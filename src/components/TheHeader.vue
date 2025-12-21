@@ -37,7 +37,7 @@
         </nav>
 
         <!-- CTA Buttons -->
-        <div :style="{ display: 'flex', alignItems: 'center', gap: '1rem' }">
+        <div :style="{ display: 'flex', alignItems: 'center', gap: '1rem' }" class="desktop-cta">
           <router-link :to="{ name: 'Admin' }" :style="adminLinkStyle" class="admin-link">
             🔐 Admin
           </router-link>
@@ -47,36 +47,36 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button @click="isMobileMenuOpen = !isMobileMenuOpen" :style="{ padding: '0.5rem', borderRadius: '0.375rem', color: '#374151', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', display: 'none' }">
+        <button @click="isMobileMenuOpen = !isMobileMenuOpen" :style="{ padding: '0.5rem', borderRadius: '0.375rem', color: '#374151', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer' }" class="mobile-menu-btn">
           {{ isMobileMenuOpen ? '✕' : '☰' }}
         </button>
       </div>
 
       <!-- Mobile Menu -->
-      <div v-if="isMobileMenuOpen" :style="{ paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }">
+      <div v-if="isMobileMenuOpen" :style="{ paddingTop: '1rem', paddingBottom: '1rem', borderTop: '1px solid #e5e7eb' }" class="mobile-menu">
         <nav :style="{ display: 'flex', flexDirection: 'column', gap: '1rem' }">
-          <router-link :to="{ name: 'Home' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Home' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Home
           </router-link>
-          <router-link :to="{ name: 'Home', hash: '#about' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Home', hash: '#about' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             About
           </router-link>
-          <router-link :to="{ name: 'Home', hash: '#live' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Home', hash: '#live' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Live Stream
           </router-link>
-          <router-link :to="{ name: 'Home', hash: '#sermons' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Home', hash: '#sermons' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Messages
           </router-link>
-          <router-link :to="{ name: 'Giving' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Giving' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Giving
           </router-link>
-          <router-link :to="{ name: 'Home', hash: '#contact' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Home', hash: '#contact' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Contact
           </router-link>
-          <router-link :to="{ name: 'Admin' }" @click="closeMobileMenu" :style="{ color: '#2563eb', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500' }">
+          <router-link :to="{ name: 'Admin' }" @click="closeMobileMenu" :style="{ color: '#2563eb', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             🔐 Admin
           </router-link>
-          <router-link :to="{ name: 'Home', hash: '#live' }" @click="closeMobileMenu" :style="ctaButtonStyle">
+          <router-link :to="{ name: 'Home', hash: '#live' }" @click="closeMobileMenu" :style="{ ...ctaButtonStyle, width: '100%', textAlign: 'center' }" class="mobile-cta">
             Watch Live
           </router-link>
         </nav>
@@ -220,8 +220,12 @@ const closeMobileMenu = () => {
     display: flex !important;
   }
   
-  button {
+  .mobile-menu-btn {
     display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
   }
   
   .logo-container span:first-of-type {
@@ -237,6 +241,14 @@ const closeMobileMenu = () => {
 @media (max-width: 1023px) and (min-width: 769px) {
   nav {
     gap: 1.5rem !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
   }
   
   .logo-container {
@@ -255,10 +267,6 @@ const closeMobileMenu = () => {
     width: 2.5rem !important;
     height: 2.5rem !important;
   }
-  
-  button {
-    display: none !important;
-  }
 }
 
 /* Mobile - Small screens */
@@ -267,8 +275,20 @@ const closeMobileMenu = () => {
     display: none !important;
   }
 
-  button {
+  .mobile-menu-btn {
     display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .mobile-nav-link:hover {
+    background-color: rgba(37, 99, 235, 0.1);
   }
   
   .logo-container {
@@ -286,10 +306,6 @@ const closeMobileMenu = () => {
   .logo-container img {
     width: 2rem !important;
     height: 2rem !important;
-  }
-  
-  div[style*="gap: 1rem"] {
-    gap: 0.5rem !important;
   }
 }
 
