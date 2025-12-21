@@ -16,12 +16,12 @@
       <!-- Main Content Grid -->
       <div :style="gridStyle" class="content-grid-animate">
         <!-- Image with Hover Effect -->
-        <div :style="{ display: 'flex', alignItems: 'stretch', height: '100%' }" class="image-container-animate">
+        <div :style="{ display: 'flex', alignItems: 'stretch', height: '100%', minHeight: '500px' }" class="image-container-animate about-image-container">
           <img
             src="@/assets/TGTBC Mission Banner Print_20251210_111814_0000.png"
             alt="Church Community"
             :style="imageStyle"
-            class="premium-image"
+            class="premium-image about-main-image"
           />
         </div>
         
@@ -234,10 +234,11 @@ const subtitleStyle = {
 
 const gridStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
+  gridTemplateColumns: '1fr 1fr',
   gap: '3rem',
-  alignItems: 'center',
-  marginBottom: '6rem'
+  alignItems: 'stretch',
+  marginBottom: '6rem',
+  minHeight: '500px'
 };
 
 const imageStyle = {
@@ -245,10 +246,14 @@ const imageStyle = {
   boxShadow: '0 20px 60px -5px rgba(0,0,0,0.15)',
   width: '100%',
   height: '100%',
-  objectFit: 'contain',
+  minHeight: '500px',
+  objectFit: 'cover',
   objectPosition: 'center',
-  imageRendering: 'crisp-edges',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  imageRendering: '-webkit-optimize-contrast',
+  transform: 'translateZ(0)',
+  backfaceVisibility: 'hidden',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  display: 'block'
 };
 
 const contentTitleStyle = {
@@ -652,6 +657,31 @@ const values = ref([
   transform: translateY(-1px);
 }
 
+/* About Image Styles */
+.about-image-container {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-main-image {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  display: block;
+}
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
   div[style*="gridStyle"] {
@@ -664,6 +694,14 @@ const values = ref([
   
   .about-title {
     font-size: 2.5rem !important;
+  }
+  
+  .about-image-container {
+    min-height: 400px;
+  }
+  
+  .about-main-image {
+    min-height: 400px;
   }
 }
 
@@ -691,6 +729,15 @@ const values = ref([
   .section-subtitle {
     font-size: 1rem !important;
   }
+  
+  .about-image-container {
+    min-height: 350px;
+    border-radius: 12px;
+  }
+  
+  .about-main-image {
+    min-height: 350px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -713,5 +760,15 @@ const values = ref([
   .stat-label {
     font-size: 0.85rem !important;
   }
+  
+  .about-image-container {
+    min-height: 280px;
+    border-radius: 8px;
+  }
+  
+  .about-main-image {
+    min-height: 280px;
+  }
+}
 }
 </style>

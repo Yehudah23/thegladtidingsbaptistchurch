@@ -5,12 +5,12 @@
       <div :style="{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '5rem' }">
         <!-- Logo with Hover Effect -->
         <div class="logo-container" :style="{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '200px' }">
-          <img src="@/assets/church_logo-removebg-preview.png" alt="Glad Tidings Baptist Church Logo" :style="{ width: '3rem', height: '3rem', objectFit: 'contain' }" />
+          <img src="@/assets/church_logo-removebg-preview.png" alt="Glad Tidings Baptist Church Logo" :style="{ width: '3rem', height: '3rem', objectFit: 'contain' }" class="logo-image" />
           <div :style="{ display: 'flex', flexDirection: 'column' }">
-            <span :style="{ fontSize: '2.3rem', fontWeight: '700', color: '#2563eb' }">
+            <span :style="{ fontSize: '2.3rem', fontWeight: '700', color: '#2563eb' }" class="church-name-main">
               The Glad Tidings
             </span>
-            <span :style="{ fontSize: '1.1rem', color: '#9ca3af', fontWeight: '700', letterSpacing: '0.01em', color: 'red',paddingLeft:'-2.0rem' }">BAPTIST CHURCH</span>
+            <span :style="{ fontSize: '1.1rem', color: '#9ca3af', fontWeight: '700', letterSpacing: '0.01em', color: 'red',paddingLeft:'-2.0rem' }" class="church-name-sub">BAPTIST CHURCH</span>
           </div>
         </div>
 
@@ -154,8 +154,66 @@ const closeMobileMenu = () => {
 </script>
 
 <style scoped>
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 .logo-container {
   animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-image {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.church-name-main {
+  background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa, #3b82f6, #2563eb);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite, fadeInUp 0.8s ease-out;
+  display: inline-block;
+}
+
+.church-name-sub {
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
 .nav-link {
