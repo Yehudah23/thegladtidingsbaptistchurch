@@ -330,7 +330,8 @@ const statLabelStyle = {
   }
   
   .pastor-card {
-    grid-template-columns: 300px 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem !important;
   }
   
   .hero-title {
@@ -342,7 +343,7 @@ const statLabelStyle = {
   }
   
   .pastor-image-container {
-    min-height: 350px !important;
+    min-height: 100% !important;
   }
 }
 
@@ -359,17 +360,16 @@ const statLabelStyle = {
   }
   
   .pastor-card {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
   }
   
   .pastor-image-container {
-    min-height: 280px !important;
-    max-height: 300px !important;
+    min-height: 350px !important;
   }
   
   .pastor-content {
-    padding: 2rem 1.5rem !important;
+    padding: 1.5rem !important;
   }
   
   .hero-title {
@@ -383,26 +383,26 @@ const statLabelStyle = {
   }
   
   .pastor-name {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
   }
   
   .pastor-title {
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
   }
   
   .pastor-paragraph {
-    font-size: 1rem !important;
+    font-size: 0.9rem !important;
     text-align: left !important;
   }
   
   .pastor-stats {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
   }
 }
 
-/* Mobile phones */
-@media (max-width: 480px) {
+/* Mobile phones - Stack vertically */
+@media (max-width: 600px) {
   .hero-container {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -430,16 +430,19 @@ const statLabelStyle = {
   }
   
   .pastor-card {
-    border-radius: 1rem !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
   }
   
   .pastor-image-container {
-    min-height: 220px !important;
-    max-height: 250px !important;
+    min-height: 280px !important;
+    max-height: 320px !important;
+    width: 100% !important;
   }
   
   .pastor-content {
-    padding: 1.5rem 1rem !important;
+    padding: 1.5rem 1.25rem !important;
     gap: 1rem !important;
   }
   
@@ -471,7 +474,7 @@ const statLabelStyle = {
   }
   
   .stat-number {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
   
   .stat-label {
@@ -489,6 +492,11 @@ const statLabelStyle = {
     font-size: 0.85rem !important;
   }
   
+  .pastor-image-container {
+    min-height: 240px !important;
+    max-height: 280px !important;
+  }
+  
   .pastor-name {
     font-size: 1.3rem !important;
   }
@@ -498,11 +506,11 @@ const statLabelStyle = {
   }
   
   .pastor-content {
-    padding: 1.25rem 0.75rem !important;
+    padding: 1.25rem 1rem !important;
   }
   
   .stat-number {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
   }
   
   .stat-label {
