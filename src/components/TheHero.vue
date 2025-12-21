@@ -388,6 +388,10 @@ const scrollDotStyle = {
   .hero-subtitle {
     font-size: 1.2rem !important;
   }
+  
+  section[id="home"] {
+    min-height: 70vh !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -415,6 +419,18 @@ const scrollDotStyle = {
   .floating-shape {
     opacity: 0.08;
   }
+  
+  section[id="home"] {
+    min-height: 60vh !important;
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 60vh !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -428,6 +444,18 @@ const scrollDotStyle = {
   
   .floating-shape {
     display: none;
+  }
+  
+  section[id="home"] {
+    min-height: 50vh !important;
+    padding-top: 3rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 50vh !important;
   }
 }
 </style>
