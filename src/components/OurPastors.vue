@@ -321,17 +321,106 @@ const statLabelStyle = {
   transform: scale(1.05);
 }
 
-@media (max-width: 968px) {
-  div[style*="pastorCardStyle"] {
-    grid-template-columns: 1fr;
-  }
-  
-  div[style*="imageContainerStyle"] {
-    min-height: 300px;
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  div[style*="pastorsGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
   }
   
   div[style*="heroTitleStyle"] {
-    font-size: 2.5rem;
+    font-size: 2.5rem !important;
+  }
+  
+  div[style*="heroSubtitleStyle"] {
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  div[style*="pastorCardStyle"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  div[style*="imageContainerStyle"] {
+    min-height: 250px !important;
+    max-height: 300px !important;
+  }
+  
+  div[style*="heroTitleStyle"] {
+    font-size: 2rem !important;
+  }
+  
+  div[style*="heroSubtitleStyle"] {
+    font-size: 1rem !important;
+  }
+  
+  div[style*="nameStyle"] {
+    font-size: 1.5rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1rem !important;
+  }
+  
+  div[style*="paragraphStyle"] {
+    font-size: 0.95rem !important;
+  }
+  
+  div[style*="statsContainerStyle"] {
+    flex-direction: row !important;
+    gap: 1rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  div[style*="heroTitleStyle"] {
+    font-size: 1.75rem !important;
+  }
+  
+  div[style*="heroSubtitleStyle"] {
+    font-size: 0.9rem !important;
+  }
+  
+  div[style*="imageContainerStyle"] {
+    min-height: 200px !important;
+    max-height: 250px !important;
+  }
+  
+  div[style*="nameStyle"] {
+    font-size: 1.3rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 0.9rem !important;
+  }
+  
+  div[style*="paragraphStyle"] {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  div[style*="statNumberStyle"] {
+    font-size: 1.5rem !important;
+  }
+  
+  div[style*="statLabelStyle"] {
+    font-size: 0.75rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  div[style*="backButtonStyle"] {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 1rem !important;
   }
 }
 </style>

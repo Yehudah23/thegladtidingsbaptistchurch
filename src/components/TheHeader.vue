@@ -15,7 +15,7 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <nav :style="{ display: 'flex', alignItems: 'center', gap: '3rem', flex: '1', justifyContent: 'center' }">
+        <nav :style="{ display: 'flex', alignItems: 'center', gap: '3rem', flex: '1', justifyContent: 'center' }" class="desktop-nav">
           <router-link :to="{ name: 'Home' }" :style="navLinkStyle" class="nav-link">
             Home
           </router-link>
@@ -216,7 +216,7 @@ const closeMobileMenu = () => {
 
 /* Desktop - Large screens */
 @media (min-width: 1024px) {
-  nav {
+  .desktop-nav {
     display: flex !important;
   }
   
@@ -226,6 +226,10 @@ const closeMobileMenu = () => {
   
   .desktop-cta {
     display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
   }
   
   .logo-container span:first-of-type {
@@ -239,8 +243,9 @@ const closeMobileMenu = () => {
 
 /* Tablet - Medium screens */
 @media (max-width: 1023px) and (min-width: 769px) {
-  nav {
+  .desktop-nav {
     gap: 1.5rem !important;
+    display: flex !important;
   }
   
   .mobile-menu-btn {
@@ -249,6 +254,10 @@ const closeMobileMenu = () => {
   
   .desktop-cta {
     display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
   }
   
   .logo-container {
@@ -267,11 +276,25 @@ const closeMobileMenu = () => {
     width: 2.5rem !important;
     height: 2.5rem !important;
   }
+  
+  .nav-link {
+    font-size: 0.85rem !important;
+  }
+  
+  .admin-link {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+  
+  .cta-button {
+    padding: 0.5rem 1.2rem !important;
+    font-size: 0.85rem !important;
+  }
 }
 
 /* Mobile - Small screens */
 @media (max-width: 768px) {
-  nav {
+  .desktop-nav {
     display: none !important;
   }
 
@@ -284,6 +307,14 @@ const closeMobileMenu = () => {
   }
   
   .mobile-menu {
+    display: block !important;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .mobile-nav-link {
     display: block !important;
   }
   
@@ -327,6 +358,16 @@ const closeMobileMenu = () => {
   .logo-container {
     min-width: 120px !important;
     gap: 0.5rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 0.9rem !important;
+    padding: 0.6rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.9rem !important;
+    padding: 0.6rem 1.2rem !important;
   }
 }
 </style>
