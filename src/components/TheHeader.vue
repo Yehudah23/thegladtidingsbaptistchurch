@@ -214,13 +214,103 @@ const closeMobileMenu = () => {
   }
 }
 
+/* Desktop - Large screens */
+@media (min-width: 1024px) {
+  nav {
+    display: flex !important;
+  }
+  
+  button {
+    display: none !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 2.3rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Tablet - Medium screens */
+@media (max-width: 1023px) and (min-width: 769px) {
+  nav {
+    gap: 1.5rem !important;
+  }
+  
+  .logo-container {
+    min-width: 180px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.8rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.9rem !important;
+  }
+  
+  .logo-container img {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  button {
+    display: none !important;
+  }
+}
+
+/* Mobile - Small screens */
 @media (max-width: 768px) {
-  .nav-link {
-    display: none;
+  nav {
+    display: none !important;
   }
 
   button {
     display: inline-block !important;
+  }
+  
+  .logo-container {
+    min-width: 150px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.4rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.75rem !important;
+  }
+  
+  .logo-container img {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+  
+  div[style*="gap: 1rem"] {
+    gap: 0.5rem !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+  .logo-container span:first-of-type {
+    font-size: 1.1rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.65rem !important;
+  }
+  
+  .logo-container img {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+  
+  .logo-container {
+    min-width: 120px !important;
+    gap: 0.5rem !important;
   }
 }
 </style>

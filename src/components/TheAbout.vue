@@ -652,6 +652,7 @@ const values = ref([
   transform: translateY(-1px);
 }
 
+/* Responsive Styles */
 @media (max-width: 1024px) {
   div[style*="gridStyle"] {
     grid-template-columns: 1fr;
@@ -660,11 +661,19 @@ const values = ref([
   div[style*="statsBoxStyle"] {
     grid-template-columns: repeat(3, 1fr);
   }
+  
+  .about-title {
+    font-size: 2.5rem !important;
+  }
 }
 
 @media (max-width: 768px) {
   div[style*="titleStyle"] {
-    font-size: 1.875rem;
+    font-size: 1.875rem !important;
+  }
+  
+  .about-title {
+    font-size: 2rem !important;
   }
 
   div[style*="valuesGridStyle"] {
@@ -673,6 +682,36 @@ const values = ref([
 
   div[style*="statsBoxStyle"] {
     grid-template-columns: 1fr;
+  }
+  
+  .section-badge {
+    font-size: 0.8rem !important;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.75rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.5rem !important;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem !important;
+  }
+  
+  .stat-number {
+    font-size: 2rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem !important;
   }
 }
 </style>

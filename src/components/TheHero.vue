@@ -379,19 +379,24 @@ const scrollDotStyle = {
   animation: pulse 2s ease-in-out infinite;
 }
 
+/* Responsive Styles */
 @media (max-width: 1024px) {
   .hero-title {
-    font-size: 3rem;
+    font-size: 3rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem !important;
   }
 }
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.2rem !important;
   }
 
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.1rem !important;
   }
 
   div[style*="statsContainerStyle"] {
@@ -409,6 +414,20 @@ const scrollDotStyle = {
 
   .floating-shape {
     opacity: 0.08;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .floating-shape {
+    display: none;
   }
 }
 </style>
