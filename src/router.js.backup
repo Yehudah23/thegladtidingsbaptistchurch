@@ -1,0 +1,11 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import TheHero from './components/TheHero.vue'
+import TheAbout from './components/TheAbout.vue'
+import TheLivestream from './components/TheLivestream.vue'
+import TheSermon from './components/TheSermon.vue'
+import TheContact from './components/TheContact.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',

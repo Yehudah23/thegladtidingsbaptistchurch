@@ -1,0 +1,286 @@
+<!-- LiveStream.vue -->
+<template>
+  <section id="live" :style="sectionStyle">
+    <div :style="containerStyle">
+      <!-- Section Header -->
+      <div :style="headerStyle">
+        <span :style="badgeStyle">LIVE SERVICE</span>
+        <h2 :style="titleStyle">
+          Join Us Online
+        </h2>
+        <p :style="subtitleStyle">
+          Experience worship from anywhere in the world
+        </p>
+      </div>
+
+      <!-- Live Stream Player -->
+      <div :style="playerContainerStyle">
+        <div :style="playerStyle">
+          <div v-if="isLive" :style="liveBadgeStyle">
+            🔴 LIVE NOW
+          </div>
+          
+          <!-- Placeholder for video player -->
+          <div :style="playerPlaceholderStyle">
+            <div :style="playButtonStyle">
+              <span style="font-size: 3rem">▶</span>
+            </div>
+            <div :style="liveStatusStyle">
+              <h3 :style="{ color: '#ffffff', fontSize: '1.5rem', margin: '1rem 0 0.5rem 0' }">
+                {{ isLive ? "Sunday Service - Live!" : "No Active Stream" }}
+              </h3>
+              <p :style="{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem' }">
+                {{ isLive ? "Join us for worship and inspiration" : "Check back during service times" }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stream Info -->
+        <div :style="streamInfoStyle">
+          <h3 :style="{ fontSize: '1.3rem', fontWeight: '700', color: '#0f172a', marginBottom: '0.75rem' }">
+            📺 Live Streaming Every Service
+          </h3>
+          <p :style="{ color: '#64748b', lineHeight: '1.6' }">
+            Can't make it to church? No problem! Watch our services live online and experience worship with us from the comfort of your home. Join our online community.
+          </p>
+        </div>
+      </div>
+
+      <!-- Upcoming Services -->
+      <div :style="{ marginTop: '4rem' }}>
+        <h3 :style="{ fontSize: '2rem', fontWeight: '800', color: '#0f172a', marginBottom: '2rem', textAlign: 'center' }}>
+          Upcoming Services
+        </h3>
+        <div :style="servicesGridStyle">
+          <div v-for="(service, index) in upcomingServices" :key="index" :style="serviceCardStyle">
+            <div :style="{ background: getGradientColor(index), borderRadius: '1rem 1rem 0 0', padding: '2rem', color: '#ffffff', minHeight: '120px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+              <h4 :style="{ fontSize: '1.25rem', fontWeight: '700', margin: '0' }}>
+                {{ service.title }}
+              </h4>
+              <p :style="{ color: 'rgba(255,255,255,0.9)', fontSize: '0.9rem', margin: '0.5rem 0 0 0' }}>
+                {{ service.description }}
+              </p>
+            </div>
+            <div :style="{ padding: '1.5rem' }}>
+              <div :style="{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', marginBottom: '0.75rem' }}>
+                <span style="font-size: 1.2rem">📅</span>
+                <span>{{ service.date }}</span>
+              </div>
+              <div :style="{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#475569', marginBottom: '1rem' }}>
+                <span style="font-size: 1.2rem">⏰</span>
+                <span>{{ service.time }}</span>
+              </div>
+              <button :style="reminderButtonStyle">
+                🔔 Set Reminder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const isLive = ref(false);
+
+const upcomingServices = ref([
+  {
+    title: "Sunday Morning Service",
+    date: "November 3, 2025",
+    time: "9:00 AM",
+    description: "Join us for worship and teaching from God's Word",
+    color: 0
+  },
+  {
+    title: "Sunday Evening Service",
+    date: "November 3, 2025",
+    time: "11:00 AM",
+    description: "Second service with the same inspiring message",
+    color: 1
+  },
+  {
+    title: "Wednesday Bible Study",
+    date: "November 6, 2025",
+    time: "7:00 PM",
+    description: "Midweek study and fellowship gathering",
+    color: 2
+  },
+]);
+
+const sectionStyle = {
+  paddingTop: '6rem',
+  paddingBottom: '6rem',
+  backgroundColor: '#ffffff'
+};
+
+const containerStyle = {
+  maxWidth: '1200px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  paddingLeft: '2rem',
+  paddingRight: '2rem'
+};
+
+const headerStyle = {
+  textAlign: 'center',
+  marginBottom: '3rem'
+};
+
+const badgeStyle = {
+  display: 'inline-block',
+  fontSize: '0.75rem',
+  fontWeight: '800',
+  letterSpacing: '0.1em',
+  color: '#6366f1',
+  backgroundColor: 'rgba(99, 102, 241, 0.1)',
+  padding: '0.5rem 1rem',
+  borderRadius: '9999px',
+  marginBottom: '1rem'
+};
+
+const titleStyle = {
+  fontSize: '2.5rem',
+  fontWeight: '800',
+  color: '#0f172a',
+  marginBottom: '1rem'
+};
+
+const subtitleStyle = {
+  fontSize: '1.2rem',
+  color: '#64748b',
+  maxWidth: '600px',
+  marginLeft: 'auto',
+  marginRight: 'auto'
+};
+
+const playerContainerStyle = {
+  marginBottom: '3rem'
+};
+
+const playerStyle = {
+  position: 'relative',
+  borderRadius: '1.5rem',
+  overflow: 'hidden',
+  boxShadow: '0 20px 60px -5px rgba(0,0,0,0.15)',
+  marginBottom: '1.5rem'
+};
+
+const liveBadgeStyle = {
+  position: 'absolute',
+  top: '1.5rem',
+  right: '1.5rem',
+  backgroundColor: '#ef4444',
+  color: '#ffffff',
+  padding: '0.5rem 1rem',
+  borderRadius: '0.5rem',
+  fontWeight: '700',
+  fontSize: '0.875rem',
+  zIndex: 10,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  animation: 'pulse 2s infinite'
+};
+
+const playerPlaceholderStyle = {
+  position: 'relative',
+  backgroundColor: '#1a1a2e',
+  aspectRatio: '16/9',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column'
+};
+
+const playButtonStyle = {
+  width: '5rem',
+  height: '5rem',
+  backgroundColor: '#6366f1',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#ffffff',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  boxShadow: '0 8px 24px -5px rgba(99, 102, 241, 0.4)'
+};
+
+const liveStatusStyle = {
+  textAlign: 'center'
+};
+
+const streamInfoStyle = {
+  backgroundColor: 'linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%)',
+  padding: '2rem',
+  borderRadius: '1rem',
+  border: '1px solid rgba(99, 102, 241, 0.15)'
+};
+
+const servicesGridStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: '2rem'
+};
+
+const serviceCardStyle = {
+  borderRadius: '1.25rem',
+  boxShadow: '0 4px 20px -2px rgba(0,0,0,0.08)',
+  overflow: 'hidden',
+  transition: 'all 0.3s ease',
+  border: '1px solid #e2e8f0'
+};
+
+const reminderButtonStyle = {
+  width: '100%',
+  padding: '0.75rem 1rem',
+  backgroundColor: '#6366f1',
+  color: '#ffffff',
+  borderRadius: '0.5rem',
+  fontWeight: '700',
+  border: 'none',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease'
+};
+
+const getGradientColor = (index) => {
+  const gradients = [
+    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+  ];
+  return gradients[index % gradients.length];
+};
+</script>
+
+<style scoped>
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+div[style*="playerPlaceholderStyle"] > div:first-child:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px -5px rgba(99, 102, 241, 0.5) !important;
+}
+
+div[style*="serviceCardStyle"]:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -5px rgba(0,0,0,0.15) !important;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -2px rgba(99, 102, 241, 0.4) !important;
+}
+
+@media (max-width: 768px) {
+  div[style*="servicesGridStyle"] {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

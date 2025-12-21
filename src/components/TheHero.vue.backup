@@ -1,0 +1,287 @@
+<!-- Hero.vue -->
+<template>
+  <section id="home" :style="heroSectionStyle">
+    <!-- Gradient Background -->
+    <div :style="gradientBackgroundStyle"></div>
+    
+    <!-- Animated Background Elements -->
+    <div :style="{ position: 'absolute', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%)', borderRadius: '50%', top: '-100px', right: '-100px', animation: 'float 6s ease-in-out infinite' }}></div>
+    <div :style="{ position: 'absolute', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%)', borderRadius: '50%', bottom: '-50px', left: '-50px', animation: 'float 8s ease-in-out infinite 1s' }}></div>
+
+    <!-- Content -->
+    <div :style="contentContainerStyle">
+      <!-- Main Heading -->
+      <div :style="{ textAlign: 'center', marginBottom: '2rem' }}>
+        <h1 :style="heroTitleStyle">
+          Welcome to<br /><span :style="{ background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Glad Tidings</span>
+        </h1>
+        <p :style="heroSubtitleStyle">
+          Experience authentic worship, powerful messages, and a thriving community of faith
+        </p>
+      </div>
+
+      <!-- Service Times Card -->
+      <div :style="serviceTimesCardStyle">
+        <div :style="{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }">
+          <div :style="serviceTimeItemStyle">
+            <span :style="{ fontSize: '1.5rem' }">📅</span>
+            <h3 :style="{ fontSize: '0.95rem', color: '#ffffff', fontWeight: '600', margin: '0.5rem 0 0 0' }">Sunday Services</h3>
+            <p :style="{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', margin: '0.25rem 0 0 0' }">9:00 AM & 11:00 AM</p>
+          </div>
+          <div :style="serviceTimeItemStyle">
+            <span :style="{ fontSize: '1.5rem' }">📖</span>
+            <h3 :style="{ fontSize: '0.95rem', color: '#ffffff', fontWeight: '600', margin: '0.5rem 0 0 0' }">Bible Study</h3>
+            <p :style="{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', margin: '0.25rem 0 0 0' }">Wednesday 7:00 PM</p>
+          </div>
+          <div :style="serviceTimeItemStyle">
+            <span :style="{ fontSize: '1.5rem' }">🙏</span>
+            <h3 :style="{ fontSize: '0.95rem', color: '#ffffff', fontWeight: '600', margin: '0.5rem 0 0 0' }">Prayer Meeting</h3>
+            <p :style="{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', margin: '0.25rem 0 0 0' }">Friday 6:00 PM</p>
+          </div>
+          <div :style="serviceTimeItemStyle">
+            <span :style="{ fontSize: '1.5rem' }">🎉</span>
+            <h3 :style="{ fontSize: '0.95rem', color: '#ffffff', fontWeight: '600', margin: '0.5rem 0 0 0' }">Youth Group</h3>
+            <p :style="{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.8)', margin: '0.25rem 0 0 0' }">Saturday 5:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div :style="ctaContainerStyle">
+        <button
+          @click="scrollToSection('live')"
+          :style="primaryButtonStyle"
+        >
+          <span>▶</span> Watch Live Service
+        </button>
+        <button
+          @click="scrollToSection('sermons')"
+          :style="secondaryButtonStyle"
+        >
+          Browse Messages
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div :style="statsContainerStyle">
+        <div :style="statItemStyle">
+          <div :style="statNumberStyle">5K+</div>
+          <div :style="statLabelStyle">Members</div>
+        </div>
+        <div :style="statItemStyle">
+          <div :style="statNumberStyle">3</div>
+          <div :style="statLabelStyle">Services Weekly</div>
+        </div>
+        <div :style="statItemStyle">
+          <div :style="statNumberStyle">40+</div>
+          <div :style="statLabelStyle">Ministries</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div :style="scrollIndicatorStyle">
+      <div :style="scrollDotStyle"></div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+const heroSectionStyle = {
+  position: 'relative',
+  minHeight: '100vh',
+  paddingTop: '6rem',
+  paddingBottom: '3rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  overflow: 'hidden'
+};
+
+const gradientBackgroundStyle = {
+  position: 'absolute',
+  inset: 0,
+  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%)',
+  zIndex: 0
+};
+
+const contentContainerStyle = {
+  position: 'relative',
+  zIndex: 10,
+  maxWidth: '800px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  paddingLeft: '2rem',
+  paddingRight: '2rem',
+  textAlign: 'center'
+};
+
+const heroTitleStyle = {
+  color: '#ffffff',
+  fontSize: '3.5rem',
+  marginBottom: '1.5rem',
+  fontWeight: '800',
+  lineHeight: '1.2',
+  letterSpacing: '-0.02em'
+};
+
+const heroSubtitleStyle = {
+  color: 'rgba(255,255,255,0.95)',
+  fontSize: '1.3rem',
+  marginBottom: '2.5rem',
+  maxWidth: '600px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  lineHeight: '1.6',
+  fontWeight: '500'
+};
+
+const serviceTimesCardStyle = {
+  backgroundColor: 'rgba(255,255,255,0.12)',
+  backdropFilter: 'blur(12px)',
+  border: '1px solid rgba(255,255,255,0.2)',
+  borderRadius: '1.5rem',
+  padding: '2rem',
+  marginBottom: '2.5rem',
+  boxShadow: '0 8px 32px -5px rgba(0,0,0,0.1)'
+};
+
+const serviceTimeItemStyle = {
+  textAlign: 'center',
+  padding: '1rem'
+};
+
+const ctaContainerStyle = {
+  display: 'flex',
+  gap: '1.5rem',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  marginBottom: '3rem'
+};
+
+const primaryButtonStyle = {
+  padding: '0.9rem 2rem',
+  backgroundColor: '#ffffff',
+  color: '#667eea',
+  borderRadius: '0.75rem',
+  fontSize: '1.05rem',
+  fontWeight: '700',
+  boxShadow: '0 8px 24px -5px rgba(0,0,0,0.15)',
+  transition: 'all 0.3s ease',
+  transform: 'translateY(0)',
+  cursor: 'pointer',
+  border: 'none'
+};
+
+const secondaryButtonStyle = {
+  padding: '0.9rem 2rem',
+  backgroundColor: 'rgba(255,255,255,0.15)',
+  border: '2px solid rgba(255,255,255,0.4)',
+  color: '#ffffff',
+  borderRadius: '0.75rem',
+  fontSize: '1.05rem',
+  fontWeight: '700',
+  backdropFilter: 'blur(8px)',
+  transition: 'all 0.3s ease',
+  transform: 'translateY(0)',
+  cursor: 'pointer'
+};
+
+const statsContainerStyle = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '2rem',
+  maxWidth: '500px',
+  marginLeft: 'auto',
+  marginRight: 'auto'
+};
+
+const statItemStyle = {
+  textAlign: 'center',
+  padding: '1rem',
+  backgroundColor: 'rgba(255,255,255,0.08)',
+  borderRadius: '1rem',
+  backdropFilter: 'blur(8px)'
+};
+
+const statNumberStyle = {
+  fontSize: '2rem',
+  fontWeight: '800',
+  color: '#ffffff'
+};
+
+const statLabelStyle = {
+  fontSize: '0.85rem',
+  color: 'rgba(255,255,255,0.8)',
+  marginTop: '0.5rem',
+  fontWeight: '500'
+};
+
+const scrollIndicatorStyle = {
+  position: 'absolute',
+  bottom: '2rem',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  animation: 'bounce 2s infinite'
+};
+
+const scrollDotStyle = {
+  width: '1.5rem',
+  height: '2.5rem',
+  border: '2px solid rgba(255,255,255,0.5)',
+  borderRadius: '9999px',
+  display: 'flex',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+  padding: '0.5rem',
+  position: 'relative'
+};
+</script>
+
+<style scoped>
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-30px); }
+  60% { transform: translateX(-50%) translateY(-15px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(30px); }
+}
+
+button:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 32px -5px rgba(0,0,0,0.2) !important;
+}
+
+button:active {
+  transform: translateY(0) !important;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+</style>
