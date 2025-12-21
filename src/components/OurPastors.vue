@@ -2,41 +2,41 @@
   <section :style="sectionStyle">
     <!-- Hero Section -->
     <div :style="heroSectionStyle">
-      <div :style="containerStyle">
+      <div :style="containerStyle" class="hero-container">
         <button @click="goBack" :style="backButtonStyle" class="back-button">
           ← Back to Home
         </button>
-        <h1 :style="heroTitleStyle" class="fade-in-title">Our Pastors</h1>
-        <p :style="heroSubtitleStyle" class="fade-in-subtitle">
+        <h1 :style="heroTitleStyle" class="fade-in-title hero-title">Our Pastors</h1>
+        <p :style="heroSubtitleStyle" class="fade-in-subtitle hero-subtitle">
           Meet the spiritual leaders guiding our church family
         </p>
       </div>
     </div>
 
     <!-- Pastors Grid -->
-    <div :style="containerStyle">
-      <div :style="pastorsGridStyle">
+    <div :style="containerStyle" class="pastors-container">
+      <div :style="pastorsGridStyle" class="pastors-grid">
         <div v-for="(pastor, index) in pastors" :key="index" :style="pastorCardStyle" class="pastor-card" :class="`pastor-card-${index}`">
-          <div :style="imageContainerStyle">
-            <img :src="pastor.image" :alt="pastor.name" :style="imageStyle" />
+          <div :style="imageContainerStyle" class="pastor-image-container">
+            <img :src="pastor.image" :alt="pastor.name" :style="imageStyle" class="pastor-image" />
             <div :style="overlayStyle"></div>
           </div>
-          <div :style="contentStyle">
-            <h2 :style="nameStyle">{{ pastor.name }}</h2>
-            <p :style="titleStyle">{{ pastor.title }}</p>
-            <div :style="bioStyle">
-              <p v-for="(paragraph, pIndex) in pastor.bio" :key="pIndex" :style="paragraphStyle">
+          <div :style="contentStyle" class="pastor-content">
+            <h2 :style="nameStyle" class="pastor-name">{{ pastor.name }}</h2>
+            <p :style="titleStyle" class="pastor-title">{{ pastor.title }}</p>
+            <div :style="bioStyle" class="pastor-bio">
+              <p v-for="(paragraph, pIndex) in pastor.bio" :key="pIndex" :style="paragraphStyle" class="pastor-paragraph">
                 {{ paragraph }}
               </p>
             </div>
-            <div :style="statsContainerStyle">
-              <div :style="statStyle">
-                <span :style="statNumberStyle">{{ pastor.yearsOfService }}</span>
-                <span :style="statLabelStyle">Years of Service</span>
+            <div :style="statsContainerStyle" class="pastor-stats">
+              <div :style="statStyle" class="stat-item">
+                <span :style="statNumberStyle" class="stat-number">{{ pastor.yearsOfService }}</span>
+                <span :style="statLabelStyle" class="stat-label">Years of Service</span>
               </div>
-              <div :style="statStyle">
-                <span :style="statNumberStyle">{{ pastor.specialization }}</span>
-                <span :style="statLabelStyle">Specialization</span>
+              <div :style="statStyle" class="stat-item">
+                <span :style="statNumberStyle" class="stat-number">{{ pastor.specialization }}</span>
+                <span :style="statLabelStyle" class="stat-label">Specialization</span>
               </div>
             </div>
           </div>
@@ -321,106 +321,192 @@ const statLabelStyle = {
   transform: scale(1.05);
 }
 
-/* Responsive Styles */
+/* Comprehensive Responsive Styles */
+
+/* Large tablets and small desktops */
 @media (max-width: 1024px) {
-  div[style*="pastorsGridStyle"] {
-    grid-template-columns: 1fr !important;
+  .pastors-grid {
     gap: 2rem !important;
   }
   
-  div[style*="heroTitleStyle"] {
-    font-size: 2.5rem !important;
+  .pastor-card {
+    grid-template-columns: 300px 1fr !important;
   }
   
-  div[style*="heroSubtitleStyle"] {
-    font-size: 1.1rem !important;
+  .hero-title {
+    font-size: 3rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 350px !important;
   }
 }
 
+/* Tablets */
 @media (max-width: 768px) {
-  div[style*="pastorCardStyle"] {
-    grid-template-columns: 1fr !important;
-  }
-  
-  div[style*="imageContainerStyle"] {
-    min-height: 250px !important;
-    max-height: 300px !important;
-  }
-  
-  div[style*="heroTitleStyle"] {
-    font-size: 2rem !important;
-  }
-  
-  div[style*="heroSubtitleStyle"] {
-    font-size: 1rem !important;
-  }
-  
-  div[style*="nameStyle"] {
-    font-size: 1.5rem !important;
-  }
-  
-  div[style*="titleStyle"] {
-    font-size: 1rem !important;
-  }
-  
-  div[style*="paragraphStyle"] {
-    font-size: 0.95rem !important;
-  }
-  
-  div[style*="statsContainerStyle"] {
-    flex-direction: row !important;
-    gap: 1rem !important;
-  }
-  
-  div[style*="containerStyle"] {
+  .hero-container {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
   }
-}
-
-@media (max-width: 480px) {
-  div[style*="heroTitleStyle"] {
-    font-size: 1.75rem !important;
+  
+  .pastors-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
   
-  div[style*="heroSubtitleStyle"] {
-    font-size: 0.9rem !important;
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
   
-  div[style*="imageContainerStyle"] {
-    min-height: 200px !important;
-    max-height: 250px !important;
+  .pastor-image-container {
+    min-height: 280px !important;
+    max-height: 300px !important;
   }
   
-  div[style*="nameStyle"] {
-    font-size: 1.3rem !important;
+  .pastor-content {
+    padding: 2rem 1.5rem !important;
   }
   
-  div[style*="titleStyle"] {
-    font-size: 0.9rem !important;
+  .hero-title {
+    font-size: 2.5rem !important;
   }
   
-  div[style*="paragraphStyle"] {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-  }
-  
-  div[style*="statNumberStyle"] {
-    font-size: 1.5rem !important;
-  }
-  
-  div[style*="statLabelStyle"] {
-    font-size: 0.75rem !important;
-  }
-  
-  div[style*="containerStyle"] {
+  .hero-subtitle {
+    font-size: 1.1rem !important;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
   
-  div[style*="backButtonStyle"] {
+  .pastor-name {
+    font-size: 1.75rem !important;
+  }
+  
+  .pastor-title {
+    font-size: 1.1rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 1rem !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .hero-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .back-button {
     font-size: 0.85rem !important;
-    padding: 0.5rem 1rem !important;
+    padding: 0.6rem 1.2rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .pastor-card {
+    border-radius: 1rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 220px !important;
+    max-height: 250px !important;
+  }
+  
+  .pastor-content {
+    padding: 1.5rem 1rem !important;
+    gap: 1rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pastor-title {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .pastor-bio {
+    gap: 0.75rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding-top: 1rem !important;
+    margin-top: 0.75rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.3rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.85rem !important;
+  }
+  
+  .pastor-content {
+    padding: 1.25rem 0.75rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.3rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem !important;
   }
 }
 </style>
