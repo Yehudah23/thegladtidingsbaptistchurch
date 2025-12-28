@@ -1649,9 +1649,9 @@ const getGradientColor = (index) => {
 
   div[style*="testimonialsGridStyle"] {
     grid-template-columns: 1fr !important;
-    justify-items: center !important;
-    max-width: 500px !important;
-    margin-left: auto !important;
+    justify-items: flex-start !important;
+    max-width: 90% !important;
+    margin-left: 2rem !important;
     margin-right: auto !important;
     width: 100% !important;
     overflow: visible !important;
@@ -1743,16 +1743,18 @@ const getGradientColor = (index) => {
 
   .cta-buttons {
     flex-direction: column;
-    align-items: center !important;
+    align-items: flex-start !important;
     gap: 1rem !important;
+    padding-left: 2rem !important;
   }
 
   .cta-btn {
-    width: 100%;
-    max-width: 400px !important;
+    width: auto !important;
+    max-width: 85% !important;
     text-align: center !important;
-    display: block !important;
+    display: inline-block !important;
     padding: 1rem 2rem !important;
+    margin-left: 0 !important;
   }
 
   .premium-cta-section {
@@ -1782,30 +1784,30 @@ const getGradientColor = (index) => {
   
   .testimonial-card {
     width: 100% !important;
-    max-width: 450px !important;
-    margin-left: auto !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
     margin-right: auto !important;
-    text-align: center !important;
+    text-align: left !important;
     display: block !important;
     overflow: visible !important;
     padding: 2rem 1.5rem !important;
   }
   
   .testimonial-header-card {
-    justify-content: center !important;
+    justify-content: flex-start !important;
     display: flex !important;
   }
   
   .testimonial-text {
-    text-align: center !important;
+    text-align: left !important;
     display: block !important;
     font-size: 1rem !important;
     line-height: 1.7 !important;
   }
   
   .testimonial-footer {
-    text-align: center !important;
-    justify-content: center !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
     display: flex !important;
   }
   
