@@ -284,12 +284,14 @@ const subtitleStyle = {
 const mainGridStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: '3rem'
+  gap: '3rem',
+  gridTemplateAreas: '"info form"'
 };
 
 const infoSectionStyle = {
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  gridArea: 'info'
 };
 
 // const infoCardStyle = {
@@ -352,7 +354,8 @@ const officeHoursStyle = {
 
 const formSectionStyle = {
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  gridArea: 'form'
 };
 
 const formCardStyle = {
@@ -674,6 +677,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 2rem !important;
   }
   
@@ -704,6 +708,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 2rem !important;
   }
   
@@ -743,6 +748,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 1.8rem !important;
   }
   
@@ -782,6 +788,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 1.65rem !important;
   }
   
@@ -832,6 +839,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 1.5rem !important;
   }
   
@@ -914,6 +922,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 2.2rem !important;
   }
   
@@ -944,6 +953,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 2.05rem !important;
   }
   
@@ -983,6 +993,7 @@ const handleSubmit = async () => {
   
   div[style*="mainGridStyle"] {
     grid-template-columns: 1fr !important;
+    grid-template-areas: "info" "form" !important;
     gap: 1.88rem !important;
   }
   
