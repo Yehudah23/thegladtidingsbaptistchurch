@@ -302,7 +302,7 @@ const closeMobileMenu = () => {
 /* iPad Pro - 12.9" and 11" screens (1366px width) */
 @media (min-width: 1366px) {
   .desktop-nav {
-    gap: 3.5rem !important;
+    gap: 4rem !important;
     display: flex !important;
   }
   
@@ -322,7 +322,7 @@ const closeMobileMenu = () => {
 /* iPad Standard/Air - 10.9" screens (1024px - 1365px) */
 @media (min-width: 1024px) and (max-width: 1365px) {
   .desktop-nav {
-    gap: 2.5rem !important;
+    gap: 3rem !important;
     display: flex !important;
   }
   
@@ -354,7 +354,7 @@ const closeMobileMenu = () => {
 /* iPad Mini - 8.3" screens (768px - 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .desktop-nav {
-    gap: 1.5rem !important;
+    gap: 2rem !important;
     display: flex !important;
   }
   
