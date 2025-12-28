@@ -33,13 +33,13 @@
               height="100%"
               style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%"
               allowfullscreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               frameborder="0"
               playsinline
               webkitallowfullscreen
               mozallowfullscreen
               loading="eager"
-              referrerpolicy="no-referrer-when-downgrade"
+              sandbox="allow-same-origin allow-scripts allow-presentation allow-forms"
               @error="facebookLoadError = true"
             ></iframe>
             <div v-if="facebookLoadError" :style="noStreamFallbackStyle" class="fade-in premium-fallback">
@@ -266,10 +266,10 @@ const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
 
-// YouTube embed URL - Mobile-optimized for Android and iOS
-// Using youtube-nocookie.com for better mobile compatibility
-// Key parameters: playsinline=1 (iOS), autoplay=0 (mobile requirement), fs=1 (fullscreen allowed)
-const youtubeEmbedUrl = 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&mute=0&playsinline=1&controls=1&modestbranding=1&rel=0&fs=1&enablejsapi=0';
+// YouTube embed URL - Optimized for all devices including Android tablets
+// Using standard youtube.com for better Android compatibility
+// Key parameters: autoplay=0 (required), playsinline=1 (iOS), controls=1, rel=0 (no related videos)
+const youtubeEmbedUrl = 'https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&controls=1&playsinline=1&modestbranding=1&rel=0';
 
 onUnmounted(() => {
   if (refreshInterval) {
@@ -1590,6 +1590,35 @@ const getGradientColor = (index) => {
   
   div[style*="facebookEmbedContainerStyle"] {
     min-height: 250px !important;
+  }
+}
+
+/* Android Tablets - Specific fixes for Android tablet browsers */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .youtube-embed-container {
+    min-height: 400px !important;
+    width: 100% !important;
+    position: relative !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .youtube-embed-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 400px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    border: 0 !important;
+  }
+  
+  .premium-video {
+    aspect-ratio: 16/9 !important;
+    min-height: 400px !important;
+  }
+  
+  div[style*="facebookEmbedContainerStyle"] {
+    min-height: 400px !important;
   }
 }
 
