@@ -568,7 +568,8 @@ const socialMediaSectionStyle = {
   padding: '4rem 3rem',
   backgroundColor: 'linear-gradient(135deg, rgba(37, 99, 235, 0.04) 0%, rgba(59, 130, 246, 0.04) 100%)',
   borderRadius: '2.5rem',
-  border: '1px solid rgba(37, 99, 235, 0.1)'
+  border: '1px solid rgba(37, 99, 235, 0.1)',
+  overflow: 'visible'
 };
 
 const sectionHeaderStyle = {
@@ -579,7 +580,9 @@ const sectionHeaderStyle = {
 const socialMediaGridStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-  gap: '2.5rem'
+  gap: '2.5rem',
+  width: '100%',
+  overflow: 'visible'
 };
 
 const cardLinkStyle = {
@@ -619,13 +622,16 @@ const testimonialSectionStyle = {
   padding: '4rem 3rem',
   backgroundColor: 'linear-gradient(135deg, rgba(37, 99, 235, 0.06) 0%, rgba(59, 130, 246, 0.06) 100%)',
   borderRadius: '2.5rem',
-  border: '1px solid rgba(37, 99, 235, 0.1)'
+  border: '1px solid rgba(37, 99, 235, 0.1)',
+  overflow: 'visible'
 };
 
 const testimonialsGridStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-  gap: '2.5rem'
+  gap: '2.5rem',
+  width: '100%',
+  overflow: 'visible'
 };
 
 const testimonialCardStyle = {
@@ -1615,12 +1621,30 @@ const getGradientColor = (index) => {
 }
 
 @media (max-width: 768px) {
+  #live {
+    overflow-x: hidden !important;
+  }
+  
+  div[style*="socialMediaSectionStyle"] {
+    padding: 2.5rem 1.5rem !important;
+    margin-bottom: 3rem !important;
+    overflow: visible !important;
+  }
+  
+  div[style*="testimonialSectionStyle"] {
+    padding: 2.5rem 1.5rem !important;
+    margin-top: 3rem !important;
+    overflow: visible !important;
+  }
+  
   div[style*="servicesGridStyle"] {
     grid-template-columns: 1fr !important;
     justify-items: center !important;
     max-width: 500px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
   }
 
   div[style*="testimonialsGridStyle"] {
@@ -1629,6 +1653,8 @@ const getGradientColor = (index) => {
     max-width: 500px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
   }
 
   div[style*="socialMediaGridStyle"] {
@@ -1637,71 +1663,111 @@ const getGradientColor = (index) => {
     max-width: 500px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
   }
 
   .platform-card {
-    min-height: 350px;
+    min-height: 380px !important;
     width: 100% !important;
     max-width: 450px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    box-shadow: 0 8px 24px -4px rgba(0,0,0,0.15) !important;
   }
 
   .card-content {
-    min-height: 350px;
+    min-height: 350px !important;
     text-align: center !important;
+    padding: 2rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+  
+  .card-link {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .premium-icon {
-    width: 80px;
-    height: 80px;
-    font-size: 3rem;
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 3rem !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    margin-bottom: 1.25rem !important;
+    display: flex !important;
   }
 
   .platform-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem !important;
     text-align: center !important;
+    margin-bottom: 0.75rem !important;
+    display: block !important;
   }
   
   .platform-desc {
     text-align: center !important;
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+    display: block !important;
+    color: #64748b !important;
   }
   
   .platform-stats {
     justify-content: center !important;
     text-align: center !important;
+    margin-bottom: 1.25rem !important;
+    display: flex !important;
+  }
+  
+  .stat-badge {
+    display: inline-block !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9rem !important;
   }
   
   .watch-btn {
     margin-left: auto !important;
     margin-right: auto !important;
+    display: block !important;
+    width: 90% !important;
+    max-width: 300px !important;
+    padding: 0.9rem 1.5rem !important;
+    font-size: 1rem !important;
   }
 
   .cta-buttons {
     flex-direction: column;
     align-items: center !important;
+    gap: 1rem !important;
   }
 
   .cta-btn {
     width: 100%;
     max-width: 400px !important;
     text-align: center !important;
+    display: block !important;
+    padding: 1rem 2rem !important;
   }
 
   .premium-cta-section {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem !important;
     text-align: center !important;
+    margin-top: 3rem !important;
   }
 
   .premium-service-header {
-    padding: 1.5rem;
+    padding: 1.5rem !important;
     text-align: center !important;
   }
 
   .premium-service-body {
-    padding: 1.5rem;
+    padding: 1.5rem !important;
     text-align: center !important;
   }
   
@@ -1710,6 +1776,8 @@ const getGradientColor = (index) => {
     max-width: 450px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    display: block !important;
+    overflow: visible !important;
   }
   
   .testimonial-card {
@@ -1718,27 +1786,37 @@ const getGradientColor = (index) => {
     margin-left: auto !important;
     margin-right: auto !important;
     text-align: center !important;
+    display: block !important;
+    overflow: visible !important;
+    padding: 2rem 1.5rem !important;
   }
   
   .testimonial-header-card {
     justify-content: center !important;
+    display: flex !important;
   }
   
   .testimonial-text {
     text-align: center !important;
+    display: block !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
   }
   
   .testimonial-footer {
     text-align: center !important;
     justify-content: center !important;
+    display: flex !important;
   }
   
   .service-details {
     text-align: center !important;
+    display: block !important;
   }
   
   .service-info {
     justify-content: center !important;
+    display: flex !important;
   }
   
   /* Centralize headers and titles */
@@ -1746,12 +1824,20 @@ const getGradientColor = (index) => {
   .services-header,
   .testimonial-header {
     text-align: center !important;
+    display: block !important;
   }
   
   .premium-section-title,
   .section-title,
   .section-subtitle {
     text-align: center !important;
+    display: block !important;
+  }
+  
+  div[style*="sectionHeaderStyle"] h3,
+  div[style*="sectionHeaderStyle"] p {
+    text-align: center !important;
+    display: block !important;
   }
 }
 </style>
