@@ -32,12 +32,14 @@
               width="100%"
               height="100%"
               style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%"
-              allowfullscreen="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; accelerometer; gyroscope; fullscreen"
+              allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
               frameborder="0"
               playsinline
               webkitallowfullscreen
               mozallowfullscreen
+              loading="eager"
+              referrerpolicy="no-referrer-when-downgrade"
               @error="facebookLoadError = true"
             ></iframe>
             <div v-if="facebookLoadError" :style="noStreamFallbackStyle" class="fade-in premium-fallback">
@@ -264,26 +266,10 @@ const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
 
-// Replace this with your actual video ID from YouTube
-// To get it: Go to any video on your channel, copy the ID from the URL after "v="
-// Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ -> video ID is "dQw4w9WgXcQ"
-const fallbackVideoId = ref(''); // Leave empty to use channel's latest uploads
-
-// Computed property for YouTube embed URL
-const youtubeEmbedUrl = computed(() => {
-  const channelId = 'UCsLZf3OqcArWB3YkVWAT1-w';
-  
-  if (fallbackVideoId.value) {
-    // If you have a specific video ID, use it
-    // This will show your video, and auto-switch to live when you start streaming
-    return `https://www.youtube.com/embed/${fallbackVideoId.value}?autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0`;
-  } else {
-    // Show latest uploads from your channel (works better on iPad)
-    // Note: The playlist ID is your channel ID with "UC" replaced by "UULP"
-    const uploadsPlaylistId = channelId.replace('UC', 'UULP');
-    return `https://www.youtube.com/embed?listType=playlist&list=${uploadsPlaylistId}&autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0`;
-  }
-});
+// YouTube embed URL - Mobile-optimized for Android and iOS
+// Using youtube-nocookie.com for better mobile compatibility
+// Key parameters: playsinline=1 (iOS), autoplay=0 (mobile requirement), fs=1 (fullscreen allowed)
+const youtubeEmbedUrl = 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&mute=0&playsinline=1&controls=1&modestbranding=1&rel=0&fs=1&enablejsapi=0';
 
 onUnmounted(() => {
   if (refreshInterval) {
@@ -340,10 +326,10 @@ const setReminder = (service) => {
 
 // Load saved reminders on mount
 onMounted(() => {
-  // Refresh iframe every 30 seconds to check for live stream
+  // Refresh iframe every 60 seconds to check for live stream (mobile-friendly interval)
   refreshInterval = setInterval(() => {
     iframeKey.value++;
-  }, 30000); // 30000ms = 30 seconds
+  }, 60000); // 60000ms = 60 seconds
   
   // Load saved reminders
   const savedReminders = JSON.parse(localStorage.getItem('serviceReminders') || '[]');
@@ -1577,6 +1563,33 @@ const getGradientColor = (index) => {
     transform: translate3d(0, 0, 0) !important;
     width: 100% !important;
     height: 100% !important;
+  }
+}
+
+/* Mobile Phones - Android and iPhone specific fixes */
+@media (max-width: 480px) {
+  .youtube-embed-container {
+    min-height: 250px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+  
+  .youtube-embed-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 250px !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+  
+  .premium-video {
+    aspect-ratio: 16/9 !important;
+    min-height: 250px !important;
+  }
+  
+  div[style*="facebookEmbedContainerStyle"] {
+    min-height: 250px !important;
   }
 }
 
