@@ -1,64 +1,63 @@
 <!-- About.vue -->
 <template>
-  <section id="about" :style="sectionStyle">
-    <div :style="containerStyle">
+  <section id="about" class="about-section">
+    <div class="about-container">
       <!-- Section Header -->
-      <div :style="headerStyle" class="about-header fade-in">
-        <span :style="badgeStyle" class="badge-animate">ABOUT US</span>
-        <h2 :style="titleStyle" class="title-animate">
+      <div class="about-header fade-in">
+        <span class="section-badge badge-animate">ABOUT US</span>
+        <h2 class="about-title title-animate">
           Discover Our Church
         </h2>
-        <p :style="subtitleStyle" class="subtitle-animate">
+        <p class="section-subtitle subtitle-animate">
           Built on faith, united in purpose, and committed to transformation
         </p>
       </div>
 
       <!-- Main Content Grid -->
-      <div :style="gridStyle" class="content-grid-animate">
+      <div class="about-content-grid content-grid-animate">
         <!-- Image with Hover Effect -->
-        <div :style="{ display: 'flex', alignItems: 'stretch', height: '100%', minHeight: '500px' }" class="image-container-animate about-image-container">
+        <div class="image-container-animate about-image-container">
           <img
             src="@/assets/TGTBC Mission Banner Print_20251210_111814_0000.png"
             alt="Church Community"
-            :style="imageStyle"
             class="premium-image about-main-image"
           />
         </div>
         
         <!-- Content -->
-        <div :style="{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }" class="content-text-animate">
-          <h3 :style="contentTitleStyle" class="content-title">
+        <div class="about-content-text content-text-animate">
+          <h3 class="content-title">
             Our Mission & Message 
           </h3>
-          <p :style="paragraphStyle">
+          <p class="content-paragraph">
             At The Glad Tidings Baptist Church, we are dedicated to Knowing Christ and Making Him Known All Over The World.
           </p>
-          <p :style="paragraphStyle">
+          <p class="content-paragraph">
             Our Message is to preach Christ and Him Crucified.
           </p>
           
           <!-- Quick Stats -->
-          <div :style="statsBoxStyle" class="stats-premium">
-            <div :style="statStyle" class="stat-item stat-item-1">
-              <div :style="{ fontSize: '1.5rem', fontWeight: '800', color: '#2563eb' }">40+</div>
-              <div :style="{ fontSize: '0.9rem', color: '#64748b' }">Ministries</div>
+          <div class="stats-premium stats-box">
+            <div class="stat-item stat-item-1">
+              <div class="stat-number">40+</div>
+              <div class="stat-label">Ministries</div>
             </div>
-            <div :style="statStyle" class="stat-item stat-item-2">
-              <div :style="{ fontSize: '1.5rem', fontWeight: '800', color: '#3b82f6' }">1K+</div>
-              <div :style="{ fontSize: '0.9rem', color: '#64748b' }">Members</div>
+            <div class="stat-item stat-item-2">
+              <div class="stat-number">1K+</div>
+              <div class="stat-label">Members</div>
             </div>
-            <div :style="statStyle" class="stat-item stat-item-3">
-              <div :style="{ fontSize: '1.5rem', fontWeight: '800', color: '#60a5fa' }">50+</div>
-              <div :style="{ fontSize: '0.9rem', color: '#64748b' }">Years</div>
+            <div class="stat-item stat-item-3">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Years</div>
             </div>
           </div>
 
           <!-- Learn More Button -->
-          <div :style="learnMoreContainerStyle">
-            <router-link to="/history" :style="learnMoreButtonStyle" class="learn-more-button">
+          <div class="button-container">
+            <router-link to="/history" class="learn-more-button">
               📖 Learn More About Us
             </router-link>
-            <router-link to="/pastors" :style="pastorsButtonStyle" class="pastors-button">
+            <router-link to="/pastors" class="pastors-button">
               👥 Meet Our Pastors
             </router-link>
           </div>
@@ -66,14 +65,14 @@
       </div>
 
       <!-- Core Values Carousel -->
-      <div :style="valuesContainerStyle" class="values-section-animate">
+      <div class="values-container values-section-animate">
         <h3 class="core-values-title">
           Our Core Values
         </h3>
         
         <!-- Carousel Container -->
-        <div :style="carouselContainerStyle">
-          <div :style="carouselWrapperStyle">
+        <div class="carousel-container">
+          <div class="carousel-wrapper">
             <div 
               :style="carouselTrackStyle" 
               class="carousel-track"
@@ -86,14 +85,14 @@
                 :class="`value-card-${index % values.length}`"
               >
                 <div class="value-card-glow"></div>
-                <div :style="iconBoxStyle(value.color)" class="icon-box">
-                  <img v-if="value.image" :src="value.image" :alt="value.title" :style="{ width: '2.5rem', height: '2.5rem', objectFit: 'contain' }" />
-                  <span v-else>{{ value.icon }}</span>
+                <div class="icon-box" :data-color="value.color">
+                  <img v-if="value.image" :src="value.image" :alt="value.title" class="icon-image" />
+                  <span v-else class="icon-emoji">{{ value.icon }}</span>
                 </div>
-                <h4 :style="{ fontSize: '1.25rem', color: '#0f172a', marginBottom: '0.75rem', fontWeight: '700' }">
+                <h4 class="value-card-title">
                   {{ value.title }}
                 </h4>
-                <p :style="{ color: '#64748b', lineHeight: '1.6' }">
+                <p class="value-card-description">
                   {{ value.description }}
                 </p>
               </div>
@@ -101,21 +100,21 @@
           </div>
           
           <!-- Carousel Navigation -->
-          <button @click="prevSlide" :style="navButtonStyle('left')" class="carousel-nav carousel-prev">
+          <button @click="prevSlide" class="carousel-nav carousel-prev">
             ‹
           </button>
-          <button @click="nextSlide" :style="navButtonStyle('right')" class="carousel-next">
+          <button @click="nextSlide" class="carousel-nav carousel-next">
             ›
           </button>
           
           <!-- Carousel Indicators -->
-          <div :style="indicatorsStyle">
+          <div class="carousel-indicators">
             <button 
               v-for="(value, index) in values" 
               :key="`indicator-${index}`"
               @click="goToSlide(index)"
-              :style="indicatorStyle(index === currentSlide)"
               class="carousel-indicator"
+              :class="{ 'active': index === currentSlide }"
             ></button>
           </div>
         </div>
@@ -185,157 +184,6 @@ const displayValues = computed(() => {
   return [...values.value, ...values.value.slice(0, 1)];
 });
 
-const sectionStyle = {
-  paddingTop: '6rem',
-  paddingBottom: '6rem',
-  backgroundColor: '#f8fafc'
-};
-
-const containerStyle = {
-  maxWidth: '1200px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  paddingLeft: '2rem',
-  paddingRight: '2rem'
-};
-
-const headerStyle = {
-  textAlign: 'center',
-  marginBottom: '4rem'
-};
-
-const badgeStyle = {
-  display: 'inline-block',
-  fontSize: '0.75rem',
-  fontWeight: '800',
-  letterSpacing: '0.1em',
-  color: '#2563eb',
-  backgroundColor: 'rgba(37, 99, 235, 0.1)',
-  padding: '0.5rem 1rem',
-  borderRadius: '9999px',
-  marginBottom: '1rem'
-};
-
-const titleStyle = {
-  fontSize: '2.5rem',
-  fontWeight: '800',
-  color: '#0f172a',
-  marginBottom: '1rem'
-};
-
-const subtitleStyle = {
-  fontSize: '1.2rem',
-  color: '#64748b',
-  maxWidth: '600px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  lineHeight: '1.6'
-};
-
-const gridStyle = {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '3rem',
-  alignItems: 'stretch',
-  marginBottom: '6rem',
-  minHeight: '500px'
-};
-
-const imageStyle = {
-  borderRadius: '1.5rem',
-  boxShadow: '0 20px 60px -5px rgba(0,0,0,0.15)',
-  width: '100%',
-  height: '100%',
-  minHeight: '500px',
-  objectFit: 'cover',
-  objectPosition: 'center',
-  imageRendering: '-webkit-optimize-contrast',
-  transform: 'translateZ(0)',
-  backfaceVisibility: 'hidden',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  display: 'block'
-};
-
-const contentTitleStyle = {
-  fontSize: '2rem',
-  fontWeight: '800',
-  color: '#0f172a'
-};
-
-const paragraphStyle = {
-  color: '#475569',
-  fontSize: '1.09rem',
-  lineHeight: '1.8'
-};
-
-const statsBoxStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: '1.5rem',
-  padding: '2rem',
-  backgroundColor: '#ffffff',
-  borderRadius: '1rem',
-  boxShadow: '0 4px 20px -2px rgba(0,0,0,0.08)'
-};
-
-const statStyle = {
-  textAlign: 'center',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-};
-
-const learnMoreContainerStyle = {
-  marginTop: '2rem',
-  textAlign: 'center',
-  display: 'flex',
-  gap: '1rem',
-  flexWrap: 'wrap',
-  justifyContent: 'center'
-};
-
-const learnMoreButtonStyle = {
-  display: 'inline-block',
-  padding: '1rem 2.5rem',
-  backgroundColor: '#2563eb',
-  color: '#ffffff',
-  fontSize: '1.1rem',
-  fontWeight: '700',
-  borderRadius: '0.75rem',
-  textDecoration: 'none',
-  boxShadow: '0 8px 20px -4px rgba(37, 99, 235, 0.4)',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-};
-
-const pastorsButtonStyle = {
-  display: 'inline-block',
-  padding: '1rem 2.5rem',
-  backgroundColor: '#10b981',
-  color: '#ffffff',
-  fontSize: '1.1rem',
-  fontWeight: '700',
-  borderRadius: '0.75rem',
-  textDecoration: 'none',
-  boxShadow: '0 8px 20px -4px rgba(16, 185, 129, 0.4)',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-};
-
-const valuesContainerStyle = {
-  paddingTop: '4rem',
-  borderTop: '2px solid #e2e8f0'
-};
-
-// Carousel Styles
-const carouselContainerStyle = {
-  position: 'relative',
-  maxWidth: '100%',
-  margin: '3rem auto 0',
-  overflow: 'hidden'
-};
-
-const carouselWrapperStyle = {
-  overflow: 'hidden',
-  borderRadius: '1rem'
-};
-
 const carouselTrackStyle = computed(() => ({
   display: 'flex',
   transform: `translateX(-${currentSlide.value * 100}%)`,
@@ -343,79 +191,6 @@ const carouselTrackStyle = computed(() => ({
   gap: '2rem',
   padding: '1rem'
 }));
-
-const navButtonStyle = (position) => ({
-  position: 'absolute',
-  top: '50%',
-  [position]: '1rem',
-  transform: 'translateY(-50%)',
-  backgroundColor: 'rgba(37, 99, 235, 0.9)',
-  color: '#ffffff',
-  border: 'none',
-  borderRadius: '50%',
-  width: '3rem',
-  height: '3rem',
-  fontSize: '2rem',
-  fontWeight: '700',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-  transition: 'all 0.3s ease',
-  zIndex: 10,
-  lineHeight: 1
-});
-
-const indicatorsStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '0.75rem',
-  marginTop: '2rem'
-};
-
-const indicatorStyle = (isActive) => ({
-  width: isActive ? '2rem' : '0.75rem',
-  height: '0.75rem',
-  borderRadius: '9999px',
-  backgroundColor: isActive ? '#2563eb' : '#cbd5e1',
-  border: 'none',
-  cursor: 'pointer',
-  transition: 'all 0.3s ease'
-});
-
-// const valuesGridStyle = {
-//   display: 'grid',
-//   gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-//   gap: '2rem'
-// };
-
-// const valueCardStyle = {
-//   padding: '2.5rem 2rem',
-//   backgroundColor: '#ffffff',
-//   borderRadius: '1.25rem',
-//   boxShadow: '0 4px 20px -2px rgba(0,0,0,0.08)',
-//   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-//   textAlign: 'center',
-//   border: '1px solid #e2e8f0',
-//   position: 'relative',
-//   overflow: 'hidden'
-// };
-
-const iconBoxStyle = (color) => ({
-  width: '4rem',
-  height: '4rem',
-  borderRadius: '1rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginBottom: '1rem',
-  fontSize: '2rem',
-  backgroundColor: `rgba(${color}, 0.1)`,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-});
 
 const values = ref([
   {
@@ -447,6 +222,253 @@ const values = ref([
 </script>
 
 <style scoped>
+/* Layout Styles */
+.about-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #f8fafc;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Main Content Grid */
+.about-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: stretch;
+  margin-bottom: 6rem;
+  min-height: 500px;
+}
+
+.about-content-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.content-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.content-paragraph {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* Stats Box */
+.stats-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat-item {
+  padding: 1.5rem 1rem;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.stat-item-2 .stat-number {
+  color: #3b82f6;
+}
+
+.stat-item-3 .stat-number {
+  color: #60a5fa;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.learn-more-button,
+.pastors-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.learn-more-button {
+  background-color: #2563eb;
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+}
+
+.pastors-button {
+  background-color: #10b981;
+  box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4);
+}
+
+/* Values Section */
+.values-container {
+  padding-top: 4rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.core-values-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  max-width: 100%;
+  margin: 3rem auto 0;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #e2e8f0;
+  color: #1e293b;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.carousel-prev {
+  left: 1rem;
+}
+
+.carousel-next {
+  right: 1rem;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.carousel-indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  width: 2rem;
+  background-color: #2563eb;
+}
+
+.value-card {
+  min-width: 100%;
+  padding: 2.5rem 2rem;
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px -2px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card-title {
+  font-size: 1.25rem;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.value-card-description {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -634,7 +656,41 @@ const values = ref([
 }
 
 .icon-box {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  background-color: rgba(37, 99, 235, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-box[data-color="37, 99, 235"] {
+  background-color: rgba(37, 99, 235, 0.1);
+}
+
+.icon-box[data-color="59, 130, 246"] {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.icon-box[data-color="96, 165, 250"] {
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+.icon-box[data-color="34, 197, 94"] {
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+.icon-box img {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  object-fit: contain !important;
+  display: block !important;
 }
 
 .learn-more-button:hover {
@@ -667,13 +723,14 @@ const values = ref([
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f8fafc;
 }
 
 .about-main-image {
   width: 100%;
   height: 100%;
   min-height: 500px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
@@ -684,16 +741,16 @@ const values = ref([
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
-  div[style*="gridStyle"] {
+  .about-content-grid {
     grid-template-columns: 1fr;
   }
 
-  div[style*="statsBoxStyle"] {
+  .stats-box {
     grid-template-columns: repeat(3, 1fr);
   }
   
   .about-title {
-    font-size: 2.5rem !important;
+    font-size: 2.5rem;
   }
   
   .about-image-container {
@@ -706,28 +763,24 @@ const values = ref([
 }
 
 @media (max-width: 768px) {
-  div[style*="titleStyle"] {
-    font-size: 1.875rem !important;
+  .about-title {
+    font-size: 2rem;
   }
   
-  .about-title {
-    font-size: 2rem !important;
+  .content-title {
+    font-size: 1.875rem;
   }
 
-  div[style*="valuesGridStyle"] {
-    grid-template-columns: 1fr;
-  }
-
-  div[style*="statsBoxStyle"] {
+  .stats-box {
     grid-template-columns: 1fr;
   }
   
   .section-badge {
-    font-size: 0.8rem !important;
+    font-size: 0.8rem;
   }
   
   .section-subtitle {
-    font-size: 1rem !important;
+    font-size: 1rem;
   }
   
   .about-image-container {
@@ -742,23 +795,23 @@ const values = ref([
 
 @media (max-width: 480px) {
   .about-title {
-    font-size: 1.75rem !important;
+    font-size: 1.75rem;
   }
   
-  div[style*="titleStyle"] {
-    font-size: 1.5rem !important;
+  .content-title {
+    font-size: 1.5rem;
   }
   
   .section-subtitle {
-    font-size: 0.95rem !important;
+    font-size: 0.95rem;
   }
   
   .stat-number {
-    font-size: 2rem !important;
+    font-size: 2rem;
   }
   
   .stat-label {
-    font-size: 0.85rem !important;
+    font-size: 0.85rem;
   }
   
   .about-image-container {
@@ -770,5 +823,5 @@ const values = ref([
     min-height: 280px;
   }
 }
-}
+
 </style>

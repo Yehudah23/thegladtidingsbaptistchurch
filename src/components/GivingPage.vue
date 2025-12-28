@@ -25,7 +25,9 @@
         <!-- First Bank -->
         <div :style="bankCardStyle" class="bank-card bank-card-1">
           <div :style="bankHeaderStyle">
-            <div :style="bankIconStyle">🏦</div>
+            <div :style="bankIconStyle">
+              <img src="@/assets/Screenshot from 2025-12-22 09-39-19.png" alt="First Bank Logo" :style="bankLogoStyle" />
+            </div>
             <h3 :style="bankNameStyle">First Bank</h3>
           </div>
           <div :style="accountsContainerStyle">
@@ -73,7 +75,9 @@
         <!-- Access Bank -->
         <div :style="bankCardStyle" class="bank-card bank-card-3">
           <div :style="bankHeaderStyle">
-            <div :style="bankIconStyle">🏦</div>
+            <div :style="bankIconStyle">
+              <img src="@/assets/accessbank.png" alt="Access Bank Logo" :style="bankLogoStyle" />
+            </div>
             <h3 :style="bankNameStyle">Access Bank</h3>
           </div>
           <div :style="accountsContainerStyle">
@@ -90,7 +94,9 @@
         <!-- Zenith Bank -->
         <div :style="bankCardStyle" class="bank-card bank-card-4">
           <div :style="bankHeaderStyle">
-            <div :style="bankIconStyle">🏦</div>
+            <div :style="bankIconStyle">
+              <img src="@/assets/zenithbank.png" alt="Zenith Bank Logo" :style="bankLogoStyle" />
+            </div>
             <h3 :style="bankNameStyle">Zenith Bank</h3>
           </div>
           <div :style="accountsContainerStyle">
@@ -248,6 +254,13 @@ const bankIconStyle = {
   justifyContent: 'center',
   backgroundColor: '#dbeafe',
   borderRadius: '0.75rem'
+};
+
+const bankLogoStyle = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain',
+  padding: '0.25rem'
 };
 
 const bankNameStyle = {
