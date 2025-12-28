@@ -379,8 +379,25 @@ const scrollDotStyle = {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Responsive Styles */
-@media (max-width: 1024px) {
+/* Responsive Styles - Apple Devices */
+
+/* iPad Pro - 12.9" and 11" screens (1366px+) */
+@media (min-width: 1366px) {
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem !important;
+  }
+  
+  section[id="home"] {
+    min-height: 80vh !important;
+  }
+}
+
+/* iPad Standard/Air - 10.9" screens (1024px - 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
   .hero-title {
     font-size: 3rem !important;
   }
@@ -390,17 +407,98 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 70vh !important;
+    min-height: 75vh !important;
   }
 }
 
-@media (max-width: 768px) {
+/* iPad Mini - 8.3" screens (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .hero-title {
-    font-size: 2.2rem !important;
+    font-size: 2.5rem !important;
   }
 
   .hero-subtitle {
     font-size: 1.1rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: row;
+  }
+
+  .premium-button {
+    width: auto;
+    justify-content: center;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 70vh !important;
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 70vh !important;
+  }
+}
+
+/* iPhone Pro Max - 6.9" screens (520px - 767px) */
+@media (min-width: 520px) and (max-width: 767px) {
+  .hero-title {
+    font-size: 2.3rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  .premium-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 65vh !important;
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 65vh !important;
+  }
+}
+
+/* iPhone Plus - 6.7" screens (480px - 519px) */
+@media (min-width: 480px) and (max-width: 519px) {
+  .hero-title {
+    font-size: 2.1rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.02rem !important;
   }
 
   div[style*="statsContainerStyle"] {
@@ -422,8 +520,8 @@ const scrollDotStyle = {
   
   section[id="home"] {
     min-height: 60vh !important;
-    padding-top: 4rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 1.5rem !important;
   }
   
   .video-background,
@@ -433,13 +531,54 @@ const scrollDotStyle = {
   }
 }
 
-@media (max-width: 480px) {
+/* iPhone Standard - 6.1" screens (430px - 479px) */
+@media (min-width: 430px) and (max-width: 479px) {
+  .hero-title {
+    font-size: 2rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  .premium-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 55vh !important;
+    padding-top: 3rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 55vh !important;
+  }
+}
+
+/* iPhone Small - 5.4" screens (390px - 429px) */
+@media (max-width: 429px) {
   .hero-title {
     font-size: 1.8rem !important;
   }
   
   .hero-subtitle {
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
   }
   
   .floating-shape {
@@ -458,4 +597,263 @@ const scrollDotStyle = {
     height: 50vh !important;
   }
 }
+
+/* ===== ANDROID DEVICE BREAKPOINTS ===== */
+
+/* Android Tablets - High Resolution (1800px - Pixel C, Galaxy Tab S) */
+@media (min-width: 1800px) and (max-width: 2560px) {
+  .hero-title {
+    font-size: 3.8rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem !important;
+  }
+  
+  section[id="home"] {
+    min-height: 85vh !important;
+  }
+  
+  .premium-button {
+    font-size: 1.1rem !important;
+    padding: 1rem 2.5rem !important;
+  }
+}
+
+/* Android Tablets - Standard (1280px-1800px - Nexus 9, Galaxy Tab) */
+@media (min-width: 1280px) and (max-width: 1799px) {
+  .hero-title {
+    font-size: 3.2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem !important;
+  }
+  
+  section[id="home"] {
+    min-height: 75vh !important;
+  }
+  
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Android Tablets - Small (800px-1279px) */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .hero-title {
+    font-size: 2.6rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: row;
+  }
+
+  .premium-button {
+    width: auto;
+    justify-content: center;
+    font-size: 0.95rem !important;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 72vh !important;
+    padding-top: 4.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 72vh !important;
+  }
+}
+
+/* Android High-End Flagships - QHD/QHD+ (720px wide - 2560px-3120px tall) */
+@media (min-width: 720px) and (max-width: 799px) {
+  .hero-title {
+    font-size: 2.35rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.08rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  .premium-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem !important;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 66vh !important;
+    padding-top: 4.2rem !important;
+    padding-bottom: 2.2rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 66vh !important;
+  }
+}
+
+/* Android Mid-Range/Flagships - FHD/FHD+ (540px wide - 1920px-2400px tall) */
+@media (min-width: 540px) and (max-width: 719px) {
+  .hero-title {
+    font-size: 2.15rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.03rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  .premium-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.92rem !important;
+  }
+
+  .floating-shape {
+    opacity: 0.08;
+  }
+  
+  section[id="home"] {
+    min-height: 62vh !important;
+    padding-top: 3.8rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 62vh !important;
+  }
+}
+
+/* Android Small Phones/Budget - HD/HD+ (360px wide - 1280px-1600px tall) */
+@media (max-width: 539px) and (min-width: 360px) {
+  .hero-title {
+    font-size: 1.9rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem !important;
+  }
+
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="ctaContainerStyle"] {
+    flex-direction: column;
+  }
+
+  .premium-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.88rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+
+  .floating-shape {
+    display: none;
+  }
+  
+  section[id="home"] {
+    min-height: 55vh !important;
+    padding-top: 3.2rem !important;
+    padding-bottom: 1.8rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 55vh !important;
+  }
+}
+
+/* Android Foldables - Unfolded State (wide landscape ~2208px-1768px) */
+@media (min-width: 1768px) and (max-width: 2208px) and (orientation: landscape) {
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem !important;
+  }
+  
+  section[id="home"] {
+    min-height: 80vh !important;
+  }
+  
+  div[style*="statsContainerStyle"] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Android Foldables - Folded/Cover Screen (narrow ~277px-420px) */
+@media (min-width: 277px) and (max-width: 359px) {
+  .hero-title {
+    font-size: 1.65rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.88rem !important;
+  }
+  
+  .floating-shape {
+    display: none;
+  }
+  
+  section[id="home"] {
+    min-height: 48vh !important;
+    padding-top: 2.8rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .video-background,
+  .image-background {
+    object-fit: cover !important;
+    height: 48vh !important;
+  }
+  
+  .premium-button {
+    width: 100%;
+    font-size: 0.82rem !important;
+    padding: 0.65rem 1.2rem !important;
+  }
+}
 </style>
+

@@ -299,8 +299,60 @@ const closeMobileMenu = () => {
   }
 }
 
-/* Tablet - Medium screens */
-@media (max-width: 1023px) and (min-width: 769px) {
+/* iPad Pro - 12.9" and 11" screens (1366px width) */
+@media (min-width: 1366px) {
+  .desktop-nav {
+    gap: 3.5rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* iPad Standard/Air - 10.9" screens (1024px - 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .desktop-nav {
+    gap: 2.5rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .nav-link {
+    font-size: 1rem !important;
+  }
+  
+  .admin-link {
+    font-size: 0.9rem !important;
+  }
+  
+  .cta-button {
+    font-size: 1rem !important;
+  }
+}
+
+/* iPad Mini - 8.3" screens (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .desktop-nav {
     gap: 1.5rem !important;
     display: flex !important;
@@ -350,8 +402,8 @@ const closeMobileMenu = () => {
   }
 }
 
-/* Mobile - Small screens */
-@media (max-width: 768px) {
+/* iPhone Pro Max - 6.9" screens (520px - 767px) */
+@media (min-width: 520px) and (max-width: 767px) {
   .desktop-nav {
     display: none !important;
   }
@@ -366,42 +418,106 @@ const closeMobileMenu = () => {
   
   .mobile-menu {
     display: block !important;
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .mobile-nav-link {
-    display: block !important;
-  }
-  
-  .mobile-nav-link:hover {
-    background-color: rgba(37, 99, 235, 0.1);
   }
   
   .logo-container {
-    min-width: 150px !important;
+    min-width: 160px !important;
   }
   
   .logo-container span:first-of-type {
-    font-size: 1.4rem !important;
+    font-size: 1.6rem !important;
   }
   
   .logo-container span:last-of-type {
-    font-size: 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .logo-container img {
+    width: 2.2rem !important;
+    height: 2.2rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 1rem !important;
+    padding: 0.75rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 1rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
+}
+
+/* iPhone Plus - 6.7" screens (480px - 519px) */
+@media (min-width: 480px) and (max-width: 519px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 145px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.3rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.7rem !important;
   }
   
   .logo-container img {
     width: 2rem !important;
     height: 2rem !important;
   }
+  
+  .mobile-nav-link {
+    font-size: 0.95rem !important;
+    padding: 0.65rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.95rem !important;
+    padding: 0.65rem 1.2rem !important;
+  }
 }
 
-/* Extra small mobile */
-@media (max-width: 480px) {
+/* iPhone Standard - 6.1" screens (430px - 479px) */
+@media (min-width: 430px) and (max-width: 479px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 140px !important;
+  }
+  
   .logo-container span:first-of-type {
-    font-size: 1.1rem !important;
+    font-size: 1.2rem !important;
   }
   
   .logo-container span:last-of-type {
@@ -409,13 +525,8 @@ const closeMobileMenu = () => {
   }
   
   .logo-container img {
-    width: 1.75rem !important;
-    height: 1.75rem !important;
-  }
-  
-  .logo-container {
-    min-width: 120px !important;
-    gap: 0.5rem !important;
+    width: 1.9rem !important;
+    height: 1.9rem !important;
   }
   
   .mobile-nav-link {
@@ -425,7 +536,378 @@ const closeMobileMenu = () => {
   
   .mobile-cta {
     font-size: 0.9rem !important;
-    padding: 0.6rem 1.2rem !important;
+    padding: 0.6rem 1.1rem !important;
+  }
+}
+
+/* iPhone Small - 5.4" screens (390px - 429px) */
+@media (max-width: 429px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 125px !important;
+    gap: 0.45rem !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.6rem !important;
+  }
+  
+  .logo-container img {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 0.85rem !important;
+    padding: 0.55rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* ===== ANDROID DEVICE BREAKPOINTS ===== */
+
+/* Android Tablets - High Resolution (1800px - Pixel C, Galaxy Tab S) */
+@media (min-width: 1800px) and (max-width: 2560px) {
+  .desktop-nav {
+    gap: 3.5rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Android Tablets - Standard (1280px-1800px - Nexus 9, Galaxy Tab) */
+@media (min-width: 1280px) and (max-width: 1799px) {
+  .desktop-nav {
+    gap: 2.5rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .logo-container {
+    min-width: 190px !important;
+  }
+  
+  .nav-link {
+    font-size: 1rem !important;
+  }
+  
+  .admin-link {
+    font-size: 0.9rem !important;
+  }
+  
+  .cta-button {
+    font-size: 1rem !important;
+  }
+}
+
+/* Android Tablets - Small (800px-1279px) */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .desktop-nav {
+    gap: 1.8rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .logo-container {
+    min-width: 180px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.8rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.9rem !important;
+  }
+  
+  .logo-container img {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  .nav-link {
+    font-size: 0.88rem !important;
+  }
+  
+  .admin-link {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.85rem !important;
+  }
+  
+  .cta-button {
+    padding: 0.5rem 1.2rem !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+/* Android High-End Flagships - QHD/QHD+ (1440px wide, 720px when vertical - 2560px-3120px tall) */
+@media (min-width: 720px) and (max-width: 799px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 165px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.65rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.82rem !important;
+  }
+  
+  .logo-container img {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 1.02rem !important;
+    padding: 0.78rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 1.02rem !important;
+    padding: 0.78rem 1.55rem !important;
+  }
+}
+
+/* Android Mid-Range/Flagships - FHD/FHD+ (1080px wide, 540px when vertical - 1920px-2400px tall) */
+@media (min-width: 540px) and (max-width: 719px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 155px !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.5rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.78rem !important;
+  }
+  
+  .logo-container img {
+    width: 2.15rem !important;
+    height: 2.15rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 0.98rem !important;
+    padding: 0.7rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.98rem !important;
+    padding: 0.7rem 1.4rem !important;
+  }
+}
+
+/* Android Small Phones/Budget - HD/HD+ (720px wide, 360px when vertical - 1280px-1600px tall) */
+@media (max-width: 539px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 130px !important;
+    gap: 0.5rem !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 1.15rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.65rem !important;
+  }
+  
+  .logo-container img {
+    width: 1.85rem !important;
+    height: 1.85rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 0.88rem !important;
+    padding: 0.6rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.88rem !important;
+    padding: 0.6rem 1.15rem !important;
+  }
+}
+
+/* Android Foldables - Unfolded State (wide aspect ratio ~2208px-1768px or similar) */
+@media (min-width: 1768px) and (max-width: 2208px) and (orientation: landscape) {
+  .desktop-nav {
+    gap: 3rem !important;
+    display: flex !important;
+  }
+  
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  
+  .desktop-cta {
+    display: flex !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .nav-link {
+    font-size: 1.05rem !important;
+  }
+}
+
+/* Android Foldables - Folded State (narrow aspect ratio ~1344px-2772px) */
+@media (min-width: 277px) and (max-width: 420px) and (max-height: 900px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-block !important;
+  }
+  
+  .desktop-cta {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: block !important;
+  }
+  
+  .logo-container {
+    min-width: 115px !important;
+    gap: 0.4rem !important;
+  }
+  
+  .logo-container span:first-of-type {
+    font-size: 0.95rem !important;
+  }
+  
+  .logo-container span:last-of-type {
+    font-size: 0.58rem !important;
+  }
+  
+  .logo-container img {
+    width: 1.65rem !important;
+    height: 1.65rem !important;
+  }
+  
+  .mobile-nav-link {
+    font-size: 0.82rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  .mobile-cta {
+    font-size: 0.82rem !important;
+    padding: 0.5rem 0.95rem !important;
   }
 }
 </style>
+

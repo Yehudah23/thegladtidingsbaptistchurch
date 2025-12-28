@@ -321,10 +321,34 @@ const statLabelStyle = {
   transform: scale(1.05);
 }
 
-/* Comprehensive Responsive Styles */
+/* Comprehensive Responsive Styles - Apple Devices */
 
-/* Large tablets and small desktops */
-@media (max-width: 1024px) {
+/* iPad Pro - 12.9" and 11" screens (1366px+) */
+@media (min-width: 1366px) {
+  .pastors-grid {
+    gap: 2.5rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 450px !important;
+  }
+}
+
+/* iPad Standard/Air - 10.9" screens (1024px - 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
   .pastors-grid {
     gap: 2rem !important;
   }
@@ -347,8 +371,8 @@ const statLabelStyle = {
   }
 }
 
-/* Tablets */
-@media (max-width: 768px) {
+/* iPad Mini - 8.3" screens (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .hero-container {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -361,11 +385,11 @@ const statLabelStyle = {
   
   .pastor-card {
     grid-template-columns: 1fr 1fr !important;
-    gap: 1rem !important;
+    gap: 1.25rem !important;
   }
   
   .pastor-image-container {
-    min-height: 350px !important;
+    min-height: 380px !important;
   }
   
   .pastor-content {
@@ -401,8 +425,213 @@ const statLabelStyle = {
   }
 }
 
-/* Mobile phones - Stack vertically */
-@media (max-width: 600px) {
+/* iPhone Pro Max - 6.9" screens (520px - 767px) */
+@media (min-width: 520px) and (max-width: 767px) {
+  .hero-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 300px !important;
+    max-height: 350px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.5rem !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pastor-title {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    padding-top: 1rem !important;
+    margin-top: 0.75rem !important;
+  }
+}
+
+/* iPhone Plus - 6.7" screens (480px - 519px) */
+@media (min-width: 480px) and (max-width: 519px) {
+  .hero-container {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 290px !important;
+    max-height: 330px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.4rem !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.1rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.98rem !important;
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.4rem !important;
+  }
+  
+  .pastor-title {
+    font-size: 0.95rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.88rem !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.9rem !important;
+    padding-top: 0.9rem !important;
+  }
+}
+
+/* iPhone Standard - 6.1" screens (430px - 479px) */
+@media (min-width: 430px) and (max-width: 479px) {
+  .hero-container {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+  
+  .back-button {
+    font-size: 0.85rem !important;
+    padding: 0.6rem 1.2rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 280px !important;
+    max-height: 320px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.3rem 1.2rem !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.35rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pastor-title {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .pastor-bio {
+    gap: 0.75rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.85rem !important;
+    padding-top: 0.85rem !important;
+    margin-top: 0.7rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.35rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* iPhone Small - 5.4" screens (390px - 429px) */
+@media (max-width: 429px) {
   .hero-container {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -419,12 +648,12 @@ const statLabelStyle = {
   }
   
   .hero-title {
-    font-size: 2rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.2 !important;
   }
   
   .hero-subtitle {
-    font-size: 0.95rem !important;
+    font-size: 0.85rem !important;
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
   }
@@ -436,77 +665,41 @@ const statLabelStyle = {
   }
   
   .pastor-image-container {
-    min-height: 280px !important;
-    max-height: 320px !important;
+    min-height: 240px !important;
+    max-height: 280px !important;
     width: 100% !important;
   }
   
   .pastor-content {
-    padding: 1.5rem 1.25rem !important;
-    gap: 1rem !important;
+    padding: 1.25rem 1rem !important;
+    gap: 0.85rem !important;
   }
   
   .pastor-name {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
+    font-size: 1.3rem !important;
+    line-height: 1.2 !important;
   }
   
   .pastor-title {
-    font-size: 1rem !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.4rem !important;
   }
   
   .pastor-bio {
-    gap: 0.75rem !important;
+    gap: 0.65rem !important;
   }
   
   .pastor-paragraph {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
     text-align: left !important;
   }
   
   .pastor-stats {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
-    padding-top: 1rem !important;
-    margin-top: 0.75rem !important;
-  }
-  
-  .stat-number {
-    font-size: 1.4rem !important;
-  }
-  
-  .stat-label {
-    font-size: 0.75rem !important;
-  }
-}
-
-/* Extra small phones */
-@media (max-width: 360px) {
-  .hero-title {
-    font-size: 1.75rem !important;
-  }
-  
-  .hero-subtitle {
-    font-size: 0.85rem !important;
-  }
-  
-  .pastor-image-container {
-    min-height: 240px !important;
-    max-height: 280px !important;
-  }
-  
-  .pastor-name {
-    font-size: 1.3rem !important;
-  }
-  
-  .pastor-paragraph {
-    font-size: 0.85rem !important;
-  }
-  
-  .pastor-content {
-    padding: 1.25rem 1rem !important;
+    gap: 0.8rem !important;
+    padding-top: 0.8rem !important;
+    margin-top: 0.6rem !important;
   }
   
   .stat-number {
@@ -515,6 +708,452 @@ const statLabelStyle = {
   
   .stat-label {
     font-size: 0.7rem !important;
+  }
+}
+
+/* ===== ANDROID DEVICE BREAKPOINTS ===== */
+
+/* Android Tablets - High Resolution (1800px - Pixel C, Galaxy Tab S) */
+@media (min-width: 1800px) and (max-width: 2560px) {
+  .pastors-grid {
+    gap: 2.8rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2.2rem !important;
+  }
+  
+  .hero-title {
+    font-size: 3.8rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.4rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 480px !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.8rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 1rem !important;
+  }
+}
+
+/* Android Tablets - Standard (1280px-1800px - Nexus 9, Galaxy Tab) */
+@media (min-width: 1280px) and (max-width: 1799px) {
+  .pastors-grid {
+    gap: 2.3rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.7rem !important;
+  }
+  
+  .hero-title {
+    font-size: 3.2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 100% !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.6rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Android Tablets - Small (800px-1279px) */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .hero-container {
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.35rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 390px !important;
+  }
+  
+  .pastor-content {
+    padding: 1.6rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.6rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.15rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.55rem !important;
+  }
+  
+  .pastor-title {
+    font-size: 1.02rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.92rem !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.8rem !important;
+  }
+}
+
+/* Android High-End Flagships - QHD/QHD+ (720px wide - 2560px-3120px tall) */
+@media (min-width: 720px) and (max-width: 799px) {
+  .hero-container {
+    padding-left: 1.3rem !important;
+    padding-right: 1.3rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.3rem !important;
+    padding-right: 1.3rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 310px !important;
+    max-height: 360px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.55rem !important;
+    gap: 1.05rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.02rem !important;
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.48rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pastor-title {
+    font-size: 1.02rem !important;
+    margin-bottom: 0.55rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.05rem !important;
+    padding-top: 1.05rem !important;
+    margin-top: 0.8rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Android Mid-Range/Flagships - FHD/FHD+ (540px wide - 1920px-2400px tall) */
+@media (min-width: 540px) and (max-width: 719px) {
+  .hero-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 295px !important;
+    max-height: 335px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.45rem !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-title {
+    font-size: 2.15rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.98rem !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.42rem !important;
+  }
+  
+  .pastor-title {
+    font-size: 0.98rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.9rem !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.95rem !important;
+    padding-top: 0.95rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.42rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* Android Small Phones/Budget - HD/HD+ (360px wide - 1280px-1600px tall) */
+@media (max-width: 539px) and (min-width: 360px) {
+  .hero-container {
+    padding-left: 1.05rem !important;
+    padding-right: 1.05rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 1.05rem !important;
+    padding-right: 1.05rem !important;
+  }
+  
+  .back-button {
+    font-size: 0.87rem !important;
+    padding: 0.62rem 1.25rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 275px !important;
+    max-height: 315px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.32rem 1.18rem !important;
+    gap: 0.95rem !important;
+  }
+  
+  .hero-title {
+    font-size: 1.98rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.93rem !important;
+    padding-left: 0.55rem !important;
+    padding-right: 0.55rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.38rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pastor-title {
+    font-size: 0.93rem !important;
+    margin-bottom: 0.48rem !important;
+  }
+  
+  .pastor-bio {
+    gap: 0.78rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.87rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.88rem !important;
+    padding-top: 0.88rem !important;
+    margin-top: 0.72rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.38rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.76rem !important;
+  }
+}
+
+/* Android Foldables - Unfolded State (wide landscape ~2208px-1768px) */
+@media (min-width: 1768px) and (max-width: 2208px) and (orientation: landscape) {
+  .pastors-grid {
+    gap: 2.5rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.35rem !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 450px !important;
+  }
+}
+
+/* Android Foldables - Folded/Cover Screen (narrow ~277px-359px) */
+@media (min-width: 277px) and (max-width: 359px) {
+  .hero-container {
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
+  }
+  
+  .pastors-container {
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
+  }
+  
+  .back-button {
+    font-size: 0.8rem !important;
+    padding: 0.55rem 1.05rem !important;
+  }
+  
+  .hero-title {
+    font-size: 1.65rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.82rem !important;
+    padding-left: 0.45rem !important;
+    padding-right: 0.45rem !important;
+  }
+  
+  .pastor-card {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0 !important;
+  }
+  
+  .pastor-image-container {
+    min-height: 220px !important;
+    max-height: 260px !important;
+    width: 100% !important;
+  }
+  
+  .pastor-content {
+    padding: 1.15rem 0.95rem !important;
+    gap: 0.8rem !important;
+  }
+  
+  .pastor-name {
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .pastor-title {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.38rem !important;
+  }
+  
+  .pastor-bio {
+    gap: 0.6rem !important;
+  }
+  
+  .pastor-paragraph {
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+  }
+  
+  .pastor-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+    padding-top: 0.75rem !important;
+    margin-top: 0.55rem !important;
+  }
+  
+  .stat-number {
+    font-size: 1.15rem !important;
+  }
+  
+  .stat-label {
+    font-size: 0.68rem !important;
   }
 }
 </style>
