@@ -595,15 +595,640 @@ const handleSubmit = async () => {
   animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (max-width: 1024px) {
-  div[style*="mainGridStyle"] {
-    grid-template-columns: 1fr;
+/* Base overflow prevention */
+#contact {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+#contact * {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+.info-card {
+  display: flex !important;
+  gap: 1rem !important;
+  align-items: flex-start !important;
+  padding: 1.5rem !important;
+  background-color: #ffffff !important;
+  border-radius: 1rem !important;
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.info-text-content {
+  flex: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.info-text-content p {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* ===== APPLE DEVICE BREAKPOINTS ===== */
+
+/* iPad Pro 12.9" & 11" (1366px+) */
+@media (min-width: 1366px) {
+  #contact {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
   }
 }
 
-@media (max-width: 768px) {
+/* iPad Air & Standard (1024px - 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
+  #contact {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    gap: 2.5rem !important;
+  }
+}
+
+/* iPad Mini (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #contact {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
   div[style*="titleStyle"] {
-    font-size: 1.875rem;
+    font-size: 2rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 1.05rem !important;
+  }
+}
+
+/* iPhone Pro Max 6.9" (520px - 767px) */
+@media (min-width: 520px) and (max-width: 767px) {
+  #contact {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2.5rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.85rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 1rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.25rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.5rem !important;
+  }
+}
+
+/* iPhone Plus 6.7" (480px - 519px) */
+@media (min-width: 480px) and (max-width: 519px) {
+  #contact {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.15rem !important;
+    padding-right: 1.15rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2.25rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.8rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.75rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.95rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.15rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.35rem !important;
+  }
+}
+
+/* iPhone Standard 6.1" (430px - 479px) */
+@media (min-width: 430px) and (max-width: 479px) {
+  #contact {
+    padding-top: 2.8rem !important;
+    padding-bottom: 2.8rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.05rem !important;
+    padding-right: 1.05rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.65rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.65rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.92rem !important;
+  }
+  
+  div[style*="badgeStyle"] {
+    font-size: 0.7rem !important;
+    padding: 0.45rem 0.9rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.05rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.25rem !important;
+  }
+  
+  div[style*="inputStyle"],
+  div[style*="textareaStyle"] {
+    padding: 0.65rem 0.9rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* iPhone Small 5.4" (390px - 429px) */
+@media (min-width: 390px) and (max-width: 429px) {
+  #contact {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 0.95rem !important;
+    padding-right: 0.95rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 1.8rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.55rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.88rem !important;
+  }
+  
+  div[style*="badgeStyle"] {
+    font-size: 0.68rem !important;
+    padding: 0.4rem 0.85rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 0.95rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.15rem !important;
+  }
+  
+  div[style*="inputStyle"],
+  div[style*="textareaStyle"] {
+    padding: 0.6rem 0.85rem !important;
+    font-size: 0.88rem !important;
+  }
+  
+  div[style*="submitButtonStyle"] {
+    padding: 0.9rem !important;
+    font-size: 0.93rem !important;
+  }
+}
+
+/* ===== ANDROID DEVICE BREAKPOINTS ===== */
+
+/* Android Tablets - High Resolution (1800px - Pixel C, Galaxy Tab S) */
+@media (min-width: 1800px) and (max-width: 2560px) {
+  #contact {
+    padding-top: 6.5rem !important;
+    padding-bottom: 6.5rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    gap: 3.2rem !important;
+  }
+}
+
+/* Android Tablets - Standard (1280px-1800px - Nexus 9, Galaxy Tab) */
+@media (min-width: 1280px) and (max-width: 1799px) {
+  #contact {
+    padding-top: 5.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.8rem !important;
+    padding-right: 1.8rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    gap: 2.8rem !important;
+  }
+}
+
+/* Android Tablets - Small (800px-1279px) */
+@media (min-width: 800px) and (max-width: 1279px) {
+  #contact {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 2.2rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 2.15rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 1.08rem !important;
+  }
+}
+
+/* Android High-End Flagships - QHD/QHD+ (720px wide) */
+@media (min-width: 720px) and (max-width: 799px) {
+  #contact {
+    padding-top: 3.8rem !important;
+    padding-bottom: 3.8rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.35rem !important;
+    padding-right: 1.35rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2.6rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 2.05rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.92rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 1.02rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.28rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.58rem !important;
+  }
+}
+
+/* Android Mid-Range/Flagships - FHD/FHD+ (540px wide) */
+@media (min-width: 540px) and (max-width: 719px) {
+  #contact {
+    padding-top: 3.4rem !important;
+    padding-bottom: 3.4rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.22rem !important;
+    padding-right: 1.22rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2.35rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.88rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.82rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.98rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.18rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.42rem !important;
+  }
+  
+  div[style*="inputStyle"],
+  div[style*="textareaStyle"] {
+    padding: 0.68rem 0.92rem !important;
+    font-size: 0.92rem !important;
+  }
+}
+
+/* Android Small Phones/Budget - HD/HD+ (360px - 539px wide) */
+@media (max-width: 539px) and (min-width: 360px) {
+  #contact {
+    padding-top: 2.8rem !important;
+    padding-bottom: 2.8rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 1.08rem !important;
+    padding-right: 1.08rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 2.05rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.68rem !important;
+    display: block !important;
+  }
+  
+  div[style*="infoSectionStyle"],
+  div[style*="formSectionStyle"] {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 1.68rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.68rem !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.9rem !important;
+  }
+  
+  div[style*="badgeStyle"] {
+    font-size: 0.69rem !important;
+    padding: 0.42rem 0.87rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 1.02rem !important;
+    margin-bottom: 1.15rem !important;
+  }
+  
+  div[style*="iconBoxStyle"] {
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 1.35rem !important;
+  }
+  
+  div[style*="socialSectionStyle"] {
+    margin-top: 1.68rem !important;
+    padding-top: 1.68rem !important;
+  }
+  
+  div[style*="socialLinksStyle"] {
+    gap: 0.88rem !important;
+    justify-content: center !important;
+  }
+  
+  div[style*="officeHoursStyle"] {
+    margin-top: 1.68rem !important;
+    padding: 1.28rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.28rem !important;
+  }
+  
+  div[style*="inputStyle"],
+  div[style*="textareaStyle"] {
+    padding: 0.62rem 0.88rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  div[style*="submitButtonStyle"] {
+    padding: 0.88rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Android Foldables - Unfolded State (wide landscape ~2208px-1768px) */
+@media (min-width: 1768px) and (max-width: 2208px) and (orientation: landscape) {
+  #contact {
+    padding-top: 5.8rem !important;
+    padding-bottom: 5.8rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    gap: 3rem !important;
+  }
+}
+
+/* Android Foldables - Folded/Cover Screen (narrow ~277px-359px) */
+@media (min-width: 277px) and (max-width: 359px) {
+  #contact {
+    padding-top: 2.2rem !important;
+    padding-bottom: 2.2rem !important;
+  }
+  
+  div[style*="containerStyle"] {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+  
+  div[style*="headerStyle"] {
+    margin-bottom: 1.6rem !important;
+  }
+  
+  div[style*="mainGridStyle"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.4rem !important;
+    display: block !important;
+  }
+  
+  div[style*="infoSectionStyle"],
+  div[style*="formSectionStyle"] {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 1.4rem !important;
+  }
+  
+  div[style*="titleStyle"] {
+    font-size: 1.42rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  div[style*="subtitleStyle"] {
+    font-size: 0.82rem !important;
+  }
+  
+  div[style*="badgeStyle"] {
+    font-size: 0.62rem !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+  
+  .info-card {
+    flex-direction: column !important;
+    padding: 0.88rem !important;
+    margin-bottom: 0.95rem !important;
+  }
+  
+  .info-card h4 {
+    font-size: 0.95rem !important;
+  }
+  
+  .info-card p {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  div[style*="iconBoxStyle"] {
+    width: 2.6rem !important;
+    height: 2.6rem !important;
+    font-size: 1.2rem !important;
+  }
+  
+  div[style*="socialSectionStyle"] {
+    margin-top: 1.4rem !important;
+    padding-top: 1.4rem !important;
+  }
+  
+  div[style*="socialSectionStyle"] h4 {
+    font-size: 1.05rem !important;
+  }
+  
+  div[style*="socialLinksStyle"] {
+    gap: 0.7rem !important;
+    justify-content: center !important;
+  }
+  
+  div[style*="socialLinkStyle"] {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+  
+  div[style*="socialLinkStyle"] img {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+  
+  div[style*="officeHoursStyle"] {
+    margin-top: 1.4rem !important;
+    padding: 1.05rem !important;
+  }
+  
+  div[style*="officeHoursStyle"] h4 {
+    font-size: 0.95rem !important;
+  }
+  
+  div[style*="formCardStyle"] {
+    padding: 1.05rem !important;
+  }
+  
+  div[style*="formCardStyle"] h3 {
+    font-size: 1.42rem !important;
+  }
+  
+  div[style*="formCardStyle"] p {
+    font-size: 0.82rem !important;
+  }
+  
+  div[style*="labelStyle"] {
+    font-size: 0.85rem !important;
+  }
+  
+  div[style*="inputStyle"],
+  div[style*="textareaStyle"] {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.82rem !important;
+  }
+  
+  div[style*="submitButtonStyle"] {
+    padding: 0.78rem !important;
+    font-size: 0.88rem !important;
   }
 }
 </style>

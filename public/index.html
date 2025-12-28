@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="" style="overflow-x: hidden !important; max-width: 100vw !important; width: 100% !important;">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon.png">
     <link rel="shortcut icon" href="<%= BASE_URL %>favicon.png">
@@ -18,8 +18,42 @@
     <meta name="msapplication-TileImage" content="<%= BASE_URL %>img/icons/msapplication-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#000000">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      /* Global overflow prevention - loaded first */
+      * {
+        box-sizing: border-box !important;
+      }
+      
+      html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+      }
+      
+      /* Prevent horizontal scrolling on all elements */
+      * {
+        max-width: 100% !important;
+      }
+      
+      /* Ensure images and media don't overflow */
+      img, video, iframe, embed, object {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    </style>
   </head>
-  <body>
+  <body style="overflow-x: hidden !important; max-width: 100vw !important; width: 100% !important; margin: 0 !important; padding: 0 !important;">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
