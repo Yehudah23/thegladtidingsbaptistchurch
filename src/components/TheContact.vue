@@ -633,6 +633,15 @@ const handleSubmit = async () => {
   overflow-wrap: break-word !important;
 }
 
+/* ===== MOBILE PHONE BREAKPOINTS ===== */
+
+/* Hide contact section on small phones (both Android and iOS) */
+@media (max-width: 767px) {
+  #contact {
+    display: none !important;
+  }
+}
+
 /* ===== APPLE DEVICE BREAKPOINTS ===== */
 
 /* iPad Pro 12.9" & 11" (1366px+) */
