@@ -28,12 +28,16 @@
           <div :style="facebookEmbedContainerStyle" class="youtube-embed-container premium-video">
             <iframe 
               :key="iframeKey"
-              src="https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=0&enablejsapi=1"
+              src="https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0"
               width="100%"
               height="100%"
               style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%"
               allowfullscreen="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; accelerometer; gyroscope"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; accelerometer; gyroscope; fullscreen"
+              frameborder="0"
+              playsinline
+              webkitallowfullscreen
+              mozallowfullscreen
               @error="facebookLoadError = true"
             ></iframe>
             <div v-if="facebookLoadError" :style="noStreamFallbackStyle" class="fade-in premium-fallback">
@@ -1496,6 +1500,57 @@ const getGradientColor = (index) => {
 
 .section-header-premium {
   animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+/* iPad Pro and Large Tablets - Ensure video loads properly */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .youtube-embed-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 500px !important;
+  }
+  
+  .premium-video {
+    aspect-ratio: 16/9 !important;
+    min-height: 500px !important;
+  }
+  
+  div[style*="facebookEmbedContainerStyle"] {
+    min-height: 500px !important;
+  }
+}
+
+/* iPad Pro 12.9" specific fixes */
+@media (min-width: 1366px) {
+  .youtube-embed-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 600px !important;
+  }
+  
+  .premium-video {
+    aspect-ratio: 16/9 !important;
+    min-height: 600px !important;
+  }
+  
+  div[style*="facebookEmbedContainerStyle"] {
+    min-height: 600px !important;
+  }
+}
+
+/* All iOS devices - Safari specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .youtube-embed-container {
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+  
+  .youtube-embed-container iframe {
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
 @media (max-width: 768px) {
