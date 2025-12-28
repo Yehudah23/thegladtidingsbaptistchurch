@@ -1553,55 +1553,205 @@ const getGradientColor = (index) => {
   }
 }
 
+/* Tablets - Centralize content */
+@media (min-width: 769px) and (max-width: 1024px) {
+  div[style*="socialMediaGridStyle"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-items: center !important;
+    gap: 2rem !important;
+  }
+  
+  div[style*="testimonialsGridStyle"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-items: center !important;
+    gap: 2rem !important;
+  }
+  
+  div[style*="servicesGridStyle"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-items: center !important;
+    gap: 2rem !important;
+  }
+  
+  .platform-card,
+  .service-card,
+  .testimonial-card {
+    width: 100% !important;
+    max-width: 400px !important;
+  }
+  
+  .section-header-premium,
+  .services-header,
+  .testimonial-header {
+    text-align: center !important;
+  }
+}
+
+/* Small tablets and large phones */
+@media (min-width: 481px) and (max-width: 768px) {
+  div[style*="socialMediaGridStyle"] {
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  div[style*="testimonialsGridStyle"] {
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  div[style*="servicesGridStyle"] {
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
   div[style*="servicesGridStyle"] {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   div[style*="testimonialsGridStyle"] {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   div[style*="socialMediaGridStyle"] {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    max-width: 500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .platform-card {
     min-height: 350px;
+    width: 100% !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .card-content {
     min-height: 350px;
+    text-align: center !important;
   }
 
   .premium-icon {
     width: 80px;
     height: 80px;
     font-size: 3rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .platform-name {
     font-size: 1.4rem;
+    text-align: center !important;
+  }
+  
+  .platform-desc {
+    text-align: center !important;
+  }
+  
+  .platform-stats {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  .watch-btn {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .cta-buttons {
     flex-direction: column;
+    align-items: center !important;
   }
 
   .cta-btn {
     width: 100%;
+    max-width: 400px !important;
+    text-align: center !important;
   }
 
   .premium-cta-section {
     padding: 3rem 1.5rem;
+    text-align: center !important;
   }
 
   .premium-service-header {
     padding: 1.5rem;
+    text-align: center !important;
   }
 
   .premium-service-body {
     padding: 1.5rem;
+    text-align: center !important;
+  }
+  
+  .service-card {
+    width: 100% !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .testimonial-card {
+    width: 100% !important;
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+  
+  .testimonial-header-card {
+    justify-content: center !important;
+  }
+  
+  .testimonial-text {
+    text-align: center !important;
+  }
+  
+  .testimonial-footer {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  
+  .service-details {
+    text-align: center !important;
+  }
+  
+  .service-info {
+    justify-content: center !important;
+  }
+  
+  /* Centralize headers and titles */
+  .section-header-premium,
+  .services-header,
+  .testimonial-header {
+    text-align: center !important;
+  }
+  
+  .premium-section-title,
+  .section-title,
+  .section-subtitle {
+    text-align: center !important;
   }
 }
 </style>
