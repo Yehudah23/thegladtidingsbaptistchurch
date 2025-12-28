@@ -28,7 +28,7 @@
           <div :style="facebookEmbedContainerStyle" class="youtube-embed-container premium-video">
             <iframe 
               :key="iframeKey"
-              src="https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0"
+              :src="youtubeEmbedUrl"
               width="100%"
               height="100%"
               style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%"
@@ -258,11 +258,32 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
+
+// Replace this with your actual video ID from YouTube
+// To get it: Go to any video on your channel, copy the ID from the URL after "v="
+// Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ -> video ID is "dQw4w9WgXcQ"
+const fallbackVideoId = ref(''); // Leave empty to use channel's latest uploads
+
+// Computed property for YouTube embed URL
+const youtubeEmbedUrl = computed(() => {
+  const channelId = 'UCsLZf3OqcArWB3YkVWAT1-w';
+  
+  if (fallbackVideoId.value) {
+    // If you have a specific video ID, use it
+    // This will show your video, and auto-switch to live when you start streaming
+    return `https://www.youtube.com/embed/${fallbackVideoId.value}?autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0`;
+  } else {
+    // Show latest uploads from your channel (works better on iPad)
+    // Note: The playlist ID is your channel ID with "UC" replaced by "UULP"
+    const uploadsPlaylistId = channelId.replace('UC', 'UULP');
+    return `https://www.youtube.com/embed?listType=playlist&list=${uploadsPlaylistId}&autoplay=0&mute=0&enablejsapi=1&playsinline=1&controls=1&modestbranding=1&rel=0`;
+  }
+});
 
 onUnmounted(() => {
   if (refreshInterval) {
