@@ -635,10 +635,58 @@ const handleSubmit = async () => {
 
 /* ===== MOBILE PHONE BREAKPOINTS ===== */
 
-/* Hide contact section on small phones (both Android and iOS) */
+/* Show only the form on small phones (both Android and iOS) */
 @media (max-width: 767px) {
   #contact {
+    display: block !important;
+    padding: 2rem 1rem !important;
+  }
+
+  /* Hide everything except the form */
+  div[style*="headerStyle"],
+  .contact-header-animate {
     display: none !important;
+  }
+
+  div[style*="infoSectionStyle"],
+  .info-section-animate {
+    display: none !important;
+  }
+
+  /* Show only the form section */
+  div[style*="mainGridStyle"],
+  .contact-grid-animate {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="formSectionStyle"],
+  .form-section-animate {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  div[style*="formCardStyle"],
+  .form-card-premium {
+    padding: 1.5rem !important;
+    box-shadow: none !important;
+  }
+
+  /* Optimize form elements for mobile */
+  input[style*="inputStyle"],
+  textarea[style*="inputStyle"],
+  .form-input,
+  .form-textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 0.875rem !important;
+  }
+
+  button[style*="buttonStyle"],
+  .form-button {
+    width: 100% !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
   }
 }
 

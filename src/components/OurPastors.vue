@@ -60,7 +60,7 @@ const pastors = ref([
   {
     name: "Rev. Segun Babalola",
     title: "Senior Pastor",
-    image: require("@/assets/reverend Olusegun.png"),
+    image: require("@/assets/Reverend Olusegun Babalola.jpg"),
     yearsOfService: "15+",
     specialization: "Teaching & Leadership",
     bio: [
@@ -73,7 +73,7 @@ const pastors = ref([
   {
     name: "Rev. Jacob Areo",
     title: "Missions/Outreach Pastor",
-    image: require("@/assets/reverend Jacob Areo.png"),
+    image: require("@/assets/Reverend Jacob Areo.png"),
     yearsOfService: "10+",
     specialization: "Children & Education",
     bio: [
@@ -85,7 +85,7 @@ const pastors = ref([
   {
     name: "Rev. Olayinka Oke",
     title: "Spiritual Formation Pastor",
-    image: require("@/assets/revrend oke.png"),
+    image: require("@/assets/Reverend Olayinka Oke.jpg"),
     yearsOfService: "10+",
     specialization: "Spiritual Growth & Discipleship",
     bio: [
@@ -97,7 +97,7 @@ const pastors = ref([
   {
     name: " Rev. Tobi Onifade",
     title: "Worship and live development ministries Pastor",
-    image: require("@/assets/reverend Tobi.png"),
+    image: require("@/assets/Reverend Tobi Onifade.jpg"),
     yearsOfService: "15+",
     specialization: "Worship & Life Development",
     bio: [
@@ -109,7 +109,7 @@ const pastors = ref([
   {
     name: "Pastor Damilola Ayoola-Abolade",
     title: "Youth Pastor/Media Director",
-    image: require("@/assets/pastor damilola.png"),
+    image: require("@/assets/Pastor Damilola.png"),
     yearsOfService: "8+",
     specialization: "Youth & Young Adults",
     bio: [

@@ -211,9 +211,12 @@
           <h3 :style="{ fontSize: '2rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem', textAlign: 'center' }">
             💬 What Our Online Community Says
           </h3>
-          <p :style="{ fontSize: '1.1rem', color: '#64748b', textAlign: 'center', marginBottom: '3rem' }">
-            Join thousands who have transformed their worship experience
+          <p :style="{ fontSize: '1.1rem', color: '#64748b', textAlign: 'center', marginBottom: '1rem' }">
+            Live comments from our Facebook and YouTube community
           </p>
+          <div v-if="isLoadingComments" :style="{ textAlign: 'center', color: '#3b82f6', marginBottom: '2rem' }">
+            <span>🔄 Loading live comments...</span>
+          </div>
         </div>
         <div :style="testimonialsGridStyle">
           <div v-for="(testimonial, index) in testimonials" :key="index" :style="testimonialCardStyle" class="testimonial-card premium-testimonial">
@@ -227,7 +230,9 @@
             </div>
             <p class="testimonial-text">"{{ testimonial.text }}"</p>
             <div class="testimonial-footer">
-              <span class="verified-badge">✓ Verified Attendee</span>
+              <span class="verified-badge" v-if="testimonial.platform === 'YouTube'">📺 YouTube</span>
+              <span class="verified-badge" v-else-if="testimonial.platform === 'Facebook'">👤 Facebook</span>
+              <span class="verified-badge" v-else>✓ Verified Attendee</span>
             </div>
           </div>
         </div>
@@ -339,25 +344,167 @@ onMounted(() => {
       service.reminderSet = true;
     }
   });
+
+  // Load live comments from YouTube and Facebook
+  loadComments();
+
+  // Refresh comments every 5 minutes
+  setInterval(() => {
+    loadComments();
+  }, 300000); // 300000ms = 5 minutes
 });
 
 const testimonials = ref([
   {
     name: "Sarah M.",
     emoji: "👩‍💼",
-    text: "Being able to worship with my church family online has been such a blessing. The streams are always clear and engaging!"
+    text: "Being able to worship with my church family online has been such a blessing. The streams are always clear and engaging!",
+    platform: "Sample",
+    verified: true
   },
   {
     name: "John D.",
     emoji: "👨‍💻",
-    text: "I work most Sundays but now I can catch up with our services online. The community is so welcoming!"
+    text: "I work most Sundays but now I can catch up with our services online. The community is so welcoming!",
+    platform: "Sample",
+    verified: true
   },
   {
     name: "Maria L.",
     emoji: "👵",
-    text: "Living out of state, I'm so grateful I can still be part of our church family through the live streams."
+    text: "Living out of state, I'm so grateful I can still be part of our church family through the live streams.",
+    platform: "Sample",
+    verified: true
   }
 ]);
+
+const isLoadingComments = ref(false);
+const commentError = ref(null);
+
+// YouTube API Configuration
+const YOUTUBE_API_KEY = ''; // Add your YouTube API key here
+const YOUTUBE_CHANNEL_ID = 'UCsLZf3OqcArWB3YkVWAT1-w';
+
+// Facebook Configuration  
+const FACEBOOK_PAGE_ID = ''; // Add your Facebook Page ID here
+const FACEBOOK_ACCESS_TOKEN = ''; // Add your Facebook access token here
+
+// Fetch YouTube comments
+const fetchYouTubeComments = async () => {
+  if (!YOUTUBE_API_KEY) {
+    console.log('YouTube API key not configured');
+    return [];
+  }
+
+  try {
+    // First, get the latest video from the channel
+    const videosResponse = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=1&type=video`
+    );
+    const videosData = await videosResponse.json();
+    
+    if (!videosData.items || videosData.items.length === 0) {
+      return [];
+    }
+
+    const latestVideoId = videosData.items[0].id.videoId;
+
+    // Get comments from the latest video
+    const commentsResponse = await fetch(
+      `https://www.googleapis.com/youtube/v3/commentThreads?key=${YOUTUBE_API_KEY}&videoId=${latestVideoId}&part=snippet&maxResults=10&order=relevance`
+    );
+    const commentsData = await commentsResponse.json();
+
+    if (!commentsData.items) {
+      return [];
+    }
+
+    return commentsData.items.map(item => ({
+      name: item.snippet.topLevelComment.snippet.authorDisplayName,
+      emoji: "📺",
+      text: item.snippet.topLevelComment.snippet.textDisplay.substring(0, 200), // Limit length
+      platform: "YouTube",
+      verified: true,
+      timestamp: item.snippet.topLevelComment.snippet.publishedAt
+    }));
+  } catch (error) {
+    console.error('Error fetching YouTube comments:', error);
+    return [];
+  }
+};
+
+// Fetch Facebook comments
+const fetchFacebookComments = async () => {
+  if (!FACEBOOK_PAGE_ID || !FACEBOOK_ACCESS_TOKEN) {
+    console.log('Facebook credentials not configured');
+    return [];
+  }
+
+  try {
+    // Get recent posts from the page
+    const postsResponse = await fetch(
+      `https://graph.facebook.com/v18.0/${FACEBOOK_PAGE_ID}/posts?fields=id,message,created_time&limit=5&access_token=${FACEBOOK_ACCESS_TOKEN}`
+    );
+    const postsData = await postsResponse.json();
+
+    if (!postsData.data || postsData.data.length === 0) {
+      return [];
+    }
+
+    // Get comments from the most recent post
+    const latestPostId = postsData.data[0].id;
+    const commentsResponse = await fetch(
+      `https://graph.facebook.com/v18.0/${latestPostId}/comments?fields=from,message,created_time&limit=10&access_token=${FACEBOOK_ACCESS_TOKEN}`
+    );
+    const commentsData = await commentsResponse.json();
+
+    if (!commentsData.data) {
+      return [];
+    }
+
+    return commentsData.data.map(comment => ({
+      name: comment.from.name,
+      emoji: "👤",
+      text: comment.message.substring(0, 200), // Limit length
+      platform: "Facebook",
+      verified: true,
+      timestamp: comment.created_time
+    }));
+  } catch (error) {
+    console.error('Error fetching Facebook comments:', error);
+    return [];
+  }
+};
+
+// Load comments from both platforms
+const loadComments = async () => {
+  isLoadingComments.value = true;
+  commentError.value = null;
+
+  try {
+    const [youtubeComments, facebookComments] = await Promise.all([
+      fetchYouTubeComments(),
+      fetchFacebookComments()
+    ]);
+
+    // Combine comments from both platforms
+    const allComments = [...youtubeComments, ...facebookComments];
+
+    // If we have real comments, use them; otherwise keep sample data
+    if (allComments.length > 0) {
+      // Sort by timestamp (most recent first)
+      allComments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      // Take top 6 comments
+      testimonials.value = allComments.slice(0, 6);
+    }
+  } catch (error) {
+    console.error('Error loading comments:', error);
+    commentError.value = 'Unable to load live comments';
+  } finally {
+    isLoadingComments.value = false;
+  }
+};
 
 const upcomingServices = ref([
   {

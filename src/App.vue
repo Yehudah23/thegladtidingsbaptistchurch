@@ -51,20 +51,20 @@ body {
   overflow-x: hidden !important;
   max-width: 100vw !important;
   width: 100% !important;
-  background-image: url('@/assets/logo.png');
+  background-image: url('@/assets/church logo.jpeg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
 
-/* Prevent all children from overflowing */
+
 #app > * {
   max-width: 100vw !important;
   overflow-x: hidden !important;
 }
 
-/* Ensure all sections stay within bounds */
+
 section,
 div,
 header,
@@ -77,7 +77,7 @@ aside {
   word-wrap: break-word !important;
 }
 
-/* Prevent images and media from overflowing */
+
 img,
 video,
 iframe,
@@ -87,7 +87,7 @@ object {
   height: auto !important;
 }
 
-/* Prevent text overflow */
+
 p,
 h1,
 h2,
@@ -104,7 +104,7 @@ li {
   hyphens: auto !important;
 }
 
-/* Prevent pre and code blocks from overflowing */
+
 pre,
 code {
   white-space: pre-wrap !important;
@@ -112,7 +112,7 @@ code {
   overflow-x: auto !important;
 }
 
-/* Ensure tables are responsive */
+
 table {
   max-width: 100% !important;
   overflow-x: auto !important;
@@ -133,9 +133,7 @@ table {
   z-index: -1;
 }
 
-/* ===== RESPONSIVE OVERFLOW FIXES FOR ALL DEVICES ===== */
 
-/* Apple & Android - All Devices */
 @media (max-width: 2560px) {
   html,
   body,
@@ -149,7 +147,6 @@ table {
   }
 }
 
-/* Tablets and below */
 @media (max-width: 1024px) {
   body {
     overflow-x: hidden !important;
@@ -161,7 +158,7 @@ table {
   }
 }
 
-/* Mobile devices */
+
 @media (max-width: 768px) {
   html {
     overflow-x: hidden !important;
@@ -182,7 +179,7 @@ table {
   }
 }
 
-/* Small mobile devices */
+
 @media (max-width: 480px) {
   html,
   body {
@@ -197,7 +194,7 @@ table {
   }
 }
 
-/* Very small devices and foldables */
+
 @media (max-width: 360px) {
   * {
     overflow-x: hidden !important;
