@@ -28,6 +28,9 @@
           <router-link :to="{ name: 'Home', hash: '#sermons' }" :style="navLinkStyle" class="nav-link">
             Messages
           </router-link>
+          <router-link :to="{ name: 'Blog' }" :style="navLinkStyle" class="nav-link">
+            Blog
+          </router-link>
           <router-link :to="{ name: 'Giving' }" :style="navLinkStyle" class="nav-link">
             Giving
           </router-link>
@@ -38,9 +41,6 @@
 
         <!-- CTA Buttons -->
         <div :style="{ display: 'flex', alignItems: 'center', gap: '1rem' }" class="desktop-cta">
-          <router-link :to="{ name: 'Admin' }" :style="adminLinkStyle" class="admin-link">
-            🔐 Admin
-          </router-link>
           <router-link :to="{ name: 'Home', hash: '#live' }" :style="ctaButtonStyle" class="cta-button">
             Watch Live
           </router-link>
@@ -67,14 +67,14 @@
           <router-link :to="{ name: 'Home', hash: '#sermons' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Messages
           </router-link>
+          <router-link :to="{ name: 'Blog' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
+            Blog
+          </router-link>
           <router-link :to="{ name: 'Giving' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Giving
           </router-link>
           <router-link :to="{ name: 'Home', hash: '#contact' }" @click="closeMobileMenu" :style="{ color: '#374151', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
             Contact
-          </router-link>
-          <router-link :to="{ name: 'Admin' }" @click="closeMobileMenu" :style="{ color: '#2563eb', transition: 'color 0.3s ease', textAlign: 'left', textDecoration: 'none', fontWeight: '500', padding: '0.5rem', borderRadius: '0.5rem' }" class="mobile-nav-link">
-            🔐 Admin
           </router-link>
           <router-link :to="{ name: 'Home', hash: '#live' }" @click="closeMobileMenu" :style="{ ...ctaButtonStyle, width: '100%', textAlign: 'center' }" class="mobile-cta">
             Watch Live
@@ -98,16 +98,6 @@ const navLinkStyle = {
   fontWeight: '500',
   fontSize: '0.95rem',
   position: 'relative'
-};
-
-const adminLinkStyle = {
-  color: '#2563eb',
-  fontSize: '0.875rem',
-  fontWeight: '600',
-  textDecoration: 'none',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  padding: '0.5rem 1rem',
-  borderRadius: '0.5rem'
 };
 
 const ctaButtonStyle = {

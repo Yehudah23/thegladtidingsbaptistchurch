@@ -260,7 +260,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const facebookLoadError = ref(false);
 const iframeKey = ref(0);

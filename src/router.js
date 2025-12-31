@@ -5,6 +5,8 @@ import AdminLogin from './components/AdminLogin.vue'
 import LearnMore from './components/LearnMore.vue'
 import GivingPage from './components/GivingPage.vue'
 import OurPastors from './components/OurPastors.vue'
+import BlogPage from './components/BlogPage.vue'
+import BlogPostDetail from './components/BlogPostDetail.vue'
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
     path: '/giving',
     name: 'Giving',
     component: GivingPage
+  },
+  {
+    path: '/blog',
+    name: 'Blog',
+    component: BlogPage
+  },
+  {
+    path: '/blog/:id',
+    name: 'BlogPost',
+    component: BlogPostDetail
   },
   {
     path: '/livestream',

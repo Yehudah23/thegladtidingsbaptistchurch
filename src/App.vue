@@ -51,6 +51,11 @@ body {
   overflow-x: hidden !important;
   max-width: 100vw !important;
   width: 100% !important;
+  background-image: url('@/assets/logo.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 /* Prevent all children from overflowing */
@@ -121,7 +126,7 @@ table {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjBiYWNrZ3JvdW5kfGVufDF8fHx8MTc2MTU1ODU0NXww&ixlib=rb-4.1.0&q=80&w=1080');
+  background-image: url('@/assets/logo.png');
   background-size: cover;
   background-position: center;
   opacity: 0.1;
