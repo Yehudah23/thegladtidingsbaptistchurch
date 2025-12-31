@@ -11,6 +11,7 @@
               The Glad Tidings
             </span>
             <span :style="{ fontSize: '1.1rem', color: '#9ca3af', fontWeight: '700', letterSpacing: '0.01em', color: 'red',paddingLeft:'-2.0rem' }" class="church-name-sub">BAPTIST CHURCH</span>
+             <span :style="{ fontSize: '1.1rem', color: '#9ca3af', fontWeight: '500', letterSpacing: '0.01em', color: 'red',paddingLeft:'-2.0rem' }" class="church-name-sub">OGBOMOSO</span>
           </div>
         </div>
 

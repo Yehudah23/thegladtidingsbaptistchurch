@@ -29,6 +29,13 @@
           🎤 All Messages
         </button>
         <button
+          @click="activeTab = 'blog'"
+          :style="getTabStyle('blog')"
+          class="tab-button tab-blog"
+        >
+          📝 Blog Posts
+        </button>
+        <button
           @click="activeTab = 'settings'"
           :style="getTabStyle('settings')"
           class="tab-button tab-settings"
@@ -281,6 +288,195 @@
         </div>
       </div>
 
+      <!-- Blog Posts Tab -->
+      <div v-if="activeTab === 'blog'" :style="tabContentStyle" class="tab-content-animate">
+        <div :style="uploadContainerStyle">
+          <h3 :style="formTitleStyle">{{ editingBlogPost ? 'Edit Blog Post' : 'Create New Blog Post' }}</h3>
+          
+          <!-- Blog Post Form -->
+          <form @submit.prevent="saveBlogPost" :style="sermonFormStyle" class="blog-form">
+            <div :style="formRowStyle">
+              <div :style="formGroupStyle" class="form-group">
+                <label :style="labelStyle">Post Title *</label>
+                <input 
+                  v-model="blogForm.title" 
+                  type="text" 
+                  required 
+                  :style="inputStyle"
+                  placeholder="Enter blog post title"
+                  class="form-input"
+                />
+              </div>
+            </div>
+
+            <div :style="formRowStyle">
+              <div :style="formGroupStyle" class="form-group">
+                <label :style="labelStyle">Category *</label>
+                <select 
+                  v-model="blogForm.category" 
+                  required 
+                  :style="inputStyle"
+                  class="form-input"
+                >
+                  <option value="">Select category</option>
+                  <option value="magazine">Magazines</option>
+                  <option value="article">Articles</option>
+                  <option value="announcement">Announcements</option>
+                  <option value="event">Events</option>
+                </select>
+              </div>
+
+              <div :style="formGroupStyle" class="form-group">
+                <label :style="labelStyle">Author *</label>
+                <input 
+                  v-model="blogForm.author" 
+                  type="text" 
+                  required 
+                  :style="inputStyle"
+                  placeholder="Author name"
+                  class="form-input"
+                />
+              </div>
+            </div>
+
+            <div :style="formRowStyle">
+              <div :style="formGroupStyle" class="form-group">
+                <label :style="labelStyle">Date *</label>
+                <input 
+                  v-model="blogForm.date" 
+                  type="date" 
+                  required 
+                  :style="inputStyle"
+                  class="form-input"
+                />
+              </div>
+
+              <div :style="formGroupStyle" class="form-group">
+                <label :style="labelStyle">Featured Image URL *</label>
+                <input 
+                  v-model="blogForm.image" 
+                  type="url" 
+                  required 
+                  :style="inputStyle"
+                  placeholder="https://example.com/image.jpg"
+                  class="form-input"
+                />
+              </div>
+            </div>
+
+            <div :style="formGroupStyle" class="form-group">
+              <label :style="labelStyle">Excerpt (Short Description) *</label>
+              <textarea 
+                v-model="blogForm.excerpt" 
+                required 
+                :style="{...inputStyle, minHeight: '80px', resize: 'vertical'}"
+                placeholder="Brief description of the post (will show in the blog list)"
+                class="form-input"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div :style="formGroupStyle" class="form-group">
+              <label :style="labelStyle">Full Content (HTML supported) *</label>
+              <textarea 
+                v-model="blogForm.content" 
+                required 
+                :style="{...inputStyle, minHeight: '200px', resize: 'vertical', fontFamily: 'monospace'}"
+                placeholder="Full blog post content. You can use HTML tags like <h2>, <h3>, <p>, <ul>, <li>, <blockquote>, etc."
+                class="form-input"
+                rows="10"
+              ></textarea>
+              <p :style="{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}">
+                💡 Tip: Use HTML for formatting (e.g., &lt;h2&gt;Heading&lt;/h2&gt;, &lt;p&gt;Paragraph&lt;/p&gt;, &lt;ul&gt;&lt;li&gt;List&lt;/li&gt;&lt;/ul&gt;)
+              </p>
+            </div>
+
+            <!-- Image Preview -->
+            <div v-if="blogForm.image" :style="{marginBottom: '1.5rem'}">
+              <label :style="labelStyle">Image Preview</label>
+              <img :src="blogForm.image" alt="Preview" :style="{maxWidth: '100%', maxHeight: '300px', borderRadius: '0.5rem', objectFit: 'cover'}" />
+            </div>
+
+            <!-- Action Buttons -->
+            <div :style="{display: 'flex', gap: '1rem', flexWrap: 'wrap'}">
+              <button type="submit" :style="uploadButtonStyle" class="save-blog-button">
+                {{ editingBlogPost ? '💾 Update Post' : '📝 Publish Post' }}
+              </button>
+              <button 
+                v-if="editingBlogPost" 
+                type="button" 
+                @click="cancelEditBlog" 
+                :style="cancelButtonStyle" 
+                class="cancel-blog-button"
+              >
+                ❌ Cancel
+              </button>
+            </div>
+          </form>
+
+          <!-- Success/Error Message -->
+          <div v-if="blogStatus.message" :style="statusMessageStyle(blogStatus.type)" class="status-animate">
+            {{ blogStatus.message }}
+          </div>
+        </div>
+
+        <!-- Blog Posts List -->
+        <div :style="{marginTop: '3rem'}">
+          <h3 :style="{...formTitleStyle, marginBottom: '1.5rem'}">All Blog Posts ({{ blogPosts.length }})</h3>
+          
+          <div v-if="blogPosts.length === 0" :style="{textAlign: 'center', padding: '3rem', color: '#64748b'}">
+            <p>No blog posts yet. Create your first post above!</p>
+          </div>
+
+          <div :style="sermonsGridStyle" class="blog-grid">
+            <div
+              v-for="(post, index) in blogPosts"
+              :key="index"
+              :style="sermonCardStyle"
+              class="blog-card"
+            >
+              <div :style="sermonImageContainerStyle" class="image-container-admin">
+                <img :src="post.image" :alt="post.title" :style="sermonImageStyle" class="blog-image" />
+                <div :style="sermonOverlayStyle" class="overlay-admin">
+                  <span :style="{padding: '0.5rem 1rem', background: '#3b82f6', borderRadius: '0.5rem', fontSize: '0.875rem'}">
+                    {{ getCategoryName(post.category) }}
+                  </span>
+                </div>
+              </div>
+
+              <div :style="sermonCardContentStyle" class="blog-card-content">
+                <div :style="sermonMetaStyle">
+                  <span :style="seriesBadgeStyle">{{ post.category }}</span>
+                  <span :style="durationBadgeStyle">{{ formatDate(post.date) }}</span>
+                </div>
+                <h4 :style="sermonCardTitleStyle">{{ post.title }}</h4>
+                <p :style="sermonSpeakerStyle">by {{ post.author }}</p>
+                <p :style="sermonDescStyle">{{ post.excerpt.substring(0, 100) }}...</p>
+
+                <div :style="sermonActionsStyle" class="blog-actions">
+                  <button
+                    @click="editBlogPost(index)"
+                    :style="editButtonStyle"
+                    title="Edit"
+                    class="edit-button"
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button
+                    @click="deleteBlogPost(index)"
+                    :style="deleteButtonStyle"
+                    title="Delete"
+                    class="delete-button"
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Settings Tab -->
       <div v-if="activeTab === 'settings'" :style="tabContentStyle" class="tab-content-animate">
         <div :style="settingsContainerStyle" class="settings-form-animate">
@@ -518,6 +714,158 @@ const saveSettings = () => {
   }, 2000);
 };
 
+// Blog Management
+const blogPosts = ref([]);
+const blogStatus = ref({ message: '', type: '' });
+const editingBlogPost = ref(false);
+const editingBlogIndex = ref(null);
+
+const blogForm = ref({
+  title: '',
+  category: '',
+  author: '',
+  date: '',
+  image: '',
+  excerpt: '',
+  content: ''
+});
+
+const getCategoryName = (categoryId) => {
+  const categories = {
+    'magazine': 'Magazines',
+    'article': 'Articles',
+    'announcement': 'Announcements',
+    'event': 'Events'
+  };
+  return categories[categoryId] || categoryId;
+};
+
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
+const saveBlogPost = () => {
+  try {
+    if (editingBlogPost.value) {
+      // Update existing post
+      blogPosts.value[editingBlogIndex.value] = {
+        ...blogForm.value,
+        id: blogPosts.value[editingBlogIndex.value].id
+      };
+      
+      blogStatus.value = {
+        message: '✓ Blog post updated successfully!',
+        type: 'success'
+      };
+    } else {
+      // Create new post
+      const newPost = {
+        id: blogPosts.value.length + 1,
+        ...blogForm.value
+      };
+      
+      blogPosts.value.unshift(newPost);
+      
+      blogStatus.value = {
+        message: '✓ Blog post published successfully!',
+        type: 'success'
+      };
+    }
+
+    // Save to localStorage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts.value));
+
+    // Reset form
+    blogForm.value = {
+      title: '',
+      category: '',
+      author: '',
+      date: '',
+      image: '',
+      excerpt: '',
+      content: ''
+    };
+    editingBlogPost.value = false;
+    editingBlogIndex.value = null;
+
+    // Clear status after 3 seconds
+    setTimeout(() => {
+      blogStatus.value = { message: '', type: '' };
+    }, 3000);
+
+  } catch (error) {
+    console.error('Save blog post error:', error);
+    blogStatus.value = {
+      message: 'Failed to save blog post. Please try again.',
+      type: 'error'
+    };
+  }
+};
+
+const editBlogPost = (index) => {
+  const post = blogPosts.value[index];
+  blogForm.value = { ...post };
+  editingBlogPost.value = true;
+  editingBlogIndex.value = index;
+  
+  // Scroll to top of form
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  blogStatus.value = {
+    message: 'Editing blog post. Modify and save.',
+    type: 'info'
+  };
+};
+
+const cancelEditBlog = () => {
+  blogForm.value = {
+    title: '',
+    category: '',
+    author: '',
+    date: '',
+    image: '',
+    excerpt: '',
+    content: ''
+  };
+  editingBlogPost.value = false;
+  editingBlogIndex.value = null;
+  blogStatus.value = { message: '', type: '' };
+};
+
+const deleteBlogPost = (index) => {
+  if (confirm('Are you sure you want to delete this blog post?')) {
+    blogPosts.value.splice(index, 1);
+    
+    // Save to localStorage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts.value));
+    
+    blogStatus.value = {
+      message: '✓ Blog post deleted successfully',
+      type: 'success'
+    };
+    
+    setTimeout(() => {
+      blogStatus.value = { message: '', type: '' };
+    }, 2000);
+  }
+};
+
+// Load blog posts from localStorage on mount
+const loadBlogPosts = () => {
+  const saved = localStorage.getItem('blogPosts');
+  if (saved) {
+    try {
+      blogPosts.value = JSON.parse(saved);
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+    }
+  }
+};
+
+// Load on component mount
+loadBlogPosts();
+
 const adminSectionStyle = {
   paddingTop: '6rem',
   paddingBottom: '6rem',
@@ -721,6 +1069,20 @@ const uploadButtonStyle = {
   cursor: 'pointer',
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   boxShadow: '0 4px 15px -2px rgba(16, 185, 129, 0.3)',
+  alignSelf: 'flex-start'
+};
+
+const cancelButtonStyle = {
+  padding: '1rem 2rem',
+  backgroundColor: '#64748b',
+  color: '#ffffff',
+  border: 'none',
+  borderRadius: '0.75rem',
+  fontSize: '1.1rem',
+  fontWeight: '600',
+  cursor: 'pointer',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  boxShadow: '0 4px 15px -2px rgba(100, 116, 139, 0.3)',
   alignSelf: 'flex-start'
 };
 
