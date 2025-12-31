@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style>
-/* ===== GLOBAL OVERFLOW PREVENTION ===== */
+
 * {
   box-sizing: border-box !important;
 }
