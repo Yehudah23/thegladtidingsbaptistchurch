@@ -1568,6 +1568,11 @@ const getGradientColor = (index) => {
 
 /* Mobile Phones - Android and iPhone specific fixes */
 @media (max-width: 480px) {
+  #live {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
   .youtube-embed-container {
     min-height: 250px !important;
     width: 100% !important;
@@ -1590,6 +1595,93 @@ const getGradientColor = (index) => {
   
   div[style*="facebookEmbedContainerStyle"] {
     min-height: 250px !important;
+  }
+
+  /* Ensure all sections are visible on mobile */
+  div[style*="socialMediaSectionStyle"],
+  .social-media-section,
+  .premium-platforms {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 2.5rem 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  div[style*="testimonialSectionStyle"],
+  .testimonial-section,
+  .premium-testimonials {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 2.5rem 1rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .upcoming-services-section,
+  .premium-services {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 2.5rem 1rem !important;
+  }
+
+  .cta-section,
+  .premium-cta-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 3rem 1rem !important;
+  }
+
+  /* Platform Cards - Make sure they're visible */
+  .platform-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 380px !important;
+    width: 100% !important;
+    max-width: 450px !important;
+    margin: 0 auto 2rem auto !important;
+  }
+
+  /* Service Cards */
+  .service-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 450px !important;
+    margin: 0 auto 1.5rem auto !important;
+  }
+
+  /* Testimonial Cards */
+  .testimonial-card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 450px !important;
+    margin: 0 auto 1.5rem auto !important;
+  }
+
+  /* Grids should stack vertically */
+  div[style*="socialMediaGridStyle"] {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+    gap: 2rem !important;
+  }
+
+  div[style*="testimonialsGridStyle"] {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+    gap: 1.5rem !important;
+  }
+
+  div[style*="servicesGridStyle"] {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+    gap: 1.5rem !important;
   }
 }
 
