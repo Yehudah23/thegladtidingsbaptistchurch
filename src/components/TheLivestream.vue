@@ -39,7 +39,6 @@
               webkitallowfullscreen
               mozallowfullscreen
               loading="eager"
-              sandbox="allow-same-origin allow-scripts allow-presentation allow-forms"
               @error="facebookLoadError = true"
             ></iframe>
             <div v-if="facebookLoadError" :style="noStreamFallbackStyle" class="fade-in premium-fallback">
@@ -271,10 +270,10 @@ const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
 
-// YouTube embed URL - Optimized for all devices including Android tablets
-// Using standard youtube.com for better Android compatibility
-// Key parameters: autoplay=0 (required), playsinline=1 (iOS), controls=1, rel=0 (no related videos)
-const youtubeEmbedUrl = 'https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=0&controls=1&playsinline=1&modestbranding=1&rel=0';
+// YouTube embed URL - Optimized for all devices including iPads and Android tablets
+// Using standard youtube.com for better compatibility
+// Key parameters: autoplay=1 (auto-start), playsinline=1 (iOS), controls=1, rel=0, origin for security
+const youtubeEmbedUrl = `https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=1&controls=1&playsinline=1&modestbranding=1&rel=0&enablejsapi=1&origin=${window.location.origin}`;
 
 onUnmounted(() => {
   if (refreshInterval) {
@@ -1839,6 +1838,7 @@ const getGradientColor = (index) => {
     width: 100% !important;
     position: relative !important;
     -webkit-overflow-scrolling: touch !important;
+    overflow: hidden !important;
   }
   
   .youtube-embed-container iframe {
@@ -1849,15 +1849,29 @@ const getGradientColor = (index) => {
     top: 0 !important;
     left: 0 !important;
     border: 0 !important;
+    pointer-events: auto !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
   }
   
   .premium-video {
     aspect-ratio: 16/9 !important;
     min-height: 400px !important;
+    overflow: hidden !important;
   }
   
   div[style*="facebookEmbedContainerStyle"] {
     min-height: 400px !important;
+    overflow: hidden !important;
+  }
+
+  /* Force video visibility on Android tablets */
+  #live {
+    overflow: visible !important;
+  }
+
+  .player-container {
+    overflow: visible !important;
   }
 }
 
