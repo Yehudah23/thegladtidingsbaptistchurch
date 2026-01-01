@@ -270,10 +270,19 @@ const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
 
-// YouTube embed URL - Optimized for all devices including iPads and Android tablets
-// Using standard youtube.com for better compatibility
-// Key parameters: autoplay=1 (auto-start), playsinline=1 (iOS), controls=1, rel=0, origin for security
+// YouTube embed URL - Two options for tablets
+// Option 1: Live stream (only works during broadcast)
 const youtubeEmbedUrl = `https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=1&controls=1&playsinline=1&modestbranding=1&rel=0&enablejsapi=1&origin=${window.location.origin}`;
+
+// Option 2: Latest video from channel (always shows something)
+// Uncomment this line and comment the one above if you want to always show the latest video
+// const youtubeEmbedUrl = 'https://www.youtube.com/embed?listType=user_uploads&list=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=1&controls=1&playsinline=1&modestbranding=1&rel=0';
+
+// To make YouTube work on Android tablets:
+// 1. Make sure you're streaming live when testing
+// 2. OR use Option 2 above to always show latest video
+// 3. Tablets need autoplay=1 with mute=1 to load
+// 4. Check that YouTube isn't blocked in tablet browser settings
 
 onUnmounted(() => {
   if (refreshInterval) {
