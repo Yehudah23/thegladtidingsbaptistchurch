@@ -12,8 +12,8 @@
         <video 
           v-if="bg.type === 'video'" 
           :ref="el => setVideoRef(el, index)"
-          :loop="bg.src !== whatsappVideo"
-          :muted="bg.src !== whatsappVideo"
+          loop
+          muted
           playsinline 
           class="video-background"
           @ended="onVideoEnded(index, bg)"
@@ -41,16 +41,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import whatsappVideo from '@/assets/WhatsApp Video 2026-01-04 at 11.43.24.mp4';
 
 // Background slides data
 const backgrounds = ref([
-  { type: 'video', src: whatsappVideo },           // Plays with sound, waits until finished
-  { type: 'video', src: '/church-video.mp4' },     // Loops silently, 4 seconds
-  { type: 'image', src: '/church-image.jpg' },     // Shows for 4 seconds
-  { type: 'image', src: '/mission-banner.png' },   // Shows for 4 seconds
-  { type: 'image', src: '/english-display.jpg' },  // Shows for 4 seconds
-  { type: 'image', src: '/yoruba-display.jpg' }    // Shows for 4 seconds
+  { type: 'video', src: '/church-video.mp4' },
+  { type: 'image', src: '/church-image.jpg' },
+  { type: 'image', src: '/mission-banner.png' },
+  { type: 'image', src: '/english-display.jpg' },
+  { type: 'image', src: '/yoruba-display.jpg' }
 ]);
 
 // Background carousel state
@@ -73,14 +71,6 @@ const playCurrentVideo = () => {
     const videoEl = videoRefs.value[currentBgSlide.value];
     if (videoEl) {
       videoEl.currentTime = 0;
-      
-      // Ensure volume is up for WhatsApp video
-      if (currentBg.src === whatsappVideo) {
-        videoEl.muted = false;
-        videoEl.volume = 1.0;
-        waitingForVideo.value = true;
-      }
-      
       videoEl.play().catch(err => {
         console.log('Video autoplay blocked, user interaction needed:', err);
       });
@@ -88,32 +78,19 @@ const playCurrentVideo = () => {
   }
 };
 
-// Handle video ended event (only for WhatsApp video)
+// Handle video ended event
 const onVideoEnded = (index, bg) => {
-  if (index === currentBgSlide.value && bg.src === whatsappVideo) {
-    waitingForVideo.value = false;
-    // Move to next slide after WhatsApp video ends
-    currentBgSlide.value = (currentBgSlide.value + 1) % backgrounds.value.length;
-  }
+  // No special handling needed - all videos loop
 };
 
-// Auto-slide backgrounds every 4 seconds (except when waiting for WhatsApp video)
+// Auto-slide backgrounds every 4 seconds
 const startInterval = () => {
   if (bgAutoplayInterval) {
     clearInterval(bgAutoplayInterval);
   }
   
   bgAutoplayInterval = setInterval(() => {
-    // Check if current slide is WhatsApp video
-    const currentBg = backgrounds.value[currentBgSlide.value];
-    if (currentBg.type === 'video' && currentBg.src === whatsappVideo) {
-      // Don't advance, wait for video to end
-      return;
-    }
-    
-    if (!waitingForVideo.value) {
-      currentBgSlide.value = (currentBgSlide.value + 1) % backgrounds.value.length;
-    }
+    currentBgSlide.value = (currentBgSlide.value + 1) % backgrounds.value.length;
   }, 4000);
 };
 
