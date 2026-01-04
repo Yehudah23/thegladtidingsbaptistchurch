@@ -443,15 +443,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 70vh !important;
-    padding-top: 4rem !important;
-    padding-bottom: 2rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 70vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -483,15 +485,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 65vh !important;
-    padding-top: 4rem !important;
-    padding-bottom: 2rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 65vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -523,15 +527,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 60vh !important;
-    padding-top: 3.5rem !important;
-    padding-bottom: 1.5rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 60vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -563,15 +569,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 55vh !important;
-    padding-top: 3rem !important;
-    padding-bottom: 1.5rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 55vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -590,15 +598,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 50vh !important;
-    padding-top: 3rem !important;
-    padding-bottom: 1.5rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 50vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -672,15 +682,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 72vh !important;
-    padding-top: 4.5rem !important;
-    padding-bottom: 2.5rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 72vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -713,15 +725,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 66vh !important;
-    padding-top: 4.2rem !important;
-    padding-bottom: 2.2rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 66vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -754,15 +768,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 62vh !important;
-    padding-top: 3.8rem !important;
-    padding-bottom: 2rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 62vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -796,15 +812,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 55vh !important;
-    padding-top: 3.2rem !important;
-    padding-bottom: 1.8rem !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .video-background,
   .image-background {
-    object-fit: cover !important;
-    height: 55vh !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
