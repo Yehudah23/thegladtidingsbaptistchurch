@@ -36,6 +36,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 // Background slides data
 const backgrounds = ref([
+  { type: 'video', src: '/church-video.mp4' },
   { type: 'image', src: '/church-image.jpg' },
   { type: 'image', src: '/mission-banner.png' },
   { type: 'image', src: '/english-display.jpg' },
@@ -66,7 +67,10 @@ const backgroundCarouselStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  zIndex: 0
+  zIndex: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 };
 
 const backgroundSlideStyle = (index) => ({
@@ -77,7 +81,10 @@ const backgroundSlideStyle = (index) => ({
   height: '100%',
   opacity: currentBgSlide.value === index ? 1 : 0,
   transition: 'opacity 1s ease-in-out',
-  zIndex: currentBgSlide.value === index ? 1 : 0
+  zIndex: currentBgSlide.value === index ? 1 : 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 });
 
 const imageBackgroundStyle = () => ({
@@ -90,8 +97,9 @@ const imageBackgroundStyle = () => ({
 
 const heroSectionStyle = {
   position: 'relative',
-  minHeight: '100vh',
-  height: '100vh',
+  minHeight: '300px',
+  height: 'auto',
+  aspectRatio: '16/9',
   paddingTop: '0',
   paddingBottom: '0',
   display: 'flex',
@@ -443,8 +451,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -453,7 +461,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important; max-height: 60vh !important;
   }
 }
 
@@ -485,8 +493,9 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
+    max-height: 60vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -495,7 +504,8 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: 60vh !important;
   }
 }
 
@@ -527,8 +537,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -537,7 +547,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important; max-height: 60vh !important;
   }
 }
 
@@ -569,8 +579,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -579,7 +589,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important; max-height: 60vh !important;
   }
 }
 
@@ -598,8 +608,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -608,7 +618,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important; max-height: 60vh !important;
   }
 }
 
@@ -682,17 +692,17 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    min-height: 400px !important;
+    height: auto !important;
+    max-height: 65vh !important;
   }
   
   .video-background,
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: 65vh !important;
   }
 }
 
@@ -725,8 +735,9 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 350px !important;
+    height: auto !important;
+    max-height: 58vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -735,7 +746,8 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: 58vh !important;
   }
 }
 
@@ -768,8 +780,9 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 320px !important;
+    height: auto !important;
+    max-height: 55vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -778,7 +791,8 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: 55vh !important;
   }
 }
 
@@ -812,8 +826,9 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 100vh !important;
-    height: 100vh !important;
+    min-height: 300px !important;
+    height: auto !important;
+    max-height: 52vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -822,7 +837,8 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: 52vh !important;
   }
 }
 
