@@ -36,9 +36,10 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 // Background slides data
 const backgrounds = ref([
-  { type: 'video', src: require('@/assets/The Glad Tidings New.mp4') },
-  { type: 'image', src: '/IMG_1888.jpg' },
-  { type: 'image', src: '/mission-banner.png' }
+  { type: 'image', src: '/church-image.jpg' },
+  { type: 'image', src: '/mission-banner.png' },
+  { type: 'image', src: '/english-display.jpg' },
+  { type: 'image', src: '/yoruba-display.jpg' }
 ]);
 
 // Background carousel state
@@ -83,19 +84,22 @@ const imageBackgroundStyle = () => ({
   width: '100%',
   height: '100%',
   objectFit: 'contain',
-  objectPosition: 'center'
+  objectPosition: 'center',
+  backgroundColor: '#000000'
 });
 
 const heroSectionStyle = {
   position: 'relative',
   minHeight: '100vh',
-  paddingTop: '6rem',
-  paddingBottom: '3rem',
+  height: '100vh',
+  paddingTop: '0',
+  paddingBottom: '0',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   overflow: 'hidden',
-  color: 'white'
+  color: 'white',
+  backgroundColor: '#000000'
 };
 
 const floatingShapesStyle = {

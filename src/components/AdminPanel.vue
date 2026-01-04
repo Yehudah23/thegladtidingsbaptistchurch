@@ -477,12 +477,12 @@
         </div>
       </div>
 
-      <!-- Settings Tab -->
+
       <div v-if="activeTab === 'settings'" :style="tabContentStyle" class="tab-content-animate">
         <div :style="settingsContainerStyle" class="settings-form-animate">
           <h3 :style="settingsTitleStyle">Admin Settings</h3>
 
-          <!-- Max File Size Setting -->
+          
           <div :style="settingItemStyle" class="setting-item setting-item-1">
             <label :style="settingLabelStyle">Maximum File Size (MB)</label>
             <input
@@ -508,7 +508,7 @@
             />
           </div>
 
-          <!-- API Endpoint -->
+        
           <div :style="settingItemStyle" class="setting-item setting-item-3">
             <label :style="settingLabelStyle">API Endpoint</label>
             <input
@@ -520,7 +520,7 @@
             />
           </div>
 
-          <!-- Save Settings Button -->
+          
           <button @click="saveSettings" :style="saveSettingsButtonStyle" class="save-settings-button">
             💾 Save Settings
           </button>
@@ -538,6 +538,7 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { API_ENDPOINTS } from '@/api/config';
 
 const router = useRouter();
 const activeTab = ref('upload');
@@ -574,8 +575,6 @@ const existingSeries = computed(() => {
 
 const handleLogout = () => {
   if (confirm('Are you sure you want to logout?')) {
-    localStorage.removeItem('isAdminAuthenticated');
-    localStorage.removeItem('adminToken');
     router.push({ name: 'Home' });
   }
 };
@@ -583,7 +582,7 @@ const handleLogout = () => {
 const settings = ref({
   maxFileSize: 50,
   uploadDirectory: '/uploads/sermons',
-  apiEndpoint: '/api/sermons'
+  apiEndpoint: API_ENDPOINTS.SERMON_UPLOAD
 });
 
 const handleAudioFile = (event) => {
@@ -773,9 +772,6 @@ const saveBlogPost = () => {
       };
     }
 
-    // Save to localStorage
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts.value));
-
     // Reset form
     blogForm.value = {
       title: '',
@@ -837,9 +833,6 @@ const deleteBlogPost = (index) => {
   if (confirm('Are you sure you want to delete this blog post?')) {
     blogPosts.value.splice(index, 1);
     
-    // Save to localStorage
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts.value));
-    
     blogStatus.value = {
       message: '✓ Blog post deleted successfully',
       type: 'success'
@@ -851,16 +844,11 @@ const deleteBlogPost = (index) => {
   }
 };
 
-// Load blog posts from localStorage on mount
+// Load blog posts function (localStorage removed)
 const loadBlogPosts = () => {
-  const saved = localStorage.getItem('blogPosts');
-  if (saved) {
-    try {
-      blogPosts.value = JSON.parse(saved);
-    } catch (error) {
-      console.error('Error loading blog posts:', error);
-    }
-  }
+  // Blog posts should be loaded from backend API
+  // Implement API call here when backend is ready
+  console.log('Blog posts should be loaded from backend API');
 };
 
 // Load on component mount

@@ -164,6 +164,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { API_ENDPOINTS } from '@/api/config';
 
 const formData = ref({
   name: "",
@@ -438,7 +439,7 @@ const handleSubmit = async () => {
     successMessage.value = "";
 
     // Post to Laravel backend
-    const response = await axios.post('http://127.0.0.1:8001/api/contact', formData.value);
+    const response = await axios.post(API_ENDPOINTS.CONTACT, formData.value);
     
     console.log('Contact form response:', response.data); // Debug log
     

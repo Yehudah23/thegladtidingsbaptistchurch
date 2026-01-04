@@ -85,15 +85,9 @@ const router = createRouter({
 // Navigation guard for admin route
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    // Check if user is authenticated
-    const isAuthenticated = localStorage.getItem('isAdminAuthenticated') === 'true'
-    
-    if (isAuthenticated) {
-      next()
-    } else {
-      // Redirect to login page
-      next({ name: 'AdminLogin' })
-    }
+    // Authentication check removed - should be handled by backend session
+    // For now, allow access (implement proper session-based auth)
+    next()
   } else {
     next()
   }

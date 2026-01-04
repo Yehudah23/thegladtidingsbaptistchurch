@@ -68,6 +68,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { API_ENDPOINTS } from '@/api/config';
 
 const router = useRouter();
 const username = ref('');
@@ -81,7 +82,7 @@ const handleLogin = async () => {
 
   try {
     // Backend API endpoint
-    const response = await axios.post('http://127.0.0.1:8001/api/admin/login', {
+    const response = await axios.post(API_ENDPOINTS.ADMIN_LOGIN, {
       username: username.value,
       password: password.value
     });
@@ -89,10 +90,6 @@ const handleLogin = async () => {
     console.log('Login response:', response.data); // Debug log
 
     if (response.data.success || response.data.token) {
-      // Store authentication token
-      localStorage.setItem('adminToken', response.data.token || 'authenticated');
-      localStorage.setItem('isAdminAuthenticated', 'true');
-      
       // Redirect to admin panel
       router.push({ name: 'Admin' });
     } else {

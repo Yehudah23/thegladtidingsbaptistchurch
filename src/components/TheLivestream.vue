@@ -162,6 +162,26 @@
               <div class="card-shine"></div>
             </a>
           </div>
+
+          <!-- Spotify Card -->
+          <div class="platform-card spotify-card premium-card">
+            <a href="https://open.spotify.com/show/0F6yJxwWSH1DJWwQxLb2F9" target="_blank" rel="noopener noreferrer" class="card-link" :style="cardLinkStyle">
+              <div class="card-glow spotify-glow"></div>
+              <div class="card-bg-gradient spotify-gradient"></div>
+              <div class="card-content">
+                <div class="platform-icon spotify-icon premium-icon">
+                  <img src="@/assets/Spotify_icon.svg.png" alt="Spotify" style="width: 100%; height: 100%; object-fit: contain;" />
+                </div>
+                <h4 class="platform-name">Spotify</h4>
+                <p class="platform-desc">Listen to Our Podcast</p>
+                <div class="platform-stats">
+                  <span class="stat-badge">Catch us on Spotify</span>
+                </div>
+                <button class="watch-btn spotify-btn">Listen Now →</button>
+              </div>
+              <div class="card-shine"></div>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -256,6 +276,9 @@
             <a href="https://t.me/tgtbcogbomoso?livestream" target="_blank" rel="noopener noreferrer" class="cta-btn telegram-cta">
               Join on Telegram
             </a>
+            <a href="https://open.spotify.com/episode/37Sosi9R5CRSlELp44bRkI?si=mwkZqzLcQFeOjvgFSOSVhw&t=2" target="_blank" rel="noopener noreferrer" class="cta-btn spotify-cta">
+              Listen on Spotify
+            </a>
           </div>
         </div>
       </div>
@@ -270,19 +293,10 @@ const facebookLoadError = ref(false);
 const iframeKey = ref(0);
 let refreshInterval = null;
 
-// YouTube embed URL - Two options for tablets
-// Option 1: Live stream (only works during broadcast)
+
 const youtubeEmbedUrl = `https://www.youtube.com/embed/live_stream?channel=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=1&controls=1&playsinline=1&modestbranding=1&rel=0&enablejsapi=1&origin=${window.location.origin}`;
 
-// Option 2: Latest video from channel (always shows something)
-// Uncomment this line and comment the one above if you want to always show the latest video
-// const youtubeEmbedUrl = 'https://www.youtube.com/embed?listType=user_uploads&list=UCsLZf3OqcArWB3YkVWAT1-w&autoplay=1&mute=1&controls=1&playsinline=1&modestbranding=1&rel=0';
 
-// To make YouTube work on Android tablets:
-// 1. Make sure you're streaming live when testing
-// 2. OR use Option 2 above to always show latest video
-// 3. Tablets need autoplay=1 with mute=1 to load
-// 4. Check that YouTube isn't blocked in tablet browser settings
 
 onUnmounted(() => {
   if (refreshInterval) {
@@ -296,29 +310,14 @@ const setReminder = (service) => {
     // Already set, so unset it
     service.reminderSet = false;
     alert(`Reminder removed for ${service.title}`);
-    
-    // Remove from localStorage
-    const reminders = JSON.parse(localStorage.getItem('serviceReminders') || '[]');
-    const updatedReminders = reminders.filter(r => r.title !== service.title);
-    localStorage.setItem('serviceReminders', JSON.stringify(updatedReminders));
   } else {
     // Set the reminder
     service.reminderSet = true;
     
-    // Save to localStorage
-    const reminders = JSON.parse(localStorage.getItem('serviceReminders') || '[]');
-    reminders.push({
-      title: service.title,
-      date: service.date,
-      time: service.time,
-      description: service.description
-    });
-    localStorage.setItem('serviceReminders', JSON.stringify(reminders));
-    
-    // Show confirmation message
+  
     alert(`✓ Reminder set for ${service.title}\n${service.date} at ${service.time}\n\nWe'll remind you before the service starts!`);
     
-    // Request notification permission if not already granted
+   
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
@@ -337,21 +336,12 @@ const setReminder = (service) => {
   }
 };
 
-// Load saved reminders on mount
+
 onMounted(() => {
   // Refresh iframe every 60 seconds to check for live stream (mobile-friendly interval)
   refreshInterval = setInterval(() => {
     iframeKey.value++;
   }, 60000); // 60000ms = 60 seconds
-  
-  // Load saved reminders
-  const savedReminders = JSON.parse(localStorage.getItem('serviceReminders') || '[]');
-  savedReminders.forEach(savedReminder => {
-    const service = upcomingServices.value.find(s => s.title === savedReminder.title);
-    if (service) {
-      service.reminderSet = true;
-    }
-  });
 
   // Load live comments from YouTube and Facebook
   loadComments();
@@ -1197,6 +1187,10 @@ const getGradientColor = (index) => {
   background: radial-gradient(circle, rgba(0, 136, 204, 0.5) 0%, transparent 70%);
 }
 
+.spotify-glow {
+  background: radial-gradient(circle, rgba(29, 185, 84, 0.5) 0%, transparent 70%);
+}
+
 .card-bg-gradient {
   position: absolute;
   top: 0;
@@ -1217,6 +1211,10 @@ const getGradientColor = (index) => {
 
 .telegram-gradient {
   background: linear-gradient(135deg, #0088cc, #0066aa);
+}
+
+.spotify-gradient {
+  background: linear-gradient(135deg, #1DB954, #1ed760);
 }
 
 .card-content {
@@ -1256,6 +1254,11 @@ const getGradientColor = (index) => {
 
 .telegram-icon {
   background: linear-gradient(135deg, #0088cc 0%, #0066aa 100%);
+  color: white;
+}
+
+.spotify-icon {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
   color: white;
 }
 
@@ -1322,6 +1325,11 @@ const getGradientColor = (index) => {
 .telegram-btn {
   background: linear-gradient(135deg, #0088cc 0%, #0066aa 100%);
   box-shadow: 0 10px 24px -4px rgba(0, 136, 204, 0.35);
+}
+
+.spotify-btn {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  box-shadow: 0 10px 24px -4px rgba(29, 185, 84, 0.35);
 }
 
 .card-shine {
@@ -1634,6 +1642,11 @@ const getGradientColor = (index) => {
 }
 
 .telegram-cta {
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+  color: #ffffff;
+}
+
+.spotify-cta {
   background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
   color: #ffffff;
 }
