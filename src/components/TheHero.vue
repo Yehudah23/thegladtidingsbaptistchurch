@@ -9,7 +9,15 @@
         :style="backgroundSlideStyle(index)"
         :class="['background-slide', { 'active': index === currentBgSlide }]"
       >
-        <video v-if="bg.type === 'video'" autoplay loop muted playsinline class="video-background">
+        <video 
+          v-if="bg.type === 'video'" 
+          :ref="el => setVideoRef(el, index)"
+          :loop="bg.src !== whatsappVideo"
+          :muted="bg.src !== whatsappVideo"
+          playsinline 
+          class="video-background"
+          @ended="onVideoEnded(index, bg)"
+        >
           <source :src="bg.src" type="video/mp4">
         </video>
         <img v-else :src="bg.src" :style="imageBackgroundStyle()" class="image-background" />
@@ -32,26 +40,95 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import whatsappVideo from '@/assets/WhatsApp Video 2026-01-04 at 11.43.24.mp4';
 
 // Background slides data
 const backgrounds = ref([
-  { type: 'video', src: '/church-video.mp4' },
-  { type: 'image', src: '/church-image.jpg' },
-  { type: 'image', src: '/mission-banner.png' },
-  { type: 'image', src: '/english-display.jpg' },
-  { type: 'image', src: '/yoruba-display.jpg' }
+  { type: 'video', src: whatsappVideo },           // Plays with sound, waits until finished
+  { type: 'video', src: '/church-video.mp4' },     // Loops silently, 4 seconds
+  { type: 'image', src: '/church-image.jpg' },     // Shows for 4 seconds
+  { type: 'image', src: '/mission-banner.png' },   // Shows for 4 seconds
+  { type: 'image', src: '/english-display.jpg' },  // Shows for 4 seconds
+  { type: 'image', src: '/yoruba-display.jpg' }    // Shows for 4 seconds
 ]);
 
 // Background carousel state
 const currentBgSlide = ref(0);
 let bgAutoplayInterval = null;
+const videoRefs = ref([]);
+const waitingForVideo = ref(false);
 
-// Auto-slide backgrounds every 4 seconds
-onMounted(() => {
-  bgAutoplayInterval = setInterval(() => {
+// Set video ref
+const setVideoRef = (el, index) => {
+  if (el) {
+    videoRefs.value[index] = el;
+  }
+};
+
+// Play video when slide becomes active
+const playCurrentVideo = () => {
+  const currentBg = backgrounds.value[currentBgSlide.value];
+  if (currentBg.type === 'video') {
+    const videoEl = videoRefs.value[currentBgSlide.value];
+    if (videoEl) {
+      videoEl.currentTime = 0;
+      
+      // Ensure volume is up for WhatsApp video
+      if (currentBg.src === whatsappVideo) {
+        videoEl.muted = false;
+        videoEl.volume = 1.0;
+        waitingForVideo.value = true;
+      }
+      
+      videoEl.play().catch(err => {
+        console.log('Video autoplay blocked, user interaction needed:', err);
+      });
+    }
+  }
+};
+
+// Handle video ended event (only for WhatsApp video)
+const onVideoEnded = (index, bg) => {
+  if (index === currentBgSlide.value && bg.src === whatsappVideo) {
+    waitingForVideo.value = false;
+    // Move to next slide after WhatsApp video ends
     currentBgSlide.value = (currentBgSlide.value + 1) % backgrounds.value.length;
+  }
+};
+
+// Auto-slide backgrounds every 4 seconds (except when waiting for WhatsApp video)
+const startInterval = () => {
+  if (bgAutoplayInterval) {
+    clearInterval(bgAutoplayInterval);
+  }
+  
+  bgAutoplayInterval = setInterval(() => {
+    // Check if current slide is WhatsApp video
+    const currentBg = backgrounds.value[currentBgSlide.value];
+    if (currentBg.type === 'video' && currentBg.src === whatsappVideo) {
+      // Don't advance, wait for video to end
+      return;
+    }
+    
+    if (!waitingForVideo.value) {
+      currentBgSlide.value = (currentBgSlide.value + 1) % backgrounds.value.length;
+    }
   }, 4000);
+};
+
+// Watch for slide changes and play videos
+watch(currentBgSlide, () => {
+  playCurrentVideo();
+});
+
+onMounted(() => {
+  // Start playing first slide
+  setTimeout(() => {
+    playCurrentVideo();
+  }, 100);
+  
+  startInterval();
 });
 
 onUnmounted(() => {
@@ -97,9 +174,10 @@ const imageBackgroundStyle = () => ({
 
 const heroSectionStyle = {
   position: 'relative',
-  minHeight: '300px',
-  height: 'auto',
-  aspectRatio: '16/9',
+  width: '100%',
+  maxWidth: '100vw',
+  height: '85vh',
+  maxHeight: '85vh',
   paddingTop: '0',
   paddingBottom: '0',
   display: 'flex',
@@ -213,11 +291,14 @@ const scrollDotStyle = {
 
 .video-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   z-index: 0;
 }
 
@@ -461,7 +542,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: auto !important; max-height: 60vh !important;
+    height: auto !important;
   }
 }
 
@@ -493,9 +574,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 350px !important;
+    min-height: 450px !important;
     height: auto !important;
-    max-height: 60vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -505,7 +585,6 @@ const scrollDotStyle = {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 60vh !important;
   }
 }
 
@@ -537,7 +616,7 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 350px !important;
+    min-height: 450px !important;
     height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -547,7 +626,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: auto !important; max-height: 60vh !important;
+    height: auto !important;
   }
 }
 
@@ -579,7 +658,7 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 350px !important;
+    min-height: 400px !important;
     height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -589,7 +668,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: auto !important; max-height: 60vh !important;
+    height: auto !important;
   }
 }
 
@@ -608,7 +687,7 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 350px !important;
+    min-height: 400px !important;
     height: auto !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -618,7 +697,7 @@ const scrollDotStyle = {
   .image-background {
     object-fit: contain !important;
     width: 100% !important;
-    height: auto !important; max-height: 60vh !important;
+    height: auto !important;
   }
 }
 
@@ -692,9 +771,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 400px !important;
+    min-height: 500px !important;
     height: auto !important;
-    max-height: 65vh !important;
   }
   
   .video-background,
@@ -702,7 +780,6 @@ const scrollDotStyle = {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 65vh !important;
   }
 }
 
@@ -735,9 +812,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 350px !important;
+    min-height: 450px !important;
     height: auto !important;
-    max-height: 58vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -747,7 +823,6 @@ const scrollDotStyle = {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 58vh !important;
   }
 }
 
@@ -780,9 +855,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 320px !important;
+    min-height: 400px !important;
     height: auto !important;
-    max-height: 55vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -792,7 +866,6 @@ const scrollDotStyle = {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 55vh !important;
   }
 }
 
@@ -826,9 +899,8 @@ const scrollDotStyle = {
   }
   
   section[id="home"] {
-    min-height: 300px !important;
+    min-height: 400px !important;
     height: auto !important;
-    max-height: 52vh !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -838,7 +910,6 @@ const scrollDotStyle = {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 52vh !important;
   }
 }
 
