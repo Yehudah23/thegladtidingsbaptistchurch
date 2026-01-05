@@ -55,7 +55,6 @@ const backgrounds = ref([
 const currentBgSlide = ref(0);
 let bgAutoplayInterval = null;
 const videoRefs = ref([]);
-const waitingForVideo = ref(false);
 
 // Set video ref
 const setVideoRef = (el, index) => {
@@ -79,7 +78,7 @@ const playCurrentVideo = () => {
 };
 
 // Handle video ended event
-const onVideoEnded = (index, bg) => {
+const onVideoEnded = () => {
   // No special handling needed - all videos loop
 };
 

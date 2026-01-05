@@ -224,39 +224,6 @@
         </div>
       </div>
 
-      <!-- Premium Testimonial Section -->
-      <div :style="testimonialSectionStyle" class="testimonial-section premium-testimonials">
-        <div class="testimonial-header">
-          <h3 :style="{ fontSize: '2rem', fontWeight: '800', color: '#0f172a', marginBottom: '1rem', textAlign: 'center' }">
-            💬 What Our Online Community Says
-          </h3>
-          <p :style="{ fontSize: '1.1rem', color: '#64748b', textAlign: 'center', marginBottom: '1rem' }">
-            Live comments from our Facebook and YouTube community
-          </p>
-          <div v-if="isLoadingComments" :style="{ textAlign: 'center', color: '#3b82f6', marginBottom: '2rem' }">
-            <span>🔄 Loading live comments...</span>
-          </div>
-        </div>
-        <div :style="testimonialsGridStyle">
-          <div v-for="(testimonial, index) in testimonials" :key="index" :style="testimonialCardStyle" class="testimonial-card premium-testimonial">
-            <div class="testimonial-glow"></div>
-            <div class="testimonial-header-card">
-              <div class="testimonial-avatar">{{ testimonial.emoji }}</div>
-              <div class="testimonial-info">
-                <h4 class="testimonial-name">{{ testimonial.name }}</h4>
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-              </div>
-            </div>
-            <p class="testimonial-text">"{{ testimonial.text }}"</p>
-            <div class="testimonial-footer">
-              <span class="verified-badge" v-if="testimonial.platform === 'YouTube'">📺 YouTube</span>
-              <span class="verified-badge" v-else-if="testimonial.platform === 'Facebook'">👤 Facebook</span>
-              <span class="verified-badge" v-else>✓ Verified Attendee</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Call to Action Section -->
       <div class="cta-section premium-cta-section">
         <div class="cta-content">
@@ -342,171 +309,20 @@ onMounted(() => {
   refreshInterval = setInterval(() => {
     iframeKey.value++;
   }, 60000); // 60000ms = 60 seconds
-
-  // Load live comments from YouTube and Facebook
-  loadComments();
-
-  // Refresh comments every 5 minutes
-  setInterval(() => {
-    loadComments();
-  }, 300000); // 300000ms = 5 minutes
 });
 
-const testimonials = ref([
-  {
-    name: "Sarah M.",
-    emoji: "👩‍💼",
-    text: "Being able to worship with my church family online has been such a blessing. The streams are always clear and engaging!",
-    platform: "Sample",
-    verified: true
-  },
-  {
-    name: "John D.",
-    emoji: "👨‍💻",
-    text: "I work most Sundays but now I can catch up with our services online. The community is so welcoming!",
-    platform: "Sample",
-    verified: true
-  },
-  {
-    name: "Maria L.",
-    emoji: "👵",
-    text: "Living out of state, I'm so grateful I can still be part of our church family through the live streams.",
-    platform: "Sample",
-    verified: true
-  }
-]);
-
-const isLoadingComments = ref(false);
-const commentError = ref(null);
-
-// YouTube API Configuration
-const YOUTUBE_API_KEY = ''; // Add your YouTube API key here
-const YOUTUBE_CHANNEL_ID = 'UCsLZf3OqcArWB3YkVWAT1-w';
-
-// Facebook Configuration  
-const FACEBOOK_PAGE_ID = ''; // Add your Facebook Page ID here
-const FACEBOOK_ACCESS_TOKEN = ''; // Add your Facebook access token here
-
-// Fetch YouTube comments
-const fetchYouTubeComments = async () => {
-  if (!YOUTUBE_API_KEY) {
-    console.log('YouTube API key not configured');
-    return [];
-  }
-
-  try {
-    // First, get the latest video from the channel
-    const videosResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=1&type=video`
-    );
-    const videosData = await videosResponse.json();
-    
-    if (!videosData.items || videosData.items.length === 0) {
-      return [];
-    }
-
-    const latestVideoId = videosData.items[0].id.videoId;
-
-    // Get comments from the latest video
-    const commentsResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/commentThreads?key=${YOUTUBE_API_KEY}&videoId=${latestVideoId}&part=snippet&maxResults=10&order=relevance`
-    );
-    const commentsData = await commentsResponse.json();
-
-    if (!commentsData.items) {
-      return [];
-    }
-
-    return commentsData.items.map(item => ({
-      name: item.snippet.topLevelComment.snippet.authorDisplayName,
-      emoji: "📺",
-      text: item.snippet.topLevelComment.snippet.textDisplay.substring(0, 200), // Limit length
-      platform: "YouTube",
-      verified: true,
-      timestamp: item.snippet.topLevelComment.snippet.publishedAt
-    }));
-  } catch (error) {
-    console.error('Error fetching YouTube comments:', error);
-    return [];
-  }
-};
-
-// Fetch Facebook comments
-const fetchFacebookComments = async () => {
-  if (!FACEBOOK_PAGE_ID || !FACEBOOK_ACCESS_TOKEN) {
-    console.log('Facebook credentials not configured');
-    return [];
-  }
-
-  try {
-    // Get recent posts from the page
-    const postsResponse = await fetch(
-      `https://graph.facebook.com/v18.0/${FACEBOOK_PAGE_ID}/posts?fields=id,message,created_time&limit=5&access_token=${FACEBOOK_ACCESS_TOKEN}`
-    );
-    const postsData = await postsResponse.json();
-
-    if (!postsData.data || postsData.data.length === 0) {
-      return [];
-    }
-
-    // Get comments from the most recent post
-    const latestPostId = postsData.data[0].id;
-    const commentsResponse = await fetch(
-      `https://graph.facebook.com/v18.0/${latestPostId}/comments?fields=from,message,created_time&limit=10&access_token=${FACEBOOK_ACCESS_TOKEN}`
-    );
-    const commentsData = await commentsResponse.json();
-
-    if (!commentsData.data) {
-      return [];
-    }
-
-    return commentsData.data.map(comment => ({
-      name: comment.from.name,
-      emoji: "👤",
-      text: comment.message.substring(0, 200), // Limit length
-      platform: "Facebook",
-      verified: true,
-      timestamp: comment.created_time
-    }));
-  } catch (error) {
-    console.error('Error fetching Facebook comments:', error);
-    return [];
-  }
-};
-
-// Load comments from both platforms
-const loadComments = async () => {
-  isLoadingComments.value = true;
-  commentError.value = null;
-
-  try {
-    const [youtubeComments, facebookComments] = await Promise.all([
-      fetchYouTubeComments(),
-      fetchFacebookComments()
-    ]);
-
-    // Combine comments from both platforms
-    const allComments = [...youtubeComments, ...facebookComments];
-
-    // If we have real comments, use them; otherwise keep sample data
-    if (allComments.length > 0) {
-      // Sort by timestamp (most recent first)
-      allComments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-      
-      // Take top 6 comments
-      testimonials.value = allComments.slice(0, 6);
-    }
-  } catch (error) {
-    console.error('Error loading comments:', error);
-    commentError.value = 'Unable to load live comments';
-  } finally {
-    isLoadingComments.value = false;
-  }
+const getGradientColor = (index) => {
+  const gradients = [
+    'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
+    'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
+    'linear-gradient(135deg, #60a5fa 0%, #bfdbfe 100%)'
+  ];
+  return gradients[index % gradients.length];
 };
 
 const upcomingServices = ref([
   {
-    title: "Holy Ghost and Service",
+    title: "Holy Ghost and Power Service",
     date: "Every First Sunday morning",
     time: "8:00 AM",
     description: "Join us for worship and teaching from God's Word",
@@ -550,16 +366,16 @@ const upcomingServices = ref([
   {
     title: "Wednesday (2nd) - Renewal Service",
     date: "2nd Wednesday",
-    time: "5:50 PM",
-    description: "Renewal Service - MMU/WMU Meetings",
+    time: "5:30 PM",
+    description: "Renewal Service ",
     color: 2,
     reminderSet: false
   },
   {
-    title: "Wednesday (3rd) - Faith & Power",
+    title: "Wednesday (3rd) - Faith & Power Service",
     date: "3rd Wednesday",
     time: "4:30 PM",
-    description: "Mid-Week Faith & Power Encounter - MMU/WMU Meetings",
+    description: "Mid-Week Faith & Power Encounter Servicec",
     color: 2,
     reminderSet: false
   },
@@ -769,42 +585,7 @@ const reminderButtonStyle = {
   fontSize: '1rem'
 };
 
-const testimonialSectionStyle = {
-  marginTop: '5rem',
-  padding: '4rem 3rem',
-  backgroundColor: 'linear-gradient(135deg, rgba(37, 99, 235, 0.06) 0%, rgba(59, 130, 246, 0.06) 100%)',
-  borderRadius: '2.5rem',
-  border: '1px solid rgba(37, 99, 235, 0.1)',
-  overflow: 'visible'
-};
 
-const testimonialsGridStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-  gap: '2.5rem',
-  width: '100%',
-  overflow: 'visible'
-};
-
-const testimonialCardStyle = {
-  backgroundColor: '#ffffff',
-  padding: '2.5rem',
-  borderRadius: '1.5rem',
-  boxShadow: '0 8px 24px -4px rgba(0,0,0,0.08)',
-  border: '1px solid rgba(37, 99, 235, 0.1)',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  position: 'relative',
-  overflow: 'hidden'
-};
-
-const getGradientColor = (index) => {
-  const gradients = [
-    'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
-    'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
-    'linear-gradient(135deg, #60a5fa 0%, #bfdbfe 100%)'
-  ];
-  return gradients[index % gradients.length];
-};
 </script>
 
 <style scoped>
@@ -955,26 +736,6 @@ const getGradientColor = (index) => {
 
 .premium-services {
   animation: slideUp 0.8s ease-out 1s both;
-}
-
-.testimonial-section {
-  animation: slideUp 0.8s ease-out 1.2s both;
-}
-
-.testimonial-card {
-  animation: fadeIn 0.6s ease-out;
-}
-
-.testimonial-card:nth-child(1) {
-  animation-delay: 1.3s;
-}
-
-.testimonial-card:nth-child(2) {
-  animation-delay: 1.4s;
-}
-
-.testimonial-card:nth-child(3) {
-  animation-delay: 1.5s;
 }
 
 /* Floating Shapes */
@@ -1481,95 +1242,6 @@ const getGradientColor = (index) => {
   box-shadow: 0 12px 32px -5px rgba(16, 185, 129, 0.4) !important;
 }
 
-/* Premium Testimonials */
-.premium-testimonial {
-  position: relative;
-}
-
-.testimonial-glow {
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: cardHoverGlow 4s ease-in-out infinite;
-}
-
-.testimonial-header-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 2;
-}
-
-.testimonial-avatar {
-  font-size: 2.5rem;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
-  border-radius: 1rem;
-  border: 2px solid rgba(37, 99, 235, 0.2);
-}
-
-.testimonial-info {
-  flex: 1;
-}
-
-.testimonial-name {
-  font-weight: 800;
-  color: #0f172a;
-  font-size: 1.1rem;
-  margin: 0;
-}
-
-.testimonial-rating {
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-  letter-spacing: 2px;
-}
-
-.testimonial-text {
-  color: #64748b;
-  font-style: italic;
-  margin: 0 0 1.5rem 0;
-  line-height: 1.8;
-  font-size: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-.testimonial-footer {
-  display: flex;
-  gap: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-.verified-badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.15) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: 0.65rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #059669;
-}
-
-.premium-testimonial:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 48px -8px rgba(37, 99, 235, 0.2) !important;
-  border-color: rgba(37, 99, 235, 0.3);
-}
-
 /* Premium CTA Section */
 .premium-cta-section {
   margin-top: 5rem;
@@ -1776,16 +1448,6 @@ const getGradientColor = (index) => {
     margin-bottom: 2rem !important;
   }
 
-  div[style*="testimonialSectionStyle"],
-  .testimonial-section,
-  .premium-testimonials {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: 2.5rem 1rem !important;
-    margin-top: 2rem !important;
-  }
-
   .upcoming-services-section,
   .premium-services {
     display: block !important;
@@ -1823,27 +1485,11 @@ const getGradientColor = (index) => {
     margin: 0 auto 1.5rem auto !important;
   }
 
-  /* Testimonial Cards */
-  .testimonial-card {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    max-width: 450px !important;
-    margin: 0 auto 1.5rem auto !important;
-  }
-
   /* Grids should stack vertically */
   div[style*="socialMediaGridStyle"] {
     grid-template-columns: 1fr !important;
     display: grid !important;
     gap: 2rem !important;
-  }
-
-  div[style*="testimonialsGridStyle"] {
-    grid-template-columns: 1fr !important;
-    display: grid !important;
-    gap: 1.5rem !important;
   }
 
   div[style*="servicesGridStyle"] {
@@ -1905,12 +1551,6 @@ const getGradientColor = (index) => {
     gap: 2rem !important;
   }
   
-  div[style*="testimonialsGridStyle"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-    justify-items: center !important;
-    gap: 2rem !important;
-  }
-  
   div[style*="servicesGridStyle"] {
     grid-template-columns: repeat(2, 1fr) !important;
     justify-items: center !important;
@@ -1918,15 +1558,13 @@ const getGradientColor = (index) => {
   }
   
   .platform-card,
-  .service-card,
-  .testimonial-card {
+  .service-card {
     width: 100% !important;
     max-width: 400px !important;
   }
   
   .section-header-premium,
-  .services-header,
-  .testimonial-header {
+  .services-header {
     text-align: center !important;
   }
 }
@@ -1934,14 +1572,6 @@ const getGradientColor = (index) => {
 /* Small tablets and large phones */
 @media (min-width: 481px) and (max-width: 768px) {
   div[style*="socialMediaGridStyle"] {
-    grid-template-columns: 1fr !important;
-    justify-items: center !important;
-    max-width: 450px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-  
-  div[style*="testimonialsGridStyle"] {
     grid-template-columns: 1fr !important;
     justify-items: center !important;
     max-width: 450px !important;
@@ -1969,27 +1599,11 @@ const getGradientColor = (index) => {
     overflow: visible !important;
   }
   
-  div[style*="testimonialSectionStyle"] {
-    padding: 2.5rem 1.5rem !important;
-    margin-top: 3rem !important;
-    overflow: visible !important;
-  }
-  
   div[style*="servicesGridStyle"] {
     grid-template-columns: 1fr !important;
     justify-items: center !important;
     max-width: 500px !important;
     margin-left: auto !important;
-    margin-right: auto !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  div[style*="testimonialsGridStyle"] {
-    grid-template-columns: 1fr !important;
-    justify-items: flex-start !important;
-    max-width: 90% !important;
-    margin-left: 2rem !important;
     margin-right: auto !important;
     width: 100% !important;
     overflow: visible !important;
@@ -2120,35 +1734,6 @@ const getGradientColor = (index) => {
     overflow: visible !important;
   }
   
-  .testimonial-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-    text-align: left !important;
-    display: block !important;
-    overflow: visible !important;
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .testimonial-header-card {
-    justify-content: flex-start !important;
-    display: flex !important;
-  }
-  
-  .testimonial-text {
-    text-align: left !important;
-    display: block !important;
-    font-size: 1rem !important;
-    line-height: 1.7 !important;
-  }
-  
-  .testimonial-footer {
-    text-align: left !important;
-    justify-content: flex-start !important;
-    display: flex !important;
-  }
-  
   .service-details {
     text-align: center !important;
     display: block !important;
@@ -2161,8 +1746,7 @@ const getGradientColor = (index) => {
   
   /* Centralize headers and titles */
   .section-header-premium,
-  .services-header,
-  .testimonial-header {
+  .services-header {
     text-align: center !important;
     display: block !important;
   }
