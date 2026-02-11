@@ -104,7 +104,7 @@
 
             <div :style="formRowStyle">
               <div :style="formGroupStyle" class="form-group form-group-5">
-                <label :style="labelStyle">Series *</label>
+                <label :style="labelStyle">Series (optional)</label>
                 <div :style="{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }">
                   <div :style="{ display: 'flex', alignItems: 'center', gap: '0.5rem' }">
                     <input 
@@ -120,11 +120,10 @@
                   <select 
                     v-if="!isNewSeries && existingSeries.length > 0"
                     v-model="sermonForm.series" 
-                    required 
                     :style="inputStyle"
                     class="form-input"
                   >
-                    <option value="">Select existing series</option>
+                    <option value="">Select existing series (or leave blank)</option>
                     <option v-for="series in existingSeries" :key="series" :value="series">
                       {{ series }}
                     </option>
@@ -133,9 +132,8 @@
                     v-if="isNewSeries || existingSeries.length === 0"
                     v-model="sermonForm.series" 
                     type="text" 
-                    required 
                     :style="inputStyle"
-                    placeholder="Enter new series name"
+                    placeholder="Enter new series name (optional)"
                     class="form-input"
                   />
                 </div>
@@ -164,14 +162,27 @@
             </div>
 
             <div :style="formGroupStyle" class="form-group form-group-8">
-              <label :style="labelStyle">Thumbnail Image URL (optional)</label>
-              <input 
-                v-model="sermonForm.thumbnail" 
-                type="url" 
-                :style="inputStyle"
-                placeholder="https://example.com/image.jpg"
-                class="form-input"
-              />
+              <label :style="labelStyle">Thumbnail Image (optional)</label>
+              <div :style="fileUploadContainerStyle">
+                <input 
+                  ref="thumbnailInput"
+                  type="file" 
+                  accept="image/*" 
+                  @change="handleThumbnailFile"
+                  :style="{ display: 'none' }"
+                />
+                <button 
+                  type="button"
+                  @click="$refs.thumbnailInput.click()" 
+                  :style="browseButtonStyle"
+                  class="browse-button"
+                >
+                  {{ sermonForm.thumbnailFile ? '✓ Change Image' : '🖼️ Select Image' }}
+                </button>
+                <span v-if="sermonForm.thumbnailFile" :style="fileNameDisplayStyle">
+                  {{ sermonForm.thumbnailFile.name }}
+                </span>
+              </div>
             </div>
 
             <div :style="formGroupStyle" class="form-group form-group-9">
@@ -352,15 +363,27 @@
               </div>
 
               <div :style="formGroupStyle" class="form-group">
-                <label :style="labelStyle">Featured Image URL *</label>
-                <input 
-                  v-model="blogForm.image" 
-                  type="url" 
-                  required 
-                  :style="inputStyle"
-                  placeholder="https://example.com/image.jpg"
-                  class="form-input"
-                />
+                <label :style="labelStyle">Featured Image *</label>
+                <div :style="fileUploadContainerStyle">
+                  <input 
+                    ref="blogImageInput"
+                    type="file" 
+                    accept="image/*" 
+                    @change="handleBlogImageFile"
+                    :style="{ display: 'none' }"
+                  />
+                  <button 
+                    type="button"
+                    @click="$refs.blogImageInput.click()" 
+                    :style="browseButtonStyle"
+                    class="browse-button"
+                  >
+                    {{ blogForm.imageFile ? '✓ Change Image' : '🖼️ Select Image' }}
+                  </button>
+                  <span v-if="blogForm.imageFile" :style="fileNameDisplayStyle">
+                    {{ blogForm.imageFile.name }}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -392,9 +415,13 @@
             </div>
 
             <!-- Image Preview -->
-            <div v-if="blogForm.image" :style="{marginBottom: '1.5rem'}">
+            <div v-if="blogForm.imageFile || blogForm.image" :style="{marginBottom: '1.5rem'}">
               <label :style="labelStyle">Image Preview</label>
-              <img :src="blogForm.image" alt="Preview" :style="{maxWidth: '100%', maxHeight: '300px', borderRadius: '0.5rem', objectFit: 'cover'}" />
+              <img 
+                :src="blogForm.imageFile ? URL.createObjectURL(blogForm.imageFile) : blogForm.image" 
+                alt="Preview" 
+                :style="{maxWidth: '100%', maxHeight: '300px', borderRadius: '0.5rem', objectFit: 'cover'}" 
+              />
             </div>
 
             <!-- Action Buttons -->
@@ -535,7 +562,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { API_ENDPOINTS } from '@/api/config';
@@ -548,6 +575,8 @@ const uploadProgress = ref(0);
 const uploadStatus = ref({ message: '', type: '' });
 const settingsStatus = ref({ message: '', type: '' });
 const audioInput = ref(null);
+const thumbnailInput = ref(null);
+const blogImageInput = ref(null);
 
 const sermonForm = ref({
   title: '',
@@ -558,6 +587,7 @@ const sermonForm = ref({
   category: '',
   description: '',
   thumbnail: '',
+  thumbnailFile: null,
   audioFile: null
 });
 
@@ -600,6 +630,89 @@ const handleAudioFile = (event) => {
   }
 };
 
+const handleThumbnailFile = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    // Check if it's an image
+    if (!file.type.startsWith('image/')) {
+      uploadStatus.value = {
+        message: 'Please select a valid image file',
+        type: 'error'
+      };
+      return;
+    }
+    // Check file size (max 5MB for images)
+    if (file.size > 5 * 1024 * 1024) {
+      uploadStatus.value = {
+        message: 'Image too large. Maximum size is 5MB',
+        type: 'error'
+      };
+      return;
+    }
+    sermonForm.value.thumbnailFile = file;
+    uploadStatus.value = { message: '', type: '' };
+  }
+};
+
+const handleBlogImageFile = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    // Check if it's an image
+    if (!file.type.startsWith('image/')) {
+      uploadStatus.value = {
+        message: 'Please select a valid image file',
+        type: 'error'
+      };
+      return;
+    }
+    // Check file size (max 5MB for images)
+    if (file.size > 5 * 1024 * 1024) {
+      uploadStatus.value = {
+        message: 'Image too large. Maximum size is 5MB',
+        type: 'error'
+      };
+      return;
+    }
+    blogForm.value.imageFile = file;
+    uploadStatus.value = { message: '', type: '' };
+  }
+};
+
+// Load existing sermons and blogs
+const loadSermons = async () => {
+  try {
+    const response = await axios.get(API_ENDPOINTS.SERMONS);
+    if (response.data && Array.isArray(response.data)) {
+      uploadedSermons.value = response.data;
+    } else if (response.data.sermons && Array.isArray(response.data.sermons)) {
+      uploadedSermons.value = response.data.sermons;
+    }
+  } catch (error) {
+    console.error('Error loading sermons:', error);
+    // Don't show error to user, just start with empty list
+  }
+};
+
+const loadBlogPosts = async () => {
+  try {
+    const response = await axios.get(API_ENDPOINTS.BLOGS);
+    if (response.data && Array.isArray(response.data)) {
+      blogPosts.value = response.data;
+    } else if (response.data.blogs && Array.isArray(response.data.blogs)) {
+      blogPosts.value = response.data.blogs;
+    }
+  } catch (error) {
+    console.error('Error loading blog posts:', error);
+    // Don't show error to user, just start with empty list
+  }
+};
+
+// Load data when component mounts
+onMounted(() => {
+  loadSermons();
+  loadBlogPosts();
+});
+
 const uploadSermon = async () => {
   if (!sermonForm.value.audioFile) {
     uploadStatus.value = { message: 'Please select an audio file', type: 'error' };
@@ -616,11 +729,17 @@ const uploadSermon = async () => {
     formData.append('speaker', sermonForm.value.speaker);
     formData.append('date', sermonForm.value.date);
     formData.append('duration', sermonForm.value.duration);
-    formData.append('series', sermonForm.value.series);
+    formData.append('series', sermonForm.value.series || '');
     formData.append('category', sermonForm.value.category);
     formData.append('description', sermonForm.value.description);
-    formData.append('thumbnail', sermonForm.value.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400');
-    formData.append('audioFile', sermonForm.value.audioFile);
+    
+    // Only append thumbnail if there's a file selected, otherwise don't include it at all
+    if (sermonForm.value.thumbnailFile) {
+      formData.append('thumbnail', sermonForm.value.thumbnailFile);
+    }
+    // Don't append thumbnail field at all if no file is selected
+    
+    formData.append('audio', sermonForm.value.audioFile);
 
     const progressInterval = setInterval(() => {
       if (uploadProgress.value < 90) {
@@ -629,7 +748,11 @@ const uploadSermon = async () => {
     }, 200);
 
     const response = await axios.post(settings.value.apiEndpoint, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
+      },
+      timeout: 120000, // 2 minutes for large file uploads
       onUploadProgress: (progressEvent) => {
         uploadProgress.value = Math.round((progressEvent.loaded * 100) / progressEvent.total);
       }
@@ -639,10 +762,16 @@ const uploadSermon = async () => {
     uploadProgress.value = 100;
 
     const newSermon = {
-      id: uploadedSermons.value.length + 1,
-      ...sermonForm.value,
-      thumbnail: sermonForm.value.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      audioUrl: response.data.audioUrl || `/sermons/${sermonForm.value.audioFile.name}`
+      id: response.data?.sermon?.id || uploadedSermons.value.length + 1,
+      title: sermonForm.value.title,
+      speaker: sermonForm.value.speaker,
+      date: sermonForm.value.date,
+      duration: sermonForm.value.duration,
+      series: sermonForm.value.series,
+      category: sermonForm.value.category,
+      description: sermonForm.value.description,
+      thumbnail: response.data?.sermon?.thumbnail_url || response.data?.sermon?.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+      audioUrl: response.data?.sermon?.audio_url || response.data?.audioUrl || URL.createObjectURL(sermonForm.value.audioFile)
     };
     
     uploadedSermons.value.unshift(newSermon);
@@ -661,8 +790,16 @@ const uploadSermon = async () => {
       category: '',
       description: '',
       thumbnail: '',
+      thumbnailFile: null,
       audioFile: null
     };
+
+    if (audioInput.value) {
+      audioInput.value.value = '';
+    }
+    if (thumbnailInput.value) {
+      thumbnailInput.value.value = '';
+    }
 
     setTimeout(() => {
       uploadProgress.value = 0;
@@ -670,9 +807,23 @@ const uploadSermon = async () => {
     }, 3000);
 
   } catch (error) {
-    console.error('Upload error:', error);
+    console.error('Upload error details:', error);
+    console.error('Error response:', error.response);
+    console.error('Error message:', error.message);
+    
+    let errorMessage = 'Upload failed. ';
+    if (error.response) {
+      errorMessage += error.response?.data?.message || `Server error: ${error.response.status}`;
+      console.error('Server response data:', error.response.data);
+    } else if (error.request) {
+      errorMessage += 'Cannot connect to server. Make sure backend is running on port 8002.';
+      console.error('No response received:', error.request);
+    } else {
+      errorMessage += error.message || 'Please check your connection and try again.';
+    }
+    
     uploadStatus.value = {
-      message: error.response?.data?.message || 'Upload failed. Please try again.',
+      message: errorMessage,
       type: 'error'
     };
   } finally {
@@ -725,6 +876,7 @@ const blogForm = ref({
   author: '',
   date: '',
   image: '',
+  imageFile: null,
   excerpt: '',
   content: ''
 });
@@ -744,13 +896,41 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('en-US', options);
 };
 
-const saveBlogPost = () => {
+const saveBlogPost = async () => {
   try {
+    let response;
+    const formData = new FormData();
+    
+    // Append all form fields
+    formData.append('title', blogForm.value.title);
+    formData.append('category', blogForm.value.category);
+    formData.append('author', blogForm.value.author);
+    formData.append('date', blogForm.value.date);
+    formData.append('excerpt', blogForm.value.excerpt);
+    formData.append('content', blogForm.value.content);
+    
+    // Append image file if selected
+    if (blogForm.value.imageFile) {
+      formData.append('image', blogForm.value.imageFile);
+    } else if (blogForm.value.image && !editingBlogPost.value) {
+      // Only send URL if not editing and no file is selected
+      formData.append('image_url', blogForm.value.image);
+    }
+    
     if (editingBlogPost.value) {
+      // Update existing blog post
+      const postId = blogPosts.value[editingBlogIndex.value].id;
+      response = await axios.post(API_ENDPOINTS.BLOG_UPDATE(postId), formData, {
+        headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       
-      blogPosts.value[editingBlogIndex.value] = {
+      blogPosts.value[editingBlogIndex.value] = response.data?.blog || {
         ...blogForm.value,
-        id: blogPosts.value[editingBlogIndex.value].id
+        id: postId,
+        image: response.data?.blog?.image_url || blogForm.value.image
       };
       
       blogStatus.value = {
@@ -758,10 +938,19 @@ const saveBlogPost = () => {
         type: 'success'
       };
     } else {
-     
-      const newPost = {
+      // Create new blog post
+      response = await axios.post(API_ENDPOINTS.BLOG_CREATE, formData, {
+        headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        },
+        timeout: 120000 // 2 minutes for large image uploads
+      });
+      
+      const newPost = response.data?.blog || {
         id: blogPosts.value.length + 1,
-        ...blogForm.value
+        ...blogForm.value,
+        image: response.data?.blog?.image_url || blogForm.value.image
       };
       
       blogPosts.value.unshift(newPost);
@@ -772,28 +961,45 @@ const saveBlogPost = () => {
       };
     }
 
-   
+    // Reset form
     blogForm.value = {
       title: '',
       category: '',
       author: '',
       date: '',
       image: '',
+      imageFile: null,
       excerpt: '',
       content: ''
     };
     editingBlogPost.value = false;
     editingBlogIndex.value = null;
 
-    
+    // Clear file input
+    if (blogImageInput.value) {
+      blogImageInput.value.value = '';
+    }
+
+    // Clear status after 3 seconds
     setTimeout(() => {
       blogStatus.value = { message: '', type: '' };
     }, 3000);
 
   } catch (error) {
-    console.error('Save blog post error:', error);
+    console.error('Save blog post error details:', error);
+    console.error('Error response:', error.response);
+    
+    let errorMessage = 'Failed to save blog post. ';
+    if (error.response) {
+      errorMessage += error.response?.data?.message || `Server error: ${error.response.status}`;
+    } else if (error.request) {
+      errorMessage += 'Cannot connect to server. Make sure backend is running on port 8002.';
+    } else {
+      errorMessage += error.message || 'Please try again.';
+    }
+    
     blogStatus.value = {
-      message: 'Failed to save blog post. Please try again.',
+      message: errorMessage,
       type: 'error'
     };
   }
@@ -821,11 +1027,18 @@ const cancelEditBlog = () => {
     author: '',
     date: '',
     image: '',
+    imageFile: null,
     excerpt: '',
     content: ''
   };
   editingBlogPost.value = false;
   editingBlogIndex.value = null;
+  
+  // Clear file input
+  if (blogImageInput.value) {
+    blogImageInput.value.value = '';
+  }
+  
   blogStatus.value = { message: '', type: '' };
 };
 
@@ -843,15 +1056,6 @@ const deleteBlogPost = (index) => {
     }, 2000);
   }
 };
-
-
-const loadBlogPosts = () => {
-
-  console.log('Blog posts should be loaded from backend API');
-};
-
-
-loadBlogPosts();
 
 const adminSectionStyle = {
   paddingTop: '6rem',
