@@ -747,7 +747,7 @@ const formatDate = (dateString) => {
 const saveBlogPost = () => {
   try {
     if (editingBlogPost.value) {
-      // Update existing post
+      
       blogPosts.value[editingBlogIndex.value] = {
         ...blogForm.value,
         id: blogPosts.value[editingBlogIndex.value].id
@@ -758,7 +758,7 @@ const saveBlogPost = () => {
         type: 'success'
       };
     } else {
-      // Create new post
+     
       const newPost = {
         id: blogPosts.value.length + 1,
         ...blogForm.value
@@ -772,7 +772,7 @@ const saveBlogPost = () => {
       };
     }
 
-    // Reset form
+   
     blogForm.value = {
       title: '',
       category: '',
@@ -785,7 +785,7 @@ const saveBlogPost = () => {
     editingBlogPost.value = false;
     editingBlogIndex.value = null;
 
-    // Clear status after 3 seconds
+    
     setTimeout(() => {
       blogStatus.value = { message: '', type: '' };
     }, 3000);
@@ -805,7 +805,7 @@ const editBlogPost = (index) => {
   editingBlogPost.value = true;
   editingBlogIndex.value = index;
   
-  // Scroll to top of form
+ 
   window.scrollTo({ top: 0, behavior: 'smooth' });
   
   blogStatus.value = {
@@ -844,14 +844,13 @@ const deleteBlogPost = (index) => {
   }
 };
 
-// Load blog posts function (localStorage removed)
+
 const loadBlogPosts = () => {
-  // Blog posts should be loaded from backend API
-  // Implement API call here when backend is ready
+
   console.log('Blog posts should be loaded from backend API');
 };
 
-// Load on component mount
+
 loadBlogPosts();
 
 const adminSectionStyle = {

@@ -1,8 +1,8 @@
-<!-- About.vue -->
+
 <template>
   <section id="about" class="about-section">
     <div class="about-container">
-      <!-- Section Header -->
+      
       <div class="about-header fade-in">
         <span class="section-badge badge-animate">ABOUT US</span>
         <h2 class="about-title title-animate">
@@ -13,9 +13,9 @@
         </p>
       </div>
 
-      <!-- Main Content Grid -->
+      
       <div class="about-content-grid content-grid-animate">
-        <!-- Image with Hover Effect -->
+        
         <div class="image-container-animate about-image-container">
           <img
             src="@/assets/TGTBC Mission Banner Print_20251210_111814_0000.png"
@@ -24,7 +24,7 @@
           />
         </div>
         
-        <!-- Content -->
+     
         <div class="about-content-text content-text-animate">
           <h3 class="content-title">
             Our Mission & Message 
@@ -36,7 +36,7 @@
             Our Message is to preach Christ and Him Crucified.
           </p>
           
-          <!-- Quick Stats -->
+          
           <div class="stats-premium stats-box">
             <div class="stat-item stat-item-1">
               <div class="stat-number">40+</div>
@@ -64,13 +64,13 @@
         </div>
       </div>
 
-      <!-- Core Values Carousel -->
+     
       <div class="values-container values-section-animate">
         <h3 class="core-values-title">
           Our Core Values
         </h3>
         
-        <!-- Carousel Container -->
+        
         <div class="carousel-container">
           <div class="carousel-wrapper">
             <div 
@@ -90,7 +90,7 @@
                   <span v-else class="icon-emoji">{{ value.icon }}</span>
                 </div>
                 <h4 class="value-card-title">
-                  {{ value.title }}
+                  <strong>{{ value.boldPart }}</strong> {{ value.normalPart }}
                 </h4>
                 <p class="value-card-description">
                   {{ value.description }}
@@ -99,7 +99,7 @@
             </div>
           </div>
           
-          <!-- Carousel Navigation -->
+          
           <button @click="prevSlide" class="carousel-nav carousel-prev">
             ‹
           </button>
@@ -107,7 +107,7 @@
             ›
           </button>
           
-          <!-- Carousel Indicators -->
+          
           <div class="carousel-indicators">
             <button 
               v-for="(value, index) in values" 
@@ -126,12 +126,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-// Carousel state
+
 const currentSlide = ref(0);
 const isTransitioning = ref(false);
 let autoplayInterval = null;
 
-// Auto-slide every 2 seconds
+
 onMounted(() => {
   autoplayInterval = setInterval(() => {
     nextSlide();
@@ -170,7 +170,7 @@ const goToSlide = (index) => {
     isTransitioning.value = false;
   }, 500);
   
-  // Reset autoplay timer
+
   if (autoplayInterval) {
     clearInterval(autoplayInterval);
     autoplayInterval = setInterval(() => {
@@ -179,7 +179,7 @@ const goToSlide = (index) => {
   }
 };
 
-// Create array with duplicates for smooth infinite scroll
+
 const displayValues = computed(() => {
   return [...values.value, ...values.value.slice(0, 1)];
 });
@@ -194,29 +194,39 @@ const carouselTrackStyle = computed(() => ({
 
 const values = ref([
   {
-    title: "Faith & Prayer",
-    description: "Grounded in prayer and trusting God for all things",
-    icon: "🙏",
+    boldPart: "HARVESTING OF SOULS",
+    normalPart: "aggressively into God's kingdom",
+    description: "Actively bringing people into a relationship with God through evangelism and outreach",
+    icon: "🌾",
     color: "37, 99, 235"
   },
   {
-    title: "Biblical Teaching",
-    description: "Committed to God's Word and biblical truth",
-    icon: "📖",
+    boldPart: "MOULDING LIVES",
+    normalPart: "to conform to the image of Christ",
+    description: "Transforming believers through discipleship to reflect Christ's character",
+    icon: "✝️",
     color: "59, 130, 246"
   },
   {
-    title: "Community",
-    description: "Building meaningful relationships and caring for others",
+    boldPart: "DEVELOPING A SENSE",
+    normalPart: "of love and care among brethren",
+    description: "Building strong, loving relationships within the church family",
     icon: "🤝",
-    image: require('@/assets/png-clipart-cooperative-bank-台南市新楼储蓄互助社-organization-logo-symbol-congregation-of-the-mission-saving-hand-thumbnail-removebg-preview.png'),
     color: "96, 165, 250"
   },
   {
-    title: "Service & Impact",
-    description: "Making a difference in our community and world",
+    boldPart: "DEMONSTRATING GOD'S LOVE",
+    normalPart: "through service to believers and the lost",
+    description: "Showing God's love through practical acts of service and compassion",
     icon: "❤️",
     color: "34, 197, 94"
+  },
+  {
+    boldPart: "CELEBRATING GOD'S PRESENCE",
+    normalPart: "through spirit filled worship experiences",
+    description: "Experiencing God's presence through heartfelt, Spirit-led worship",
+    icon: "🙌",
+    color: "168, 85, 247"
   },
 ]);
 </script>

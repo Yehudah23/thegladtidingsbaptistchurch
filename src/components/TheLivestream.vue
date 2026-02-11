@@ -1,4 +1,4 @@
-<!-- LiveStream.vue -->
+
 <template>
   <section id="live" :style="sectionStyle">
     <div :style="animatedBackgroundStyle"></div>
@@ -10,7 +10,7 @@
     </div>
     
     <div :style="containerStyle">
-      <!-- Section Header -->
+    
       <div :style="headerStyle">
         <span :style="badgeStyle" class="floating-badge">✨ LIVE SERVICE</span>
         <h2 :style="titleStyle" class="fade-in-title">
@@ -21,10 +21,10 @@
         </p>
       </div>
 
-      <!-- Premium Live Stream Player -->
+     
       <div :style="playerContainerStyle" class="premium-player-section">
         <div :style="playerStyle" class="player-container premium-player">
-          <!-- YouTube Live Stream Embed -->
+          
           <div :style="facebookEmbedContainerStyle" class="youtube-embed-container premium-video">
             <iframe 
               :key="iframeKey"
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <!-- Stream Info with Premium Design -->
+        
         <div :style="streamInfoStyle" class="stream-info-card premium-info">
           <div class="info-glow"></div>
           <div class="info-content">
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <!-- Premium Social Media Section -->
+      
       <div :style="socialMediaSectionStyle" class="social-media-section premium-platforms">
         <div :style="sectionHeaderStyle" class="section-header-premium">
           <h3 :style="{ fontSize: '2rem', fontWeight: '800', color: '#0f172a', margin: 0, marginBottom: '0.5rem' }">
@@ -103,7 +103,7 @@
         </div>
 
         <div :style="socialMediaGridStyle">
-          <!-- Facebook Card -->
+         
           <div class="platform-card facebook-card premium-card">
             <a href="https://web.facebook.com/TGTBCOgbomoso" target="_blank" rel="noopener noreferrer" class="card-link" :style="cardLinkStyle">
               <div class="card-glow facebook-glow"></div>
@@ -123,7 +123,7 @@
             </a>
           </div>
 
-          <!-- YouTube Card -->
+        
           <div class="platform-card youtube-card premium-card">
             <a href="http://youtube.com/@tgtbcogbomoso" target="_blank" rel="noopener noreferrer" class="card-link" :style="cardLinkStyle">
               <div class="card-glow youtube-glow"></div>
@@ -143,7 +143,7 @@
             </a>
           </div>
 
-          <!-- Telegram Card -->
+         
           <div class="platform-card telegram-card premium-card">
             <a href="https://t.me/tgtbcogbomoso?livestream" target="_blank" rel="noopener noreferrer" class="card-link" :style="cardLinkStyle">
               <div class="card-glow telegram-glow"></div>
@@ -163,7 +163,7 @@
             </a>
           </div>
 
-          <!-- Spotify Card -->
+        
           <div class="platform-card spotify-card premium-card">
             <a href="https://open.spotify.com/show/0F6yJxwWSH1DJWwQxLb2F9" target="_blank" rel="noopener noreferrer" class="card-link" :style="cardLinkStyle">
               <div class="card-glow spotify-glow"></div>
@@ -185,7 +185,7 @@
         </div>
       </div>
 
-      <!-- Premium Upcoming Services -->
+    
       <div class="upcoming-services-section premium-services">
         <div class="services-header">
           <h3 class="section-title premium-section-title">
@@ -204,7 +204,7 @@
             <div class="service-body premium-service-body">
               <div class="service-details">
                 <div class="service-info">
-                  <!-- <span class="service-icon"></span> -->
+                 
                   <span class="service-text">{{ service.date }}</span>
                 </div>
                 <div class="service-info">
@@ -224,7 +224,7 @@
         </div>
       </div>
 
-      <!-- Call to Action Section -->
+    
       <div class="cta-section premium-cta-section">
         <div class="cta-content">
           <h3 :style="{ fontSize: '2rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem', textAlign: 'center' }">
@@ -271,14 +271,14 @@ onUnmounted(() => {
   }
 });
 
-// Set reminder function
+
 const setReminder = (service) => {
   if (service.reminderSet) {
-    // Already set, so unset it
+    
     service.reminderSet = false;
     alert(`Reminder removed for ${service.title}`);
   } else {
-    // Set the reminder
+   
     service.reminderSet = true;
     
   
@@ -305,10 +305,10 @@ const setReminder = (service) => {
 
 
 onMounted(() => {
-  // Refresh iframe every 60 seconds to check for live stream (mobile-friendly interval)
+ 
   refreshInterval = setInterval(() => {
     iframeKey.value++;
-  }, 60000); // 60000ms = 60 seconds
+  }, 60000); 
 });
 
 const getGradientColor = (index) => {

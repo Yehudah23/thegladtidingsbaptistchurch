@@ -1,7 +1,7 @@
 <template>
   <section id="giving" :style="sectionStyle">
     <div :style="containerStyle">
-      <!-- Header -->
+      
       <div :style="headerStyle" class="header-animate">
         <span :style="badgeStyle" class="badge-animate">GIVING</span>
         <h2 :style="titleStyle" class="title-animate">
@@ -12,7 +12,7 @@
         </p>
       </div>
 
-      <!-- Bible Verse -->
+   
       <div :style="verseBoxStyle" class="verse-animate">
         <p :style="verseTextStyle">
           "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
@@ -20,9 +20,9 @@
         <p :style="verseReferenceStyle">- 2 Corinthians 9:7</p>
       </div>
 
-      <!-- Bank Accounts Grid -->
+    
       <div :style="banksGridStyle">
-        <!-- First Bank -->
+       
         <div :style="bankCardStyle" class="bank-card bank-card-1">
           <div :style="bankHeaderStyle">
             <div :style="bankIconStyle">
@@ -72,7 +72,7 @@
           </div>
         </div>
 
-        <!-- Access Bank -->
+       
         <div :style="bankCardStyle" class="bank-card bank-card-3">
           <div :style="bankHeaderStyle">
             <div :style="bankIconStyle">
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <!-- Zenith Bank -->
+       
         <div :style="bankCardStyle" class="bank-card bank-card-4">
           <div :style="bankHeaderStyle">
             <div :style="bankIconStyle">
@@ -111,7 +111,7 @@
         </div>
       </div>
 
-      <!-- Impact Section -->
+     
       <div :style="impactSectionStyle" class="impact-section-animate">
         <h3 :style="impactTitleStyle">Your Giving Makes a Difference</h3>
         <div :style="impactGridStyle">
@@ -138,7 +138,7 @@
         </div>
       </div>
 
-      <!-- Contact Info -->
+     
       <div :style="contactBoxStyle" class="contact-animate">
         <p :style="contactTextStyle">
           For more information about giving or if you need assistance, please contact our finance team at 

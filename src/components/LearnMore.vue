@@ -1,7 +1,7 @@
 <template>
   <section id="history" :style="sectionStyle">
     <div :style="containerStyle">
-      <!-- Header -->
+   
       <div :style="headerStyle" class="header-animate">
         <span :style="badgeStyle" class="badge-animate">OUR STORY</span>
         <h2 :style="titleStyle" class="title-animate">
@@ -12,7 +12,7 @@
         </p>
       </div>
 
-      <!-- Navigation Tabs -->
+  
       <div :style="tabsContainerStyle" class="tabs-animate">
         <button
           v-for="section in sections"
@@ -25,9 +25,9 @@
         </button>
       </div>
 
-      <!-- Content Area -->
+    
       <div :style="contentContainerStyle" class="content-animate">
-        <!-- Preamble Section -->
+       
         <div v-if="activeSection === 'preamble'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">Preamble</h3>
           <div :style="contentTextStyle">
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <!-- Beginnings Section -->
+        
         <div v-if="activeSection === 'beginnings'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">The Beginnings</h3>
           <div :style="contentTextStyle">
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <!-- Pastorates Section -->
+      
         <div v-if="activeSection === 'pastorates'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">The Pastorates</h3>
           <div :style="contentTextStyle">
@@ -141,7 +141,7 @@
           </div>
         </div>
 
-        <!-- Mission & Evangelism Section -->
+        
         <div v-if="activeSection === 'mission'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">Outreach (Mission and Evangelism)</h3>
           <div :style="contentTextStyle">
@@ -205,7 +205,7 @@
           </div>
         </div>
 
-        <!-- International Mission Section -->
+       
         <div v-if="activeSection === 'international'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">International Mission Work</h3>
           <div :style="contentTextStyle">
@@ -278,7 +278,7 @@
           </div>
         </div>
 
-        <!-- Ministries Section -->
+       
         <div v-if="activeSection === 'ministries'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">Church Ministries</h3>
           <div :style="contentTextStyle">
@@ -339,7 +339,7 @@
           </div>
         </div>
 
-        <!-- Growth & Development Section -->
+       
         <div v-if="activeSection === 'growth'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">Spiritual Growth and Development</h3>
           <div :style="contentTextStyle">
@@ -421,7 +421,7 @@
           </div>
         </div>
 
-        <!-- Physical Development Section -->
+       
         <div v-if="activeSection === 'development'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">Physical Development</h3>
           <div :style="contentTextStyle">
@@ -491,7 +491,7 @@
           </div>
         </div>
 
-        <!-- Vision & Future Section -->
+        
         <div v-if="activeSection === 'vision'" :style="sectionContentStyle" class="section-content">
           <h3 :style="sectionTitleStyle">The Church Is Marching Forward</h3>
           <div :style="contentTextStyle">

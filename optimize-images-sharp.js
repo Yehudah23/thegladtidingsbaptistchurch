@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
@@ -43,7 +43,6 @@ async function optimizeImages() {
       console.log(`  ✓ Savings: ${savings}%`);
       console.log(`  ✓ Resolution: ${info.width}x${info.height}`);
       
-      // Replace original with optimized
       fs.copyFileSync(outputPath, inputPath);
       fs.unlinkSync(outputPath);
       console.log(`  ✓ Replaced original with optimized version\n`);

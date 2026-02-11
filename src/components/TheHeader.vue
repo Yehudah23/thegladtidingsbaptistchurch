@@ -1,9 +1,9 @@
-<!-- Header.vue -->
+
 <template>
   <header :style="headerStyle">
     <div :style="{ maxWidth: '1400px', marginLeft: 'auto', marginRight: 'auto', paddingLeft: '2rem', paddingRight: '2rem' }">
       <div :style="{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '5rem' }">
-        <!-- Logo with Hover Effect -->
+       
         <div class="logo-container" :style="{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '200px' }">
           <img src="@/assets/church_logo-removebg-preview.png" alt="Glad Tidings Baptist Church Logo" :style="{ width: '3rem', height: '3rem', objectFit: 'contain' }" class="logo-image" />
           <div :style="{ display: 'flex', flexDirection: 'column' }">
@@ -15,7 +15,7 @@
           </div>
         </div>
 
-        <!-- Desktop Navigation -->
+        
         <nav :style="{ display: 'flex', alignItems: 'center', gap: '3rem', flex: '1', justifyContent: 'center' }" class="desktop-nav">
           <router-link :to="{ name: 'Home' }" :style="navLinkStyle" class="nav-link">
             Home
@@ -40,14 +40,14 @@
           </router-link>
         </nav>
 
-        <!-- CTA Buttons -->
+        
         <div :style="{ display: 'flex', alignItems: 'center', gap: '1rem' }" class="desktop-cta">
           <router-link :to="{ name: 'Home', hash: '#live' }" :style="ctaButtonStyle" class="cta-button">
             Watch Live
           </router-link>
         </div>
 
-        <!-- Mobile Menu Button -->
+        
         <button @click="isMobileMenuOpen = !isMobileMenuOpen" :style="{ padding: '0.5rem', borderRadius: '0.375rem', color: '#374151', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer' }" class="mobile-menu-btn">
           {{ isMobileMenuOpen ? '✕' : '☰' }}
         </button>

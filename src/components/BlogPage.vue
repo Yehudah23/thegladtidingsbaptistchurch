@@ -1,6 +1,6 @@
 <template>
   <div class="blog-page">
-    <!-- Hero Section -->
+    
     <section class="blog-hero">
       <div class="hero-content">
         <h1>Church Blog & Publications</h1>
@@ -8,11 +8,11 @@
       </div>
     </section>
 
-    <!-- Filter and Search Section -->
+    
     <section class="blog-controls">
       <div class="container">
         <div class="controls-wrapper">
-          <!-- Category Filter -->
+        
           <div class="category-filter">
             <button 
               v-for="category in categories" 
@@ -24,7 +24,7 @@
             </button>
           </div>
 
-          <!-- Search Bar -->
+         
           <div class="search-bar">
             <input 
               v-model="searchQuery" 
@@ -41,7 +41,7 @@
       </div>
     </section>
 
-    <!-- Blog Posts Grid -->
+   
     <section class="blog-posts">
       <div class="container">
         <div v-if="filteredPosts.length === 0" class="no-posts">
@@ -71,7 +71,7 @@
           </article>
         </div>
 
-        <!-- Pagination -->
+      
         <div v-if="totalPages > 1" class="pagination">
           <button 
             class="page-btn"
@@ -115,7 +115,7 @@ export default {
       { id: 'event', name: 'Events' }
     ]);
 
-    // Sample blog posts - Replace with your actual data or API calls
+    
     const blogPosts = ref([
       {
         id: 1,
@@ -200,16 +200,16 @@ export default {
       },
     ]);
 
-    // Computed: Filter posts by category and search query
+    
     const filteredPosts = computed(() => {
       let posts = blogPosts.value;
 
-      // Filter by category
+   
       if (selectedCategory.value !== 'all') {
         posts = posts.filter(post => post.category === selectedCategory.value);
       }
 
-      // Filter by search query
+    
       if (searchQuery.value.trim()) {
         const query = searchQuery.value.toLowerCase();
         posts = posts.filter(post => 
@@ -219,23 +219,23 @@ export default {
         );
       }
 
-      // Sort by date (newest first)
+    
       return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     });
 
-    // Computed: Paginated posts
+   
     const paginatedPosts = computed(() => {
       const start = (currentPage.value - 1) * postsPerPage;
       const end = start + postsPerPage;
       return filteredPosts.value.slice(start, end);
     });
 
-    // Computed: Total pages
+   
     const totalPages = computed(() => {
       return Math.ceil(filteredPosts.value.length / postsPerPage);
     });
 
-    // Methods
+   
     const getCategoryName = (categoryId) => {
       const category = categories.value.find(cat => cat.id === categoryId);
       return category ? category.name : categoryId;
@@ -243,7 +243,7 @@ export default {
 
     const formatDate = (dateString) => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(dateString).toLocaleDateString('en-US', options);
+      return new Date(dateString).toLocaleDateString('en-NG', options);
     };
 
     const goToPost = (postId) => {
@@ -267,7 +267,7 @@ export default {
 </script>
 
 <style scoped>
-/* Hero Section */
+
 .blog-hero {
   background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
   color: white;
@@ -287,7 +287,6 @@ export default {
   opacity: 0.95;
 }
 
-/* Controls Section */
 .blog-controls {
   background: #f8fafc;
   padding: 2rem 0;

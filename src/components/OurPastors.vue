@@ -1,6 +1,6 @@
 <template>
   <section :style="sectionStyle">
-    <!-- Hero Section -->
+   
     <div :style="heroSectionStyle">
       <div :style="containerStyle" class="hero-container">
         <button @click="goBack" :style="backButtonStyle" class="back-button">
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <!-- Pastors Grid -->
+   
     <div :style="containerStyle" class="pastors-container">
       <div :style="pastorsGridStyle" class="pastors-grid">
         <div v-for="(pastor, index) in pastors" :key="index" :style="pastorCardStyle" class="pastor-card" :class="`pastor-card-${index}`">
@@ -71,57 +71,61 @@ const pastors = ref([
   },
 
   {
-    name: "Rev. Jacob Areo",
+    name: "Rev. Jacob Onaolapo Areo",
     title: "Missions/Outreach Pastor",
     image: require("@/assets/Reverend Jacob Areo.png"),
-    yearsOfService: "10+",
-    specialization: "Children & Education",
+    yearsOfService: "9+",
+    specialization: "Missions & Evangelism",
     bio: [
-      "Rev. Jacob Areo has dedicated his ministry to reaching the lost through missions and outreaches. With a background in early childhood education and Christian ministry, he brings both professional expertise and spiritual insight to his role.",
-      "He holds a degree in Education from the University of Ibadan and a diploma in Children's Ministry from the Baptist Convention. His creative approach of teaching biblical principles has made Sunday School an exciting and transformative experience for our children.",
-      "Rev. Areo oversees all Missions programs including Local Outreaches, International Outreaches, and Missions. He has also developed age-appropriate curricula that help children understand and apply biblical truths in their daily lives. His heart's desire is to see every child in our church develop a personal relationship with Jesus Christ."
+      "Rev. Jacob Onaolapo Areo's journey with Christ began on September 27, 1998, when he surrendered his life to Jesus Christ. This transformative encounter marked the beginning of a deep relationship with the Lord that would eventually lead him to full-time Gospel ministry.",
+      "After years of faithful service and growing conviction, Rev. Areo answered God's call into the Gospel Ministry in 2003. His decision to dedicate his life to ministry was born out of a profound passion for seeing souls come to Christ and experience the transforming power of the Gospel.",
+      "Rev. Areo's ministry philosophy is firmly rooted in proclaiming the Gospel of Jesus Christ to unbelievers, calling them to genuine repentance and faith. He believes that effective ministry must be guided by the Holy Spirit, grounded in Scripture, and expressed through love and service to others. His unwavering conviction is that Jesus Christ is the only name given among men by which we must be saved.",
+      "As the Missions and Outreach Pastor at The Glad Tidings Baptist Church, Rev. Areo oversees all evangelistic efforts, including local and international missions. His heart burns with passion for evangelism that clearly and boldly presents Jesus as the only way to salvation. Through his leadership, our church continues to reach out to the lost, making disciples and expanding God's kingdom one soul at a time.",
+      "Rev. Areo's dedication to the Great Commission inspires our congregation to be active witnesses for Christ, both in our local community and to the ends of the earth. His life and ministry exemplify what it means to be a fisher of men, always ready to share the hope that is found in Jesus Christ alone."
     ]
   },
   {
     name: "Rev. Olayinka Oke",
     title: "Spiritual Formation Pastor",
     image: require("@/assets/Reverend Olayinka Oke.jpg"),
-    yearsOfService: "10+",
+    yearsOfService: "3+",
     specialization: "Spiritual Growth & Discipleship",
     bio: [
-      "Pastor Olayinka Oke has dedicated his ministry to shaping the spiritual formation of the members of the church through sound discipleship methods. With a background in early childhood education and Christian ministry, he brings both professional expertise and spiritual insight to his role.",
-      "He holds a degree in Education from the University of Ibadan and a diploma in Children's Ministry from the Baptist Convention. His creative approach to teaching biblical principles has made Sunday School an exciting and transformative experience for our children.",
-      "Pastor Oke oversees all spiritual formation programs including Sunday School, Vacation Bible School, and discipleship in and outside the church. He has also developed age-appropriate curricula that help  members understand and apply biblical truths in their daily lives. His heart's desire is to see discipleship a core practicein our church and to develop a personal relationship with Jesus Christ."
+      "Samson Olayinka Oke was born on March 03, 1982. He went to elementary, secondary and bagged a degree in Agricultural Economics and Extension from LAUTECH Ogbomoso.",
+      "Though born and raised in the Baptist, Samson after he listened to a teaching on the Baptism of the Holy Spirit with salvation as a prerequisite surrendered his life to Jesus Christ, confessed Him as His Lord and Saviour on July 19, 1999 and was baptized in June 2002 at the Glad Tidings Baptist Church.",
+      "Proper discipleship followed his conversion experience which helped in being rooted and built up in Christ as a young convert. Olayinka Oke served in different capacity in Royal Ambassador, an active member of Youth, and a Sunday School Teacher. He equally served in the Baptist Student Fellowship (BSF) Ogbomoso Baptist Conference and BSF LAUTECH.",
+      "Samson Olayinka Oke in 2004 received God's call into full time pastoral ministry and upon answering the call in 2014; he attended the Nigerian Baptist Theological Seminary (NBTS), Ogbomoso and graduated on June 03, 2017. He got ordained into full time Pastoral ministry by the denomination in 2021.",
+      "A Pastor-Teacher by calling with the responsibility of living as God intended and presenting the word of God undilutedly and affirmatively served as a Student Pastor in Ayegun Baptist Church and the Glad Tidings Baptist Church both in Ogbomoso. He received a call after graduation to Pastor New Heritage Baptist Church, Akpabuyo, Calabar, Cross River State where he served from 2018-2022.",
+      "He joined the ministerial staff of the Glad Tidings Baptist Church in charge of Spiritual Formation and Family Life on October 1, 2022. Samson Olayinka Oke is married to Abosede Olayimika Oke and they are blessed with four children to the glory of God."
     ]
   },
   {
     name: " Rev. Tobi Onifade",
     title: "Worship and live development ministries Pastor",
     image: require("@/assets/Reverend Tobi Onifade.jpg"),
-    yearsOfService: "15+",
+    yearsOfService: "3+",
     specialization: "Worship & Life Development",
     bio: [
-      "Rev. Tobi Onifadelese is a seasoned pastor known for her compassionate heart and effective ministry strategies. She serves alongside her husband as Associate Pastor and leads our thriving Women's Ministry. Her compassionate approach to ministry has touched countless lives, particularly in areas of marriage counseling, family restoration, and women's empowerment.",
-      "He is a graduate of the Baptist Men's Missionary Union Leadership Training and holds a Master's degree in Christian Education. Her ministry emphasizes practical discipleship, mentorship, and building strong Christian families.",
-      "Rev. Tobi coordinates various men's programs including Bible studies, prayer meetings, and community outreach initiatives. His heart for missions has also led to the establishment of several social welfare programs that serve vulnerable men and children in our community."
+      "Onifade Oluwatobi was born to the family of Mr and Mrs Jacob Comfort Onifade on March 21, 1991. He had his education from primary to tertiary institution level where he obtained a Bachelors degree in Accounting, and observed the one year national youth service in Nnewi South Local Government of Anambra state.",
+      "He gave his life to Christ on December 29, 2001 and was baptized on October 24, 2004. He has since then submitted himself to, and undergone some discipleship training from 'Christ Indwelling You' to 'Master Life'.",
+      "In engaging his talents and spiritual gifts, he has served in the following ministry opportunities: Music ministry, Teaching ministry as a Sunday school teacher, and Teenage ministry. He has also served in the Baptist Student Fellowship and the Royal Ambassadors in different capacities.",
+      "Having sensed the call of God upon his life with deep conviction, he proceeded to Nigerian Baptist Theological Seminary, Ogbomoso in 2017 to be trained as a Baptist minister. He is married to Sis. Opeyemi Onifade."
     ]
   },
   {
     name: "Pastor Damilola Ayoola-Abolade",
     title: "Youth Pastor/Media Director",
     image: require("@/assets/Pastor Damilola.png"),
-    yearsOfService: "8+",
+    yearsOfService: "1+",
     specialization: "Youth & Young Adults",
     bio: [
-      "Pastor Damilola Ayo-Ola-Abolade joined our pastoral team in 2025 as Youth Pastor, bringing vibrant energy and innovative approaches to youth ministry. His dynamic teaching style and genuine connection with young people have made him a beloved figure among our youth congregation.",
-      "He graduated with honors from the Nigerian Baptist Theological Seminary and has additional training in youth psychology and contemporary ministry methods. His vision is to raise a generation of young people who are passionate about Christ and equipped to impact their world.",
-      "Under Pastor Seun's leadership, our youth ministry has grown significantly, with active programs including weekly youth services, mentorship groups, talent development initiatives, and annual youth conferences. He is also actively involved in campus ministry at local universities."
+      "Damilola Ayoola-Abolade gave his life to Christ July 15th 2010 and responded to the call into full time Gospel ministry in August 2021. He has a BSc in Actuarial Science from the University of Lagos, as well a data science certificate as a qualified data analyst. He is passionate about spreading the gospel and raising a generation of young people who love God, obey His Word, and are equipped to serve in their communities and campuses."
     ]
   },
   
 ]);
 
-// Styles
+
 const sectionStyle = {
   minHeight: '100vh',
   backgroundColor: '#f8fafc',

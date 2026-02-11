@@ -1,9 +1,8 @@
-#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
 
-// Simple image optimization script using Node.js built-ins
-// Since we don't have ImageMagick or FFmpeg, we'll provide instructions
+
 
 console.log('Image Optimization Report');
 console.log('========================\n');

@@ -12,7 +12,7 @@
     </div>
 
     <article v-else class="post-detail">
-      <!-- Featured Image -->
+     
       <div class="featured-image">
         <img :src="post.image" :alt="post.title" />
         <div class="image-overlay">
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <!-- Post Content -->
+     
       <div class="post-container">
         <div class="post-header">
           <button @click="goBack" class="back-btn-small">← Back to Blog</button>
@@ -47,11 +47,11 @@
           </div>
         </div>
 
-        <!-- Post Body -->
+       
         <div class="post-body">
           <div class="content-section" v-html="post.content"></div>
           
-          <!-- Share Section -->
+          
           <div class="share-section">
             <h3>Share This Post</h3>
             <div class="share-buttons">
@@ -78,7 +78,6 @@
           </div>
         </div>
 
-        <!-- Navigation -->
         <div class="post-navigation">
           <button v-if="previousPost" @click="goToPost(previousPost.id)" class="nav-btn prev">
             <span class="nav-label">← Previous</span>

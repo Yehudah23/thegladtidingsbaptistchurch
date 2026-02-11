@@ -1,11 +1,11 @@
-<!-- Contact.vue -->
+
 <template>
   <section id="contact" :style="sectionStyle">
-    <!-- Background gradient -->
+  
     <div :style="backgroundStyle"></div>
 
     <div :style="containerStyle">
-      <!-- Section Header -->
+     
       <div :style="headerStyle" class="contact-header-animate">
         <span :style="badgeStyle" class="badge-animate">CONTACT US</span>
         <h2 :style="titleStyle" class="title-animate">
@@ -17,7 +17,7 @@
       </div>
 
       <div :style="mainGridStyle" class="contact-grid-animate">
-        <!-- Contact Information -->
+      
         <div :style="infoSectionStyle" class="info-section-animate">
           <h3 :style="{ fontSize: '1.75rem', fontWeight: '800', color: '#0f172a', marginBottom: '2rem' }">
             Contact Information
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <!-- Social Media -->
+      
           <div :style="socialSectionStyle" class="social-section-animate">
             <h4 :style="{ fontSize: '1.25rem', fontWeight: '700', color: '#0f172a', marginBottom: '1rem' }">
               Connect With Us
@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          <!-- Office Hours -->
+         
           <div :style="officeHoursStyle" class="office-hours-animate">
             <h4 :style="{ fontSize: '1.1rem', fontWeight: '700', color: '#0f172a', marginBottom: '1rem' }">
               ⏰ Office Hours
@@ -74,7 +74,7 @@
           </div>
         </div>
 
-        <!-- Contact Form -->
+       
         <div :style="formSectionStyle" class="form-section-animate">
           <div :style="formCardStyle" class="form-card-premium">
             <h3 :style="{ fontSize: '1.75rem', fontWeight: '800', color: '#0f172a', marginBottom: '0.5rem' }">
@@ -145,12 +145,11 @@
               </button>
             </form>
 
-            <!-- Success Message -->
             <div v-if="successMessage" :style="successMessageStyle" class="success-animate">
               ✓ {{ successMessage }}
             </div>
             
-            <!-- Error Message -->
+            
             <div v-if="errorMessage" :style="errorMessageStyle" class="error-animate">
               ✗ {{ errorMessage }}
             </div>
@@ -293,16 +292,7 @@ const infoSectionStyle = {
   flexDirection: 'column'
 };
 
-// const infoCardStyle = {
-//   display: 'flex',
-//   gap: '1rem',
-//   alignItems: 'flex-start',
-//   padding: '1.5rem',
-//   backgroundColor: '#ffffff',
-//   borderRadius: '1rem',
-//   border: '1px solid #e2e8f0',
-//   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-// };
+
 
 const iconBoxStyle = (color) => ({
   width: '3.5rem',

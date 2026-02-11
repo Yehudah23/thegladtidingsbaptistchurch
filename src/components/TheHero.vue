@@ -1,7 +1,7 @@
-<!-- Hero.vue -->
+
 <template>
   <section id="home" :style="heroSectionStyle">
-    <!-- Background Carousel -->
+  
     <div :style="backgroundCarouselStyle">
       <div 
         v-for="(bg, index) in backgrounds" 
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- Floating Animated Shapes -->
+    
     <div :style="floatingShapesStyle">
       <div class="floating-shape shape-1"></div>
       <div class="floating-shape shape-2"></div>
@@ -32,7 +32,7 @@
       <div class="floating-shape shape-4"></div>
     </div>
 
-    <!-- Scroll Indicator with Animation -->
+   
     <div :style="scrollIndicatorStyle" class="scroll-indicator-animated">
       <div :style="scrollDotStyle"></div>
     </div>
@@ -42,7 +42,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 
-// Background slides data
+
 const backgrounds = ref([
   { type: 'video', src: '/church-video.mp4' },
   { type: 'image', src: '/church-image.jpg' },
@@ -51,19 +51,18 @@ const backgrounds = ref([
   { type: 'image', src: '/yoruba-display.jpg' }
 ]);
 
-// Background carousel state
+
 const currentBgSlide = ref(0);
 let bgAutoplayInterval = null;
 const videoRefs = ref([]);
 
-// Set video ref
 const setVideoRef = (el, index) => {
   if (el) {
     videoRefs.value[index] = el;
   }
 };
 
-// Play video when slide becomes active
+
 const playCurrentVideo = () => {
   const currentBg = backgrounds.value[currentBgSlide.value];
   if (currentBg.type === 'video') {
@@ -77,12 +76,10 @@ const playCurrentVideo = () => {
   }
 };
 
-// Handle video ended event
 const onVideoEnded = () => {
-  // No special handling needed - all videos loop
+
 };
 
-// Auto-slide backgrounds every 4 seconds
 const startInterval = () => {
   if (bgAutoplayInterval) {
     clearInterval(bgAutoplayInterval);
@@ -93,13 +90,13 @@ const startInterval = () => {
   }, 4000);
 };
 
-// Watch for slide changes and play videos
+
 watch(currentBgSlide, () => {
   playCurrentVideo();
 });
 
 onMounted(() => {
-  // Start playing first slide
+  
   setTimeout(() => {
     playCurrentVideo();
   }, 100);
@@ -113,7 +110,7 @@ onUnmounted(() => {
   }
 });
 
-// Background carousel styles
+
 const backgroundCarouselStyle = {
   position: 'absolute',
   top: 0,

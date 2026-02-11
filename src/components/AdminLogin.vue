@@ -2,14 +2,14 @@
   <section :style="loginSectionStyle">
     <div :style="loginContainerStyle">
       <div :style="loginCardStyle" class="login-card-animate">
-        <!-- Logo -->
+      
         <div :style="logoContainerStyle">
           <img src="@/assets/church_logo-removebg-preview.png" alt="Church Logo" :style="logoImageStyle" />
           <h2 :style="logoTextStyle">Admin Login</h2>
           <p :style="logoSubtextStyle">The Glad Tidings Baptist Church</p>
         </div>
 
-        <!-- Login Form -->
+        
         <form @submit.prevent="handleLogin" :style="formStyle">
           <div :style="formGroupStyle">
             <label for="username" :style="labelStyle">Username</label>
@@ -37,12 +37,12 @@
             />
           </div>
 
-          <!-- Error Message -->
+         
           <div v-if="errorMessage" :style="errorMessageStyle" class="error-animate">
             {{ errorMessage }}
           </div>
 
-          <!-- Login Button -->
+         
           <button
             type="submit"
             :style="loginButtonStyle"
@@ -53,7 +53,7 @@
           </button>
         </form>
 
-        <!-- Footer -->
+     
         <div :style="footerStyle">
           <p :style="footerTextStyle">
             Forgot your password? Contact the system administrator.
@@ -81,16 +81,16 @@ const handleLogin = async () => {
   isLoading.value = true;
 
   try {
-    // Backend API endpoint
+    
     const response = await axios.post(API_ENDPOINTS.ADMIN_LOGIN, {
       username: username.value,
       password: password.value
     });
 
-    console.log('Login response:', response.data); // Debug log
+    console.log('Login response:', response.data); 
 
     if (response.data.success || response.data.token) {
-      // Redirect to admin panel
+   
       router.push({ name: 'Admin' });
     } else {
       errorMessage.value = response.data.message || 'Invalid credentials';
@@ -105,7 +105,7 @@ const handleLogin = async () => {
   }
 };
 
-// Styles
+
 const loginSectionStyle = {
   minHeight: '100vh',
   display: 'flex',

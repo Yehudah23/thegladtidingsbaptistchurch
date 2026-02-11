@@ -8,17 +8,17 @@
           class="slide"
           :style="{ flex: `0 0 ${100 / Math.max(1, Math.min(props.slidesPerView, items.length))}%` }"
         >
-          <!-- Render a sermon card for each item (compact when requested) -->
+         
           <SermonCard :sermon="item" :compact="compact" :showFullImage="showFullImage" @play="() => emit('play', item)" @download="() => emit('download', item)" />
         </div>
       </div>
     </div>
 
-    <!-- Prev / Next controls -->
+ 
     <button v-if="pageCount() > 1" class="prev" @click="prev" aria-label="Previous slide">‹</button>
     <button v-if="pageCount() > 1" class="next" @click="next" aria-label="Next slide">›</button>
 
-    <!-- Indicators (pages) -->
+   
     <div v-if="pageCount() > 1" class="indicators">
       <button
         v-for="idx in pageCount()"

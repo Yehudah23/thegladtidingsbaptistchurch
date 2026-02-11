@@ -1,8 +1,8 @@
-<!-- Sermons.vue -->
+
 <template>
   <section id="sermons" :style="sectionStyle">
     <div :style="containerStyle">
-      <!-- Section Header -->
+     
       <div :style="headerStyle" class="sermon-header-animate">
         <span :style="badgeStyle" class="badge-animate">MESSAGES</span>
         <h2 :style="titleStyle" class="title-animate">
@@ -12,7 +12,7 @@
           Experience powerful teaching from our pastors and speakers
         </p>
 
-        <!-- Search -->
+        
         <div :style="searchContainerStyle" class="search-animate">
           <span :style="searchIconStyle">🔍</span>
           <input
@@ -56,10 +56,10 @@
         </button>
       </div>
 
-      <!-- Messages Grid -->
+     
       <div v-if="activeTab !== 'series' && filteredSermons.length > 0" :style="gridStyle" class="sermons-grid-animate">
         <div v-for="(sermon, index) in filteredSermons" :key="sermon.id" :style="cardStyle" class="sermon-card-premium" :class="`sermon-card-${index}`">
-          <!-- Image with Overlay -->
+          
           <div :style="imageContainerStyle" class="image-container-premium">
             <img :src="sermon.thumbnail" :alt="sermon.title" :style="imageStyle" class="sermon-image" />
             <div :style="overlayStyle" class="overlay-premium">
@@ -69,7 +69,7 @@
             </div>
           </div>
 
-          <!-- Content -->
+          
           <div :style="contentStyle" class="sermon-content">
             <div :style="metaStyle">
               <span :style="categoryBadgeStyle">{{ sermon.series }}</span>
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <!-- Series Grouped View -->
+     
       <div v-if="activeTab === 'series'" class="series-view-animate">
         <div v-if="Object.keys(sermonsBySeries).length === 0" :style="emptyStateStyle" class="empty-state-animate">
           <div :style="emptyIconStyle">🎤</div>
@@ -141,7 +141,7 @@
         </div>
       </div>
 
-      <!-- Empty State -->
+     
       <div v-if="activeTab !== 'series' && filteredSermons.length === 0" :style="emptyStateStyle" class="empty-state-animate">
         <div :style="emptyIconStyle">🎤</div>
         <p :style="emptyTextStyle">No messages found matching your search</p>
@@ -155,7 +155,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-// import axios from 'axios';
+
 
 const searchQuery = ref("");
 const activeTab = ref("all");
@@ -261,7 +261,7 @@ const sermonsBySeries = computed(() => {
     }
     grouped[sermon.series].push(sermon);
   });
-  // Sort each series by date (newest first)
+  
   Object.keys(grouped).forEach(series => {
     grouped[series].sort((a, b) => new Date(b.date) - new Date(a.date));
   });

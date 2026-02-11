@@ -1,7 +1,7 @@
 <template>
   <div :style="cardWrapperStyle">
     <template v-if="!compact">
-      <!-- Image removed per user request. Series badge displayed inline. -->
+      
       <div :style="{ padding: '1.5rem 1.5rem 0.75rem' }">
         <span :style="{ backgroundColor: '#1d4ed8', color: '#ffffff', padding: '0.25rem 0.5rem', borderRadius: '0.25rem' }">{{ sermon.series }}</span>
         <h5 :style="{ color: '#1e3a8a', fontSize: '1.25rem', marginTop: '0.5rem' }">{{ sermon.title }}</h5>
@@ -24,7 +24,7 @@
     </template>
 
     <template v-else>
-      <!-- Compact card without image -->
+     
       <div :style="{ position: 'relative', padding: '1rem', backgroundColor: '#f3f4f6', borderRadius: '0.5rem', minHeight: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }" class="compact-card">
         <div class="compact-title">{{ sermon.title }}</div>
         <div class="compact-sub">{{ sermon.speaker }}</div>

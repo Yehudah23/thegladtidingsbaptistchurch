@@ -1,10 +1,10 @@
-<!-- Footer.vue -->
+
 <template>
   <footer :style="footerStyle">
     <div :style="containerStyle">
-      <!-- Main Footer Content -->
+      
       <div :style="gridStyle" class="footer-grid-animate">
-        <!-- About Section -->
+        
         <div class="footer-section footer-section-1" :style="{ animation: 'slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both' }">
           <div :style="logoStyle" class="footer-logo">
             <img src="@/assets/church_logo-removebg-preview.png" alt="Glad Tidings Baptist Church Logo" :style="{ width: '3rem', height: '3rem', objectFit: 'contain' }" />
@@ -15,7 +15,7 @@
           </p>
         </div>
 
-        <!-- Quick Links -->
+        
         <div class="footer-section footer-section-2" :style="{ animation: 'slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both' }">
           <h4 :style="columnTitleStyle">Quick Links</h4>
           <ul :style="linkListStyle">
@@ -42,7 +42,7 @@
           </ul>
         </div>
 
-        <!-- Service Times -->
+       
         <div class="footer-section footer-section-3" :style="{ animation: 'slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both' }">
           <h4 :style="columnTitleStyle">Service Times</h4>
           <ul :style="serviceListStyle">
@@ -57,7 +57,7 @@
           </ul>
         </div>
 
-        <!-- Contact -->
+       
         <div class="footer-section footer-section-4" :style="{ animation: 'slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both' }">
           <h4 :style="columnTitleStyle">Contact</h4>
           <ul :style="contactListStyle">
@@ -77,19 +77,19 @@
         </div>
       </div>
 
-      <!-- Divider -->
+      
       <div :style="{ borderTop: '1px solid rgba(255,255,255,0.15)', marginTop: '3rem', paddingTop: '3rem' }"></div>
 
-      <!-- Bottom Section -->
+      
       <div :style="bottomSectionStyle" class="footer-bottom-animate">
-        <!-- Copyright -->
+       
         <p :style="copyrightStyle">
           © {{ currentYear }} The Glad Tidings Baptist Church. Made with 
           <span style="color: #ec4899; margin: '0 0.25rem'">❤️</span>
            for spreading the Gospel.
         </p>
 
-        <!-- Social Links -->
+        
         <div :style="socialLinksStyle" class="footer-social-links">
           <a
             v-for="(social, index) in socialMedia"

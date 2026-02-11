@@ -7,16 +7,16 @@
         class="slide"
         :style="slideStyle(i)"
       >
-        <!-- Render a sermon card for each item -->
+      
         <SermonCard :sermon="item" @play="() => emit('play', item)" @download="() => emit('download', item)" />
       </div>
     </div>
 
-    <!-- Prev / Next controls -->
+   
     <button v-if="items.length > 1" class="prev" @click="prev" aria-label="Previous slide">‹</button>
     <button v-if="items.length > 1" class="next" @click="next" aria-label="Next slide">›</button>
 
-    <!-- Indicators -->
+   
     <div v-if="items.length > 1" class="indicators">
       <button
         v-for="(item, idx) in items"
