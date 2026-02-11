@@ -18,6 +18,7 @@ export const API_ENDPOINTS = {
 
   BLOGS: `${API_BASE_URL}/api/blogs`,
   BLOG_BY_ID: (id) => `${API_BASE_URL}/api/blogs/${id}`,
+  BLOG_ADMIN: `${API_BASE_URL}/api/admin/blogs`,
   BLOG_CREATE: `${API_BASE_URL}/api/admin/blogs`,
   BLOG_UPDATE: (id) => `${API_BASE_URL}/api/admin/blogs/${id}`,
   BLOG_DELETE: (id) => `${API_BASE_URL}/api/admin/blogs/${id}`,

@@ -186,7 +186,7 @@
             </div>
 
             <div :style="formGroupStyle" class="form-group form-group-9">
-              <label :style="labelStyle">Audio File *</label>
+              <label :style="labelStyle">Audio File {{ sermonForm.id ? '(optional - only if changing)' : '*' }}</label>
               <div :style="fileUploadContainerStyle">
                 <input 
                   ref="audioInput"
@@ -219,15 +219,27 @@
               </div>
             </div>
 
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              :style="uploadButtonStyle"
-              :disabled="isUploading"
-              class="upload-button"
-            >
-              {{ isUploading ? 'Uploading...' : '📤 Upload Message' }}
-            </button>
+            <!-- Submit and Cancel Buttons -->
+            <div :style="{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }">
+              <button
+                type="submit"
+                :style="uploadButtonStyle"
+                :disabled="isUploading"
+                class="upload-button"
+              >
+                {{ isUploading ? 'Uploading...' : (sermonForm.id ? '💾 Update Message' : '📤 Upload Message') }}
+              </button>
+              
+              <button
+                v-if="sermonForm.id"
+                type="button"
+                @click="cancelEditSermon"
+                :style="cancelButtonStyle"
+                class="cancel-button"
+              >
+                ❌ Cancel Edit
+              </button>
+            </div>
 
             <!-- Status Messages -->
             <div v-if="uploadStatus.message" :style="statusMessageStyle(uploadStatus.type)" class="status-animate">
@@ -681,11 +693,39 @@ const handleBlogImageFile = (event) => {
 // Load existing sermons and blogs
 const loadSermons = async () => {
   try {
-    const response = await axios.get(API_ENDPOINTS.SERMONS);
-    if (response.data && Array.isArray(response.data)) {
-      uploadedSermons.value = response.data;
-    } else if (response.data.sermons && Array.isArray(response.data.sermons)) {
-      uploadedSermons.value = response.data.sermons;
+    const response = await axios.get(API_ENDPOINTS.SERMONS, {
+      params: {
+        per_page: 1000 // Load all sermons
+      }
+    });
+    
+    // Handle paginated response
+    if (response.data && response.data.data) {
+      uploadedSermons.value = response.data.data.map(sermon => ({
+        id: sermon.id,
+        title: sermon.title,
+        speaker: sermon.speaker,
+        date: sermon.date,
+        duration: sermon.duration,
+        series: sermon.series || '',
+        category: sermon.category,
+        description: sermon.description,
+        thumbnail: sermon.thumbnail_url || sermon.thumbnail,
+        audioUrl: sermon.audio_url || sermon.audio
+      }));
+    } else if (Array.isArray(response.data)) {
+      uploadedSermons.value = response.data.map(sermon => ({
+        id: sermon.id,
+        title: sermon.title,
+        speaker: sermon.speaker,
+        date: sermon.date,
+        duration: sermon.duration,
+        series: sermon.series || '',
+        category: sermon.category,
+        description: sermon.description,
+        thumbnail: sermon.thumbnail_url || sermon.thumbnail,
+        audioUrl: sermon.audio_url || sermon.audio
+      }));
     }
   } catch (error) {
     console.error('Error loading sermons:', error);
@@ -695,11 +735,37 @@ const loadSermons = async () => {
 
 const loadBlogPosts = async () => {
   try {
-    const response = await axios.get(API_ENDPOINTS.BLOGS);
-    if (response.data && Array.isArray(response.data)) {
-      blogPosts.value = response.data;
-    } else if (response.data.blogs && Array.isArray(response.data.blogs)) {
-      blogPosts.value = response.data.blogs;
+    const response = await axios.get(API_ENDPOINTS.BLOG_ADMIN, {
+      params: {
+        per_page: 1000 // Load all blog posts
+      }
+    });
+    
+    // Handle paginated response
+    if (response.data && response.data.data) {
+      blogPosts.value = response.data.data.map(post => ({
+        id: post.id,
+        title: post.title,
+        category: post.category,
+        author: post.author,
+        date: post.date,
+        image: post.image_url || post.image,
+        excerpt: post.excerpt,
+        content: post.content,
+        published: post.published
+      }));
+    } else if (Array.isArray(response.data)) {
+      blogPosts.value = response.data.map(post => ({
+        id: post.id,
+        title: post.title,
+        category: post.category,
+        author: post.author,
+        date: post.date,
+        image: post.image_url || post.image,
+        excerpt: post.excerpt,
+        content: post.content,
+        published: post.published
+      }));
     }
   } catch (error) {
     console.error('Error loading blog posts:', error);
@@ -714,7 +780,11 @@ onMounted(() => {
 });
 
 const uploadSermon = async () => {
-  if (!sermonForm.value.audioFile) {
+  // Check if we're editing (update) or creating new
+  const isEditing = !!sermonForm.value.id;
+  
+  // For updates, audio file is optional
+  if (!isEditing && !sermonForm.value.audioFile) {
     uploadStatus.value = { message: 'Please select an audio file', type: 'error' };
     return;
   }
@@ -733,13 +803,15 @@ const uploadSermon = async () => {
     formData.append('category', sermonForm.value.category);
     formData.append('description', sermonForm.value.description);
     
-    // Only append thumbnail if there's a file selected, otherwise don't include it at all
+    // Only append thumbnail if there's a file selected
     if (sermonForm.value.thumbnailFile) {
       formData.append('thumbnail', sermonForm.value.thumbnailFile);
     }
-    // Don't append thumbnail field at all if no file is selected
     
-    formData.append('audio', sermonForm.value.audioFile);
+    // Only append audio if there's a new file (required for create, optional for update)
+    if (sermonForm.value.audioFile) {
+      formData.append('audio', sermonForm.value.audioFile);
+    }
 
     const progressInterval = setInterval(() => {
       if (uploadProgress.value < 90) {
@@ -747,7 +819,17 @@ const uploadSermon = async () => {
       }
     }, 200);
 
-    const response = await axios.post(settings.value.apiEndpoint, formData, {
+    // Use appropriate endpoint based on whether we're editing or creating
+    const endpoint = isEditing 
+      ? API_ENDPOINTS.SERMON_UPDATE(sermonForm.value.id)
+      : settings.value.apiEndpoint;
+    
+    const method = isEditing ? 'put' : 'post';
+    
+    const response = await axios({
+      method: method,
+      url: endpoint,
+      data: formData,
       headers: { 
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
@@ -761,8 +843,8 @@ const uploadSermon = async () => {
     clearInterval(progressInterval);
     uploadProgress.value = 100;
 
-    const newSermon = {
-      id: response.data?.sermon?.id || uploadedSermons.value.length + 1,
+    const sermonData = {
+      id: response.data?.sermon?.id || sermonForm.value.id,
       title: sermonForm.value.title,
       speaker: sermonForm.value.speaker,
       date: sermonForm.value.date,
@@ -770,17 +852,30 @@ const uploadSermon = async () => {
       series: sermonForm.value.series,
       category: sermonForm.value.category,
       description: sermonForm.value.description,
-      thumbnail: response.data?.sermon?.thumbnail_url || response.data?.sermon?.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      audioUrl: response.data?.sermon?.audio_url || response.data?.audioUrl || URL.createObjectURL(sermonForm.value.audioFile)
+      thumbnail: response.data?.sermon?.thumbnail_url || response.data?.sermon?.thumbnail || sermonForm.value.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+      audioUrl: response.data?.sermon?.audio_url || response.data?.audioUrl || sermonForm.value.audioUrl
     };
     
-    uploadedSermons.value.unshift(newSermon);
+    if (isEditing) {
+      // Update existing sermon in the list
+      const index = uploadedSermons.value.findIndex(s => s.id === sermonForm.value.id);
+      if (index !== -1) {
+        uploadedSermons.value[index] = sermonData;
+      }
+      uploadStatus.value = {
+        message: '✓ Message updated successfully!',
+        type: 'success'
+      };
+    } else {
+      // Add new sermon to the list
+      uploadedSermons.value.unshift(sermonData);
+      uploadStatus.value = {
+        message: '✓ Message uploaded successfully!',
+        type: 'success'
+      };
+    }
 
-    uploadStatus.value = {
-      message: '✓ Message uploaded successfully!',
-      type: 'success'
-    };
-
+    // Reset form
     sermonForm.value = {
       title: '',
       speaker: '',
@@ -831,26 +926,105 @@ const uploadSermon = async () => {
   }
 };
 
-const editSermon = (index) => {
+const editSermon = async (index) => {
   const sermon = uploadedSermons.value[index];
-  sermonForm.value = { ...sermon };
+  
+  // Populate form with existing sermon data
+  sermonForm.value = {
+    id: sermon.id,
+    title: sermon.title,
+    speaker: sermon.speaker,
+    date: sermon.date,
+    duration: sermon.duration,
+    series: sermon.series || '',
+    category: sermon.category,
+    description: sermon.description,
+    thumbnail: sermon.thumbnail,
+    thumbnailFile: null, // Will be populated if user uploads new image
+    audioFile: null // Will be populated if user uploads new audio
+  };
+  
+  // Switch to upload tab for editing
   activeTab.value = 'upload';
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
   uploadStatus.value = {
-    message: 'Editing sermon. Modify and resubmit.',
+    message: '📝 Editing sermon. Modify fields and click upload to save changes.',
     type: 'info'
   };
 };
 
-const deleteSermon = (index) => {
-  if (confirm('Are you sure you want to delete this message?')) {
+const cancelEditSermon = () => {
+  // Reset form
+  sermonForm.value = {
+    title: '',
+    speaker: '',
+    date: '',
+    duration: '',
+    series: '',
+    category: '',
+    description: '',
+    thumbnail: '',
+    thumbnailFile: null,
+    audioFile: null
+  };
+  
+  // Clear file inputs
+  if (audioInput.value) {
+    audioInput.value.value = '';
+  }
+  if (thumbnailInput.value) {
+    thumbnailInput.value.value = '';
+  }
+  
+  uploadStatus.value = { message: '', type: '' };
+};
+
+const deleteSermon = async (index) => {
+  if (!confirm('Are you sure you want to delete this message? This action cannot be undone.')) {
+    return;
+  }
+  
+  const sermon = uploadedSermons.value[index];
+  
+  try {
+    await axios.delete(API_ENDPOINTS.SERMON_DELETE(sermon.id), {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    // Remove from local array on success
     uploadedSermons.value.splice(index, 1);
+    
     uploadStatus.value = {
       message: '✓ Message deleted successfully',
       type: 'success'
     };
+    
     setTimeout(() => {
       uploadStatus.value = { message: '', type: '' };
     }, 2000);
+  } catch (error) {
+    console.error('Delete sermon error:', error);
+    
+    let errorMessage = 'Failed to delete message. ';
+    if (error.response) {
+      errorMessage += error.response?.data?.message || `Server error: ${error.response.status}`;
+    } else {
+      errorMessage += 'Please check your connection and try again.';
+    }
+    
+    uploadStatus.value = {
+      message: errorMessage,
+      type: 'error'
+    };
+    
+    setTimeout(() => {
+      uploadStatus.value = { message: '', type: '' };
+    }, 4000);
   }
 };
 
@@ -1042,8 +1216,21 @@ const cancelEditBlog = () => {
   blogStatus.value = { message: '', type: '' };
 };
 
-const deleteBlogPost = (index) => {
-  if (confirm('Are you sure you want to delete this blog post?')) {
+const deleteBlogPost = async (index) => {
+  if (!confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) {
+    return;
+  }
+  
+  const post = blogPosts.value[index];
+  
+  try {
+    await axios.delete(API_ENDPOINTS.BLOG_DELETE(post.id), {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    // Remove from local array on success
     blogPosts.value.splice(index, 1);
     
     blogStatus.value = {
@@ -1054,6 +1241,24 @@ const deleteBlogPost = (index) => {
     setTimeout(() => {
       blogStatus.value = { message: '', type: '' };
     }, 2000);
+  } catch (error) {
+    console.error('Delete blog post error:', error);
+    
+    let errorMessage = 'Failed to delete blog post. ';
+    if (error.response) {
+      errorMessage += error.response?.data?.message || `Server error: ${error.response.status}`;
+    } else {
+      errorMessage += 'Please check your connection and try again.';
+    }
+    
+    blogStatus.value = {
+      message: errorMessage,
+      type: 'error'
+    };
+    
+    setTimeout(() => {
+      blogStatus.value = { message: '', type: '' };
+    }, 4000);
   }
 };
 

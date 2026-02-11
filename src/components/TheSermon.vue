@@ -56,8 +56,14 @@
         </button>
       </div>
 
+      <!-- Loading State -->
+      <div v-if="loading" :style="emptyStateStyle" class="loading-state-animate">
+        <div :style="emptyIconStyle">⏳</div>
+        <p :style="emptyTextStyle">Loading messages...</p>
+      </div>
+
      
-      <div v-if="activeTab !== 'series' && filteredSermons.length > 0" :style="gridStyle" class="sermons-grid-animate">
+      <div v-if="!loading && activeTab !== 'series' && filteredSermons.length > 0" :style="gridStyle" class="sermons-grid-animate">
         <div v-for="(sermon, index) in filteredSermons" :key="sermon.id" :style="cardStyle" class="sermon-card-premium" :class="`sermon-card-${index}`">
           
           <div :style="imageContainerStyle" class="image-container-premium">
@@ -87,7 +93,7 @@
       </div>
 
      
-      <div v-if="activeTab === 'series'" class="series-view-animate">
+      <div v-if="!loading && activeTab === 'series'" class="series-view-animate">
         <div v-if="Object.keys(sermonsBySeries).length === 0" :style="emptyStateStyle" class="empty-state-animate">
           <div :style="emptyIconStyle">🎤</div>
           <p :style="emptyTextStyle">No sermon series available</p>
@@ -142,7 +148,7 @@
       </div>
 
      
-      <div v-if="activeTab !== 'series' && filteredSermons.length === 0" :style="emptyStateStyle" class="empty-state-animate">
+      <div v-if="!loading && activeTab !== 'series' && filteredSermons.length === 0" :style="emptyStateStyle" class="empty-state-animate">
         <div :style="emptyIconStyle">🎤</div>
         <p :style="emptyTextStyle">No messages found matching your search</p>
         <button @click="clearSearch" :style="clearButtonStyle" class="clear-button-premium">
@@ -154,87 +160,66 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-
+import { ref, computed, onMounted } from 'vue';
+import axios from 'axios';
+import { API_ENDPOINTS } from '../api/config';
 
 const searchQuery = ref("");
 const activeTab = ref("all");
 const expandedSeries = ref({});
+const loading = ref(true);
+const sermons = ref([]);
 
-const sermons = ref([
-  {
-    id: 1,
-    title: "Walking in Faith",
-    speaker: "Pastor John Smith",
-    date: "October 27, 2025",
-    series: "Faith Foundations",
-    duration: "45 min",
-    description: "Exploring what it means to walk by faith and not by sight",
-    thumbnail: "https://images.unsplash.com/photo-1610414961792-b7fffebddd14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "recent",
-    audioUrl: "/sermons/walking-in-faith.mp3"
-  },
-  {
-    id: 2,
-    title: "The Power of Prayer",
-    speaker: "Pastor Jane Doe",
-    date: "October 20, 2025",
-    series: "Spiritual Disciplines",
-    duration: "50 min",
-    description: "Understanding the importance of prayer in our daily lives",
-    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "popular",
-    audioUrl: "/sermons/power-of-prayer.mp3"
-  },
-  {
-    id: 3,
-    title: "Living a Life of Gratitude",
-    speaker: "Pastor John Smith",
-    date: "October 13, 2025",
-    series: "Faith Foundations",
-    duration: "42 min",
-    description: "How gratitude transforms our perspective",
-    thumbnail: "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "recent",
-    audioUrl: "/sermons/life-of-gratitude.mp3"
-  },
-  {
-    id: 4,
-    title: "The Great Commission",
-    speaker: "Pastor Jane Doe",
-    date: "October 6, 2025",
-    series: "Evangelism",
-    duration: "48 min",
-    description: "Our call to share the Gospel",
-    thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "popular",
-    audioUrl: "/sermons/great-commission.mp3"
-  },
-  {
-    id: 5,
-    title: "Breaking Free from Fear",
-    speaker: "Pastor Michael Johnson",
-    date: "September 29, 2025",
-    series: "Victory in Christ",
-    duration: "55 min",
-    description: "Finding courage and strength in Jesus",
-    thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "recent",
-    audioUrl: "/sermons/breaking-free-from-fear.mp3"
-  },
-  {
-    id: 6,
-    title: "God's Unfailing Love",
-    speaker: "Pastor Sarah Williams",
-    date: "September 22, 2025",
-    series: "Love Unconditional",
-    duration: "47 min",
-    description: "Understanding God's love for us",
-    thumbnail: "https://images.unsplash.com/photo-1551836022-d5d88e8e5f91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    category: "popular",
-    audioUrl: "/sermons/gods-unfailing-love.mp3"
-  },
-]);
+// Load sermons from API
+const loadSermons = async () => {
+  try {
+    loading.value = true;
+    const response = await axios.get(API_ENDPOINTS.SERMONS, {
+      params: {
+        per_page: 100 // Load all sermons
+      }
+    });
+    
+    // Handle paginated response
+    if (response.data && response.data.data) {
+      sermons.value = response.data.data.map(sermon => ({
+        id: sermon.id,
+        title: sermon.title,
+        speaker: sermon.speaker,
+        date: sermon.date,
+        series: sermon.series || 'General',
+        duration: sermon.duration,
+        description: sermon.description,
+        thumbnail: sermon.thumbnail_url || sermon.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+        category: sermon.category,
+        audioUrl: sermon.audio_url || sermon.audio
+      }));
+    } else if (Array.isArray(response.data)) {
+      sermons.value = response.data.map(sermon => ({
+        id: sermon.id,
+        title: sermon.title,
+        speaker: sermon.speaker,
+        date: sermon.date,
+        series: sermon.series || 'General',
+        duration: sermon.duration,
+        description: sermon.description,
+        thumbnail: sermon.thumbnail_url || sermon.thumbnail || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+        category: sermon.category,
+        audioUrl: sermon.audio_url || sermon.audio
+      }));
+    }
+    loading.value = false;
+  } catch (error) {
+    console.error('Error loading sermons:', error);
+    loading.value = false;
+    // Keep empty array if there's an error
+  }
+};
+
+// Load sermons when component mounts
+onMounted(() => {
+  loadSermons();
+});
 
 const filteredSermons = computed(() => {
   let filtered = sermons.value;

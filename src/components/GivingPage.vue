@@ -122,7 +122,7 @@
           </div>
           <div :style="impactCardStyle" class="impact-card">
             <div :style="impactIconStyle">⛪</div>
-            <h4 :style="impactCardTitleStyle">Church Development</h4>
+            <h4 :style="impactCardTitleStyle">Physical Development</h4>
             <p :style="impactCardTextStyle">Building and maintaining facilities to serve our growing congregation</p>
           </div>
           <div :style="impactCardStyle" class="impact-card">

@@ -44,7 +44,11 @@
    
     <section class="blog-posts">
       <div class="container">
-        <div v-if="filteredPosts.length === 0" class="no-posts">
+        <div v-if="loading" class="no-posts">
+          <p>⏳ Loading blog posts...</p>
+        </div>
+        
+        <div v-else-if="filteredPosts.length === 0" class="no-posts">
           <p>No posts found. Check back soon!</p>
         </div>
         
@@ -95,8 +99,10 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
+import { API_ENDPOINTS } from '../api/config';
 
 export default {
   name: 'BlogPage',
@@ -115,90 +121,55 @@ export default {
       { id: 'event', name: 'Events' }
     ]);
 
-    
-    const blogPosts = ref([
-      {
-        id: 1,
-        title: 'January 2025 Church Magazine',
-        excerpt: 'Our monthly magazine featuring testimonies, upcoming events, and spiritual insights for the new year.',
-        category: 'magazine',
-        author: 'Editorial Team',
-        date: '2025-01-01',
-        image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&h=600&fit=crop',
-      },
-      {
-        id: 2,
-        title: 'The Power of Prayer in Daily Life',
-        excerpt: 'Discover how incorporating prayer into your daily routine can transform your spiritual journey and strengthen your faith.',
-        category: 'article',
-        author: 'Pastor Johnson',
-        date: '2024-12-28',
-        image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&h=600&fit=crop',
-      },
-      {
-        id: 3,
-        title: 'New Year Revival Service',
-        excerpt: 'Join us for a special revival service as we welcome 2025 with worship, prayer, and powerful preaching.',
-        category: 'announcement',
-        author: 'Admin',
-        date: '2024-12-30',
-        image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&h=600&fit=crop',
-      },
-      {
-        id: 4,
-        title: 'Youth Conference 2025',
-        excerpt: 'Annual youth conference featuring dynamic speakers, worship sessions, and fellowship opportunities for young believers.',
-        category: 'event',
-        author: 'Youth Ministry',
-        date: '2024-12-25',
-        image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop',
-      },
-      {
-        id: 5,
-        title: 'Understanding Biblical Grace',
-        excerpt: 'An in-depth look at the concept of grace in scripture and how it applies to our modern Christian walk.',
-        category: 'article',
-        author: 'Pastor Williams',
-        date: '2024-12-20',
-        image: 'https://images.unsplash.com/photo-1519491050282-cf00c82424b4?w=800&h=600&fit=crop',
-      },
-      {
-        id: 6,
-        title: 'December 2024 Magazine',
-        excerpt: 'Year-end edition featuring testimonies, highlights from 2024, and vision for 2025.',
-        category: 'magazine',
-        author: 'Editorial Team',
-        date: '2024-12-01',
-        image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=600&fit=crop',
-      },
-      {
-        id: 7,
-        title: 'Community Outreach Program',
-        excerpt: 'Join our community service initiative to bring hope and practical help to families in need.',
-        category: 'announcement',
-        author: 'Outreach Team',
-        date: '2024-12-15',
-        image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop',
-      },
-      {
-        id: 8,
-        title: 'Walking in Faith: A Study Series',
-        excerpt: 'Join us for a transformative Bible study series exploring practical faith in everyday circumstances.',
-        category: 'article',
-        author: 'Teaching Ministry',
-        date: '2024-12-10',
-        image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&h=600&fit=crop',
-      },
-      {
-        id: 9,
-        title: 'Christmas Service Celebration',
-        excerpt: 'Special Christmas service with choir performances, nativity presentation, and communion.',
-        category: 'event',
-        author: 'Admin',
-        date: '2024-12-24',
-        image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&h=600&fit=crop',
-      },
-    ]);
+    const loading = ref(true);
+    const blogPosts = ref([]);
+
+    // Load blog posts from API
+    const loadBlogPosts = async () => {
+      try {
+        loading.value = true;
+        const response = await axios.get(API_ENDPOINTS.BLOGS, {
+          params: {
+            per_page: 100 // Load all blog posts
+          }
+        });
+        
+        // Handle paginated response
+        if (response.data && response.data.data) {
+          blogPosts.value = response.data.data.map(post => ({
+            id: post.id,
+            title: post.title,
+            excerpt: post.excerpt,
+            category: post.category,
+            author: post.author,
+            date: post.date,
+            image: post.image,
+            content: post.content
+          }));
+        } else if (Array.isArray(response.data)) {
+          blogPosts.value = response.data.map(post => ({
+            id: post.id,
+            title: post.title,
+            excerpt: post.excerpt,
+            category: post.category,
+            author: post.author,
+            date: post.date,
+            image: post.image,
+            content: post.content
+          }));
+        }
+        loading.value = false;
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+        loading.value = false;
+        // Keep empty array if there's an error
+      }
+    };
+
+    // Load blog posts when component mounts
+    onMounted(() => {
+      loadBlogPosts();
+    });
 
     
     const filteredPosts = computed(() => {
@@ -251,6 +222,7 @@ export default {
     };
 
     return {
+      loading,
       searchQuery,
       selectedCategory,
       currentPage,
